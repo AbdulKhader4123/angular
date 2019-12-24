@@ -1,0 +1,16 @@
+ <br>
+ <div class="row">
+   <div class="col-md-12">
+     <button class="btn btn-success">New Recipe</button>
+   </div>
+ </div>
+ <hr>
+ <div class="row">
+  <div class="col-md-12">
+    <app-recipe-item *ngFor="let recipeEL of recipes" [recipe]="recipeEL"></app-recipe-item>
+    <!-- (recipeitemSelected)="onRecipeSelected(recipeEL) </app-recipe-item>" -->
+  </div>
+</div>
+
+
+ 
