@@ -1,0 +1,37 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" >
+
+        <div class="form-group" > <!-- First Name -->
+            <label for="first_name" class="control-label">First Name</label>
+            <input type="text" formControlName="first_name" class="form-control"[ngClass]="{ 'is-invalid': invalidFirstName() }" id="first_name" name="first_name" placeholder="Martin">
+            <p *ngIf="invalidFirstName()" id="first_name_error" class="invalid-feedback">Invalid first name.</p>
+        </div>
+    
+        <div class="form-group " > <!-- Last Name -->
+            <label for="last_name" class="control-label">Last Name</label>
+            <input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': invalidLastName() }" id="last_name" name="last_name" placeholder="Toha">
+            <p *ngIf="invalidLastName()" id="last_name_error" class="invalid-feedback">Invalid last name.</p>
+        </div>
+    
+        <div class="form-group" > <!-- Email -->
+            <label for="email" class="control-label">E-mail</label>
+            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': invalidEmail() }" id="email" name="email" placeholder="your@email.com">
+            <p *ngIf="invalidEmail()" id="email_error" class="invalid-feedback">Invalid email address.</p>
+        </div>
+    
+        <div class="form-group" > <!-- Zip Code-->
+            <label for="zipcode" class="control-label">Zip Code</label>
+            <input type="text" formControlName="zipcode" class="form-control" [ngClass]="{ 'is-invalid': invalidZipcode() }" id="zipcode" name="zipcode" placeholder="#####">
+            <p *ngIf="invalidZipcode()" id="zipcode_error" class="invalid-feedback">Invalid zip code.</p>
+        </div>
+    
+        <div class="form-group" > <!-- Password -->
+            <label for="password" class="control-label">Password</label>
+            <input type="password" formControlName="password" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }" id="password" name="password" placeholder="*****">
+            <p *ngIf="invalidPassword()" id="password_error" class="invalid-feedback">Invalid password.</p>
+        </div>
+        
+        <div class="form-group is-invalid"> <!-- Register Button -->
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    
+    </form>	

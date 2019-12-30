@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/FORMS';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import {DropdownDirective} from './shared/DropDownDirective';
 import { from } from 'rxjs';
 import { ShoppingService } from './shopping-list/shopping-list.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,14 @@ import { ShoppingService } from './shopping-list/shopping-list.service';
     ShoppingListComponent,
     ShoppingItemComponent,
     RecipeDetailComponent,
-    DropdownDirective
+    DropdownDirective,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ShoppingService],
   bootstrap: [AppComponent]
