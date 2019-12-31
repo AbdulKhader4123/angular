@@ -1,15 +1,19 @@
-  <div class="row"> 
-    <div class="col-md-12"> 
-      <app-shopping-item ></app-shopping-item>
-      <!-- (IngredientsAdded)="AddIngredients($event)"></app-shopping-item> -->
-      <hr>
-      <ul class="list-group">
-        <a 
-        class="list-group-item" 
-        *ngFor="let ingredient of ingredients"
-        >
-          {{ingredient.name}} ({{ingredient.amount}})
-        </a>
-      </ul>
+  <div class="container">
+    <div class="row"> 
+      <div class="col-md-12"> 
+        <app-shopping-item ></app-shopping-item>
+        <!-- (IngredientsAdded)="AddIngredients($event)"></app-shopping-item> -->
+        <hr>
+        <ul class="list-group">
+          <a 
+          class="list-group-item" 
+          *ngFor="let ingredient of ingredients"
+          >
+            {{ingredient.name}} ({{ingredient.amount}})
+          </a>
+        </ul>
+      </div>
     </div>
+
   </div>
+  

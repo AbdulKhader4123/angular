@@ -7,9 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'abuka';
-  loadedFeature='recipe';
-  onNavigate(feature : string){
-this.loadedFeature=feature;
-  }
+ 
 }
  

@@ -4,7 +4,10 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
+import { routing }   from './app.routing';
+
 import {HeaderComponent} from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
@@ -16,6 +19,9 @@ import {DropdownDirective} from './shared/DropDownDirective';
 import { from } from 'rxjs';
 import { ShoppingService } from './shopping-list/shopping-list.service';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
 
 @NgModule({
   declarations: [
@@ -28,13 +34,16 @@ import { HomeComponent } from './home/home.component';
     ShoppingItemComponent,
     RecipeDetailComponent,
     DropdownDirective,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    routing
   ],
   providers: [ShoppingService],
   bootstrap: [AppComponent]
