@@ -1,3 +1,6 @@
+<div class="container">
+        <br>
+        
 <div class="row">
     <div class="col-md-4">
       </div>
@@ -5,16 +8,11 @@
    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" >
 
         <div class="form-group" > <!-- First Name -->
-            <label for="first_name" class="control-label">First Name</label>
-            <input type="text" formControlName="first_name" class="form-control"[ngClass]="{ 'is-invalid': invalidFirstName() }" id="first_name" name="first_name" >
-            <p *ngIf="invalidFirstName()" id="first_name_error" class="invalid-feedback">Invalid first name.</p>
+            <label for="name" class="control-label">Name</label>
+            <input type="text" formControlName="name" class="form-control"[ngClass]="{ 'is-invalid': invalidFirstName() }" id="name" name="name" >
+            <p *ngIf="invalidFirstName()" id="name_error" class="invalid-feedback">Invalid first name.</p>
         </div>
     
-        <div class="form-group " > <!-- Last Name -->
-            <label for="last_name" class="control-label">Last Name</label>
-            <input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': invalidLastName() }" id="last_name" name="last_name" >
-            <p *ngIf="invalidLastName()" id="last_name_error" class="invalid-feedback">Invalid last name.</p>
-        </div>
     
         <div class="form-group" > <!-- Email -->
             <label for="email" class="control-label">E-mail</label>
@@ -35,4 +33,6 @@
     </form>	
 </div>
 </div>
+</div>
+
 

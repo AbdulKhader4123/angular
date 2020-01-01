@@ -1,30 +1,28 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { RegisterService } from '../shared/Register.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  providers:[RegisterService]
 })
 export class RegisterComponent implements OnInit {
   registered = false;
 	submitted = false;
 	userForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder)
+  constructor(private formBuilder: FormBuilder,private registerService:RegisterService)
   {
 
   }
 
   invalidFirstName()
   {
-  	return (this.submitted && this.userForm.controls.first_name.errors != null);
+  	return (this.submitted && this.userForm.controls.name.errors != null);
   }
 
-  invalidLastName()
-  {
-  	return (this.submitted && this.userForm.controls.last_name.errors != null);
-  }
 
   invalidEmail()
   {
@@ -41,8 +39,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit()
   {
   	this.userForm = this.formBuilder.group({
-  		first_name: ['', Validators.required],
-  		last_name: ['', Validators.required],
+  		name: ['', Validators.required],
   		email: ['', [Validators.required, Validators.email]],
   		password: ['', [Validators.required, Validators.minLength(5)]],
   	});
@@ -57,8 +54,12 @@ export class RegisterComponent implements OnInit {
   	}
   	else
   	{
-  		this.registered = true;
-  	}
+      this.registered = true;
+      this.registerService.postUser(this.userForm.value).subscribe((res)=>{
+        console.log(res);
+      
+      }
+      );
   }
-
+  }
 };
