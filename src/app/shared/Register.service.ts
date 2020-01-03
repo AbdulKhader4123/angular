@@ -9,11 +9,12 @@ import {User} from './User.model'
 export class RegisterService{
 
     user:User;
-    readonly baseUrl='http://localhost:4000/api'
+    // readonly baseUrl='http://localhost:4000/api'
     constructor(private http:HttpClient){
     }
 postUser(user:User){
-    return this.http.post(this.baseUrl+"/user/registerUser",user)
+    
+    return this.http.post("/api/user/registerUser",user)
 }
    
-}
+}   

@@ -1,6 +1,7 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from '../shared/Register.service';
+import { CustomValidators } from '../custom-validators';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  invalidFirstName()
+  invalidUserName()
   {
   	return (this.submitted && this.userForm.controls.name.errors != null);
   }
@@ -41,12 +42,23 @@ export class RegisterComponent implements OnInit {
   	this.userForm = this.formBuilder.group({
   		name: ['', Validators.required],
   		email: ['', [Validators.required, Validators.email]],
-  		password: ['', [Validators.required, Validators.minLength(5)]],
-  	});
+      password: ['', Validators.compose([Validators.required,Validators.minLength(8),
+        CustomValidators.patternValidator(/\d/, { hasNumber: true }),
+        CustomValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+        CustomValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
+      ])],
+      confirmPassword: [null, Validators.compose([Validators.required])]
+        
+    },
+    {
+      // check whether our password and confirm password match
+      validator: CustomValidators.passwordMatchValidator
+   })
   }
 
   onSubmit()
   {
+
   	this.submitted = true;
   	if(this.userForm.invalid == true)
   	{
@@ -54,6 +66,7 @@ export class RegisterComponent implements OnInit {
   	}
   	else
   	{
+      
       this.registered = true;
       this.registerService.postUser(this.userForm.value).subscribe((res)=>{
         console.log(res);
@@ -62,4 +75,5 @@ export class RegisterComponent implements OnInit {
       );
   }
   }
+
 };
