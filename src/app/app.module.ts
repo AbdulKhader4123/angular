@@ -4,7 +4,7 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
-import { AppRoutingModule } from './app-routing.module';
+// import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { routing }   from './app.routing';
@@ -22,6 +22,8 @@ import { ShoppingService } from './shopping-list/shopping-list.service';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './guards/auth-guard.service';
+import { AuthenticationService } from './shared/authentication.service';
 
 
 @NgModule({
@@ -41,13 +43,12 @@ import { RegisterComponent } from './register/register.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     routing,
     HttpClientModule
   ],
-  providers: [ShoppingService],
+  providers: [ShoppingService,AuthGuard,AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

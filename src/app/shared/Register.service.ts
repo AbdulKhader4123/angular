@@ -16,5 +16,8 @@ postUser(user:User){
     
     return this.http.post("/api/user/registerUser",user)
 }
+checkUser(username:String){
+    return this.http.post("/api/user/checkUser",{name:username})
+}
    
 }   
