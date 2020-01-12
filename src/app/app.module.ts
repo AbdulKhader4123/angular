@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
 // import { AppRoutingModule } from './app-routing.module';
@@ -22,8 +22,10 @@ import { ShoppingService } from './shopping-list/shopping-list.service';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { AuthGuard } from './guards/auth-guard.service';
+import { AuthGuard } from './auth/guards/auth-guard.service';
 import { AuthenticationService } from './shared/authentication.service';
+import { TokenInterceptor } from './auth/token.interceptor';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -46,9 +48,10 @@ import { AuthenticationService } from './shared/authentication.service';
     FormsModule,
     ReactiveFormsModule,
     routing,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule
   ],
-  providers: [ShoppingService,AuthGuard,AuthenticationService],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},ShoppingService,AuthGuard,AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

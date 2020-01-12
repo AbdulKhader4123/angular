@@ -47,7 +47,7 @@ password:["",[Validators.required,Validators.minLength(5)]]
   	{
       this.loggedIn = true;
       this.loginService.LoginUser(this.loginForm.value).subscribe((res)=>{
-        
+        console.log(res)
 this.authService.doLoginUser(res['userName'],res['token'])
         this.router.navigate(['/home'])
       
