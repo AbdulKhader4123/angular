@@ -1,22 +1,20 @@
 import { Component, OnInit, Output,EventEmitter, ɵConsole } from '@angular/core';
-import { Recipe } from '../recipe.model';
-import { RecipeService } from '../recipe.service';
+import { Product } from '../products.model';
 import { HttpClient } from '@angular/common/http';
-import { TokenInterceptor } from 'src/app/auth/token.interceptor';
-import { AuthenticationService } from 'src/app/shared/authentication.service';
+import { RecipeService } from '../../shared/recipe.service';
 
 
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.scss'],
-  providers:[TokenInterceptor]
+  providers:[]
 })
 export class RecipeListComponent implements OnInit {
   // @Output() recipeWasSelected =new EventEmitter<Recipe>();
-  recipes :Recipe[];
+  products :Product[];
   
-  constructor(private recipeService:RecipeService,private http:HttpClient,private intercept:TokenInterceptor,private authservice:AuthenticationService) {
+  constructor(private recipeService:RecipeService,private http:HttpClient) {
 
    }
 
@@ -25,7 +23,7 @@ export class RecipeListComponent implements OnInit {
 
   // }
   ngOnInit() {
-    this.recipes=this.recipeService.getRecipes();
+    this.products=this.recipeService.getProducts()
   }
 checkToken(){
 // this.authservice.refreshToken().subscribe((res)=>{

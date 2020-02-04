@@ -1,19 +1,17 @@
-  <div class="container">
-    <div class="row"> 
-      <div class="col-md-12"> 
-        <app-shopping-item ></app-shopping-item>
+  <!--<div class="container jumbotron"> -->
+        <app-shopping-item *ngIf="UserLoggedIn"></app-shopping-item>
+        <app-login *ngIf="!UserLoggedIn" (dismissError)="hideErrorMsg()"></app-login>
         <!-- (IngredientsAdded)="AddIngredients($event)"></app-shopping-item> -->
-        <hr>
-        <ul class="list-group">
+        <!-- <ul class="list-group">
           <a 
           class="list-group-item" 
           *ngFor="let ingredient of ingredients"
           >
             {{ingredient.name}} ({{ingredient.amount}})
           </a>
-        </ul>
-      </div>
-    </div>
+        </ul> -->
+      <!-- </div>
+     </div> -->
 
-  </div>
-  
+  <!-- </div> -->
+ 

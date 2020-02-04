@@ -97,14 +97,17 @@ export class RegisterComponent implements OnInit {
   	else
   	{
       this.registerService.checkUser(this.userForm.value.name).subscribe((res)=>{
+        console.log(res);
         this.data=res;
         if(this.data['msg']=="Username Available"){
           this.userExistError="";
           this.registered = true;
           this.registerService.postUser(this.userForm.value).subscribe((res)=>{
+          console.log(res);
             if(res['msg']=="User sucessfully created"){
 this.authService.doLoginUser(this.userForm.value.name,res['token'])
 this.router.navigate(['/home'])
+
             }
           console.log(res);
           });

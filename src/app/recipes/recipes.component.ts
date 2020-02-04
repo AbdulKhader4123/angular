@@ -1,23 +1,29 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Recipe } from './recipe.model';
-import { RecipeService } from './recipe.service';
+import { Product } from './products.model';
+import { AuthenticationService } from '../shared/authentication.service';
+import { RecipeService } from '../shared/recipe.service';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.scss'], 
-  providers:[RecipeService]
+  providers:[]
 })
 export class RecipesComponent implements OnInit {
-  selectedRecipe:Recipe;
+  selectedProduct:Product;
 
-  constructor(private recipeService:RecipeService) { }
+  constructor(private recipeService:RecipeService,private authService: AuthenticationService) { }
   ngOnInit() {
-    this.recipeService.recipeSelected.subscribe(
-      (recipe:Recipe)=>{
-        this.selectedRecipe=recipe;
-      }
-    )
+    // this.recipeService.productSelected.subscribe(
+    //   (product:Product)=>{
+    //     this.selectedProduct=product;
+    //     console.log(this.selectedProduct)
+    //   }
+    // )
+    //to return from detail component to home page
+    // this.authService.featureSelected.subscribe(()=>{
+    //   this.selectedProduct=null;
+    // })
   }
 
 }

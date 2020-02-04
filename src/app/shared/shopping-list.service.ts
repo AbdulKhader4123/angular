@@ -1,4 +1,4 @@
-import { Ingredients } from '../shared/Ingredients.model';
+import { Ingredients } from './Ingredients.model';
 import { EventEmitter } from '@angular/core';
 
 export class ShoppingService{

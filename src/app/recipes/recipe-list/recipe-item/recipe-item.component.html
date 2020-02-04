@@ -1,12 +1,25 @@
 
-  <a  href="#"
-  class="list-group-item clearfix" (click)="recipeSelected()">
-    <div class="pull-left">
+
+  <!-- <a  href="#"
+  class="list-group-item clearfix"  (click)="recipeSelected()"> -->
+    <!-- <div class="pull-left">
     <h4 class="list-group-item-heading">{{recipe.name}}</h4>
     <p class="list-group-item-text">{{recipe.description}}</p>
-</div>
-  <span class="pull-right">
-    <img [src]="recipe.imagePath" alt="{{recipe.name}}" class="img-responsive" style="max-height:50px">
+</div> -->
+  <!-- <span class="pull-left">
+    <img [src]="recipe.imagePath" alt="{{recipe.name}}" class="img-responsive big-banner" style="max-height:230px">
 </span>
-    </a>
+    </a> -->
 
+    <div class="card" (click)="productSelected()" style="width: 15.5rem;">
+      <img class="card-img-top"style="height: 20rem;" [src]="product.imagePath" alt="{{product.name}}">
+      <div class="card-body" style="height: 4.9rem;padding-top: 1%;padding-left: 3%;margin-bottom: 0%">
+ 
+        <p class="card-text"style="color:grey;font-size:16px;padding-top: 0%;margin-bottom: 0%">{{product.name}}</p>
+        <p class="card-text"style="font-size:14px;  padding-top: 0%;margin-bottom: 0%">{{product.description}}</p>
+        <p class="card-text"style="display:inline-block;font-weight:bold;padding-top: 0%;margin-bottom: 0%"><i class="fa fa-inr"></i>{{product.price-(product.price*(product.discount/100)) | number:'1.0-0'}}</p>&nbsp;&nbsp;
+        <p class="card-text"style="display:inline-block;text-decoration:line-through;padding-top: 0%;margin-bottom: 0%"><i class="fa fa-inr"></i>{{product.price}}</p>&nbsp;&nbsp;
+        <p class="card-text"style="display:inline-block;color:grey;font-size:14px;padding-top: 0%;margin-bottom: 0%">{{(product.discount/100) | percent}} off</p>
+<!-- added css import link in header component for rupee icon -->
+      </div>
+    </div>

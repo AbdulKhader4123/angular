@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Recipe } from '../../recipe.model';
-import { RecipeService } from '../../recipe.service';
+import { Product } from '../../products.model';
+import { RecipeService } from '../../../shared/recipe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-item',
@@ -8,13 +9,19 @@ import { RecipeService } from '../../recipe.service';
   styleUrls: ['./recipe-item.component.scss']
 })
 export class RecipeItemComponent implements OnInit {
- @Input()  recipe:Recipe;
+ @Input()  product:Product;
 // @Output() recipeitemSelected= new EventEmitter<void>();
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService,private route:Router) { }
 
-  recipeSelected(){
+  productSelected(){
 // this.recipeitemSelected.emit();
-this.recipeService.recipeSelected.emit(this.recipe);
+this.recipeService.productSelected.emit(this.product);
+// let navigationExtras: NavigationExtras = {
+//   queryParams: {
+//       "product": this.product.productId
+//   }
+// };
+this.route.navigate(['/product',this.product.productId])
 
   }
   ngOnInit() {

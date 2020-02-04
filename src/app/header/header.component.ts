@@ -8,18 +8,20 @@ import { Router } from '@angular/router';
     styles:['./header.component.scss']
 })
 export class HeaderComponent{
-  @Output() featureSelected =new EventEmitter<string>();
+//   @Output() featureSelected =new EventEmitter<string>();
 
-  constructor(private authService:AuthenticationService,private route:Router){
+  constructor(private authService:AuthenticationService){
 
   }
 onSelect(feature : string){
-        this.featureSelected.emit(feature);
+    console.log(feature)
+        this.authService.featureSelected.emit(feature);
+        // this.authService.featureSelect(feature);
     }
 
     LogOut(){
 this.authService.doLogoutUser();
-this.route.navigate(['/login'])
+
     }
 
 }

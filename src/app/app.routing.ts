@@ -5,12 +5,20 @@ import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
  import { AuthGuard } from './auth/guards/auth-guard.service';
+import { AnonymousGuard } from './auth/guards/anonymous-guard.service';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 const appRoutes: Routes = [
     // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'register', component: RegisterComponent },
-    { path: 'login', component: LoginComponent},
-    { path: '', component: HomeComponent,canActivate: [AuthGuard] },
+    { path: 'register', component: RegisterComponent, canActivate: [AnonymousGuard] },
+    { path: 'login', component: LoginComponent, canActivate: [AnonymousGuard] },
+    { path: '', component: HomeComponent},
+    { path: 'product/:id', component: RecipeDetailComponent},
+    { path: 'cart', component: ShoppingListComponent},
+    
+    // { path: '', component: HomeComponent,canActivate: [AuthGuard] },
+
 
 
     // otherwise redirect to home

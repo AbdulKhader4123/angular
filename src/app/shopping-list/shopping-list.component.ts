@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import{Ingredients} from '../shared/Ingredients.model';
-import { ShoppingService } from './shopping-list.service';
+import { ShoppingService } from '../shared/shopping-list.service';
+import { AuthenticationService } from '../shared/authentication.service';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
@@ -8,20 +9,33 @@ import { ShoppingService } from './shopping-list.service';
 })
 export class ShoppingListComponent implements OnInit {
 
-  constructor(private shoppingService: ShoppingService) { }
+  constructor(private shoppingService: ShoppingService ,private _authService:AuthenticationService) {
+    // this._authService.featureSelected.subscribe((feature : string)=>{
+    //   console.log("458")
+    // })
+   }
   ingredients:Ingredients[];
-
+UserLoggedIn=false;
   ngOnInit() {
-  this.ingredients=this.shoppingService.getShoppingList();
-  this.shoppingService.shoppingEvent
-  .subscribe(
-    (ingredientsArray:Ingredients[])=>{
-this.ingredients=ingredientsArray;
-    }
-  )
 
+if (this._authService.isLoggedIn()) {
+this.UserLoggedIn=true;
+
+ }
+ else{
+  this.UserLoggedIn=false;
+ }
+
+ 
   }
 
+  showErrorMsg() {
+    this.UserLoggedIn = true;
+}
+hideErrorMsg() {
+    this.UserLoggedIn = true;
+}
+  
 //   AddIngredients(ingredient:Ingredients){
 // this.ingredients.push(ingredient);
   // }

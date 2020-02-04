@@ -9,11 +9,13 @@ import { AuthGuard } from './guards/auth-guard.service';
 import {AuthenticationService} from '../shared/authentication.service'
 // import { RandomGuard } from './guards/random.guard';
 import { TokenInterceptor } from './token.interceptor';
+import { AnonymousGuard } from './guards/anonymous-guard.service';
 
 @NgModule({
   declarations: [],
   providers: [
     AuthGuard,
+    AnonymousGuard,
     AuthenticationService,
     {
       provide: HTTP_INTERCEPTORS,

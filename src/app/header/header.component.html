@@ -3,25 +3,32 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#" >Recipe Book</a>
+<!-- for rupee icon below css -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" routerLink="/" (click)="onSelect('home')" >ADF FASHION</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-collapse collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <!-- <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li> -->
-        <li class="nav-item">
-            <a class="nav-link" href="#" (click)="onSelect('recipe')">Recipes</a>
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="#" (click)="onSelect('home')">Recipes</a>
+        </li> -->
+        <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/" (click)="onSelect('shopping-list')">Shopping List</a>
+        </li> -->
+        <!-- <li  class="nav-item" >
+          <a class="nav-link"  router-link="/home" (click)="onSelect('home')">ADF FASHION</a>
+          </li> -->
+          <li>
+            <a class="navbar-brand" routerLink='/cart' routerLinkActive="active">&nbsp;&nbsp;Cart</a>
         </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#" (click)="onSelect('shopping-list')">Shopping List</a>
-        </li>
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Manage
           </a>
@@ -31,14 +38,14 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
-        </li>
+        </li> -->
         <!-- <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li> -->
       </ul>
       <ul class="navbar-nav text-right">
         <li class="nav-item">
-            <a class="nav-link" router-link="#" (click)="LogOut()">LogOut</a>
+            <a class="nav-link" router-link="/" (click)="LogOut()">LogOut</a>
         </li>
         </ul>
       <!-- <form class="form-inline my-2 my-lg-0">

@@ -1,4 +1,5 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, Input,  } from '@angular/core';
+import { AuthenticationService } from '../shared/authentication.service';
 
 
 @Component({
@@ -8,18 +9,31 @@ import { Component, OnInit, ɵConsole } from '@angular/core';
 })
 
 export class HomeComponent implements OnInit {
-  loadedFeature='recipe';
+ @Input() loadedFeature='home';
+ 
   onNavigate(feature : string){
 this.loadedFeature=feature;
   }
-
-  constructor()
+  constructor(private authService: AuthenticationService)
   {
 
+    this.authService.featureSelected.subscribe((feature : string)=>{
+      this.loadedFeature=feature;
+    })
+    // this.authService.feature$.subscribe(()=>{
+      console.log( this.loadedFeature)
+    // })
   }
+  
 
   ngOnInit()
   {
+    console.log("1")
+    this.onNavigate(this.loadedFeature);
+    this.authService.featureSelected.subscribe((feature : string)=>{
+      this.loadedFeature=feature;
+    })
   }
+  
 
   };

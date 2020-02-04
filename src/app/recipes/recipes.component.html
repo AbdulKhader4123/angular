@@ -1,13 +1,46 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-5">
+ 
+  <!-- <div class="row" *ngIf="selectedProduct==null;"> -->
+    <div class="row" >
+    <div class="col-md-3" style="flex:23%;" >
+    <!-- <div class="col-md-2" style="max-width: 22%;flex: 22%;" > -->
+    <div class="card" style="margin-top: 23px;" >
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+</div>
+</div>
+<div class="col-md-9"style="flex:70%;margin-left: 10px;padding-left: 1%;" >
+
+
+<!-- <div class="container" style="padding-left: 0%;margin-left: 20%"> -->
+  
+  <!-- <div class="row"> -->
+    <!-- <div class="col-md-12"> -->
       <!-- <app-recipe-list (recipeWasSelected)="selectedRecipe=$event"></app-recipe-list> -->
       <app-recipe-list></app-recipe-list>
-  </div>
-  <div class="col-md-7">
+  <!-- </div> -->
+  <!-- <div class="col-md-7">
     <app-recipe-detail *ngIf=" selectedRecipe;else infoText" [recipes]="selectedRecipe" ></app-recipe-detail>
     <ng-template #infoText>
       <p>Please select a Recipe</p>
     </ng-template>
+</div> --> 
+<!-- </div> -->
 </div>
+<!-- </div> -->
 </div>
+<!-- <div class="row" *ngIf="selectedProduct!=null;">
+    
+<div class="col-md-12" >
+    <app-recipe-detail [product]="selectedProduct"></app-recipe-detail>
+
+</div>
+</div> -->
