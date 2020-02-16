@@ -12,7 +12,8 @@ export class AnonymousGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this._authService.isLoggedIn()) {
-
+//  logged in so redirect to homr page with the return url
+this._router.navigate(['/'], { queryParams: { returnUrl: state.url }});
      return false
     }
 return true

@@ -13,12 +13,13 @@ export class RecipeDetailComponent implements OnInit {
 //  @Input() product:Product
 @Input() product:Product;
 prodarr:Product[];
+prodDetails:string[]=[];
  prodId :number;
  isLoaded =false;
   constructor(private recipeService: RecipeService,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    debugger;
+    // debugger;
 //  this.recipeService.productSelected.subscribe(
 //       (product:Product)=>{
 //         this.product=product;
@@ -27,22 +28,36 @@ prodarr:Product[];
 //     )
 this.isLoaded =false;
     this.route.queryParams.subscribe(params => {
-      debugger;
+      // debugger;
      this.prodId =Number(this.route.snapshot.paramMap.get('id'));
-     console.log(this.prodId);
+    //  console.log(this.prodId);
      this.prodarr=this.recipeService.product;
+    //  console.log(this.prodarr)
      if(this.prodarr.length>0){
       for (var i=0; i < this.prodarr.length; i++) {
         if (this.prodarr[i].productId === this.prodId ) {
             this.product= this.prodarr[i];
+            for (let [key, value] of Object.entries(this.product.productDetails)) {
+              if(value!=""){
+                console.log(key + '|' + value)
+                this.prodDetails.push(key + '|' + value)
+              }
+           }
       this.isLoaded =true;
      }
       }
   }
   else{
         this.recipeService.getProduct(this.prodId).subscribe((res)=>{
-          debugger;
+          // debugger;
+          
      this.product= new Product(res);
+     for (let [key, value] of Object.entries(this.product.productDetails)) {
+       if(value!=""){
+         console.log("1111")
+         this.prodDetails.push(key + '|' + value)
+       }
+    }
 // this.product.imagePath=res[6];
 // this.product.description=res["description"]
 // this.product.name=res["title"]

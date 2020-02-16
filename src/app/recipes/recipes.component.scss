@@ -1,3 +1,20 @@
 .jumbotron{
     height: 100vh;
 }
+@media screen and (max-width: 450px) {
+    .column {
+       margin-left: 7%;
+       padding-left : 1%;
+       flex: 70%;
+       margin-top:-4%;
+     }
+   }
+   @media screen and (min-width: 500px) {
+    .column {
+       padding-left : 1%;
+       margin-left : 10px;
+       flex: 70%;
+       margin-left: 10px
+
+     }
+   }

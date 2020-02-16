@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { AnonymousGuard } from './auth/guards/anonymous-guard.service';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 const appRoutes: Routes = [
     // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -16,7 +17,10 @@ const appRoutes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'product/:id', component: RecipeDetailComponent},
     { path: 'cart', component: ShoppingListComponent},
-    
+    { path: 'password-reset', component: PasswordResetComponent},
+    { path: 'reset-options', component: PasswordResetComponent},
+    { path: 'password-reset/response-reset-password/:id', component: PasswordResetComponent},
+
     // { path: '', component: HomeComponent,canActivate: [AuthGuard] },
 
 

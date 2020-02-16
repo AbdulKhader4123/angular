@@ -1,5 +1,8 @@
 <div class="container">
         <br>
+        <br>
+        <br>
+        <br>
 <div class="row">
     <div class="col-md-4">
       </div>
@@ -10,8 +13,8 @@
         <div class="form-group" > <!-- First Name -->
             <label for="name" class="control-label">UserName</label>
             <input type="text" formControlName="name" class="form-control"[ngClass]="{ 'is-invalid':( userForm.controls['name'].hasError('required')|| userExistError!='') && this.submitted}" id="name" name="name" (keyup)="ChangeHandler()">
-            <p *ngIf="userForm.controls['name'].hasError('required') && this.submitted" id="userName_error" class="invalid-feedback">User name is Required.</p>
-            <p *ngIf="userExistError!='' && !userForm.controls['name'].hasError('required')" id="userName_error1" class="invalid-feedback">User name already Exists.</p>
+            <p *ngIf="userForm.controls['name'].hasError('required') && this.submitted" id="userName_error" class="invalid-feedback">User name is required.</p>
+            <p *ngIf="userExistError!='' && !userForm.controls['name'].hasError('required')" id="userName_error1" class="invalid-feedback">User name already exists.</p>
             <!-- <label
   class="text-danger"
   *ngIf="userForm.controls['name'].hasError('required')"
@@ -25,19 +28,24 @@
             <label for="email" class="control-label">E-mail</label>
             <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': invalidEmail() }" id="email" name="email" >
             <p *ngIf="invalidEmail() && !userForm.controls['email'].hasError('required')" id="email_error" class="invalid-feedback">Invalid email address.</p>
-            <p *ngIf="userForm.controls['email'].hasError('required') " id="email_error" class="invalid-feedback">Email is Required.</p>
+            <p *ngIf="userForm.controls['email'].hasError('required') " id="email_error" class="invalid-feedback">Email is required.</p>
         </div>
     
         <div class="form-group" > <!-- Password -->
             <label for="password" class="control-label">Password</label>
-            <input type="password" formControlName="password" title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }" id="password" name="password" >
-            <p *ngIf="invalidPassword()" id="password_error" class="invalid-feedback">Invalid password.</p>
+            <show-hide-password size="md" btnStyle="primary" [btnOutline]="false">
+            <input type="password" formControlName="password" title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" (keypress)="PasswordkeyPress($event)" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }" id="password" name="password" autocomplete="off">
+        </show-hide-password>
+        <p *ngIf="invalidPassword()" id="password_error" style=" width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">Invalid password.</p>
         </div>
+       
 
         <div class="form-group" > <!-- Password -->
             <label for="confirmPassword" class="control-label">Confirm Password</label>
-            <input type="password" formControlName="confirmPassword" class="form-control"[ngClass]="{ 'is-invalid': (invalidPassword() ||userForm.controls['confirmPassword'].hasError('NoPassswordMatch'))&& this.submitted}" id="confirmPassword" name="confirmPassword" >
-            <p *ngIf="userForm.controls['confirmPassword'].hasError('NoPassswordMatch')"id="confirmPassword_error1" class="invalid-feedback">Password do not match.</p>
+            <show-hide-password size="md" btnStyle="primary" [btnOutline]="false">
+            <input type="password" formControlName="confirmPassword" (keypress)="PasswordkeyPress($event)" class="form-control"[ngClass]="{ 'is-invalid': (userForm.controls['confirmPassword'].hasError('NoPassswordMatch'))&& this.submitted}" id="confirmPassword" name="confirmPassword" autocomplete="off">
+        </show-hide-password>
+            <p *ngIf="userForm.controls['confirmPassword'].hasError('NoPassswordMatch')" id="confirmPassword_error1" style=" width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">Password do not match.</p>
         </div>
 
         <br>

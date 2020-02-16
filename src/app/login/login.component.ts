@@ -3,25 +3,34 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {LoginService} from '../shared/login.Service'
 import { Tokens } from '../shared/token.model';
 import { AuthenticationService } from '../shared/authentication.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CustomValidators } from '../custom-validators';
+import * as $ from 'jquery';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./login.component.scss'],
-  providers:[LoginService,AuthenticationService]
+  providers:[LoginService]
 })
 export class LoginComponent implements OnInit  {
 
-  constructor(private fb:FormBuilder,private loginService:LoginService,private authService:AuthenticationService,private router:Router,private modalService:NgbModal) { }
-  @Output() dismissError: EventEmitter<any> = new EventEmitter();
+  constructor(private fb:FormBuilder,private loginService:LoginService,private authService:AuthenticationService,private router:Router,private modalService:NgbModal,private route:ActivatedRoute) { 
 
+  }
+  @Output() dismissError: EventEmitter<any> = new EventEmitter();
   loginForm:FormGroup;
   submitted = false;
   loggedIn=false;
   closeResult: string;
+  loginPage =false;
+  param:string="";
+  ResetPass:string="";
+
+ 
   // myBackgroundImageUrl = './login/login.jpg'
  
 //   @HostBinding('style.backgroundImage')
@@ -34,7 +43,7 @@ export class LoginComponent implements OnInit  {
 }
 
 openBackDropCustomClass(content) {
-  this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+  this.modalService.open(content, {backdropClass: 'light-blue-backdrop',centered: true,backdrop: 'static'});
 }
   invalidUserName()
   {
@@ -47,10 +56,42 @@ openBackDropCustomClass(content) {
   }
 
   ngOnInit() {
-this.loginForm=  this.fb.group({
-username:["",Validators.required],
-password:["",[Validators.required,Validators.minLength(5)]]
-})
+    this.loginForm=  this.fb.group({
+      username:["",Validators.required],
+      password: ['', Validators.compose([Validators.required,Validators.minLength(8),
+        CustomValidators.patternValidator(/\d/, { hasNumber: true }),
+        CustomValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+        CustomValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
+      ])],
+      })
+    
+//after password reset navigating to login
+    if(this.router.url.indexOf("resetPass")>0){
+this.ResetPass="reset-password-success"
+ this.loginForm.controls['username'].setValue(this.route.snapshot.queryParamMap.get('username'))
+    }  
+
+//if url has login i.e main login page
+    if(this.router.url.indexOf("login")>0){
+     this.loginPage =true;
+    }
+
+}
+
+  PasswordkeyPress(event: any) {
+    //to hide incorrect error message error
+    this.param="";
+    if (event.charCode==32) {
+      event.preventDefault();
+    }
+  }
+  UsernamekeyPress(event: any) {
+    //to hide incorrect error message error
+    this.param="";
+    this.ResetPass="";
+    if (event.charCode==32) {
+      event.preventDefault();
+    }
   }
   onSubmit()
   {
@@ -62,18 +103,32 @@ password:["",[Validators.required,Validators.minLength(5)]]
   	else
   	{
 // this.authService.featureSelected.emit("home")
-
+      this.param="";
       this.loggedIn = true;
       this.loginService.LoginUser(this.loginForm.value).subscribe((res)=>{
         console.log(res)
 this.authService.doLoginUser(res['userName'],res['token'])
 // this.authService.featureSelected.emit("home")
+this.authService.observableMethod();
 
      this.modalService.dismissAll()
      this.dismissAlert();
-// this.router.navigate(['/'])
-// this.ngOnDestroy()
+
+     if(this.loginPage){
+      this.router.navigate(['/'])
+     }
       }
+      ,
+   err => {
+
+     if( err.error.msg=="Incorrect Password"){
+this.param="incorrectPassword";
+   }
+   else if( err.error.msg=="User not exist in the Database"){
+
+    this.param="invalidUsername";
+       }
+  },
       );
   	}
   }

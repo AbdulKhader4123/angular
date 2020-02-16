@@ -23,7 +23,7 @@ productSelected = new EventEmitter<Product>();
                 this.http.get("/api/products/getProducts").subscribe((res) => {
 
                       for (var i in res) {
-                            // console.log(res[i])
+                        //      console.log(res[i])
                             let prod = new Product(res[i]);
                             this.product.push(prod)
                       }

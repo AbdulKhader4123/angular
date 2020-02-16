@@ -18,3 +18,10 @@ width: 100%;
 .txtcolor{
     text-decoration-color: white
 }
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+}

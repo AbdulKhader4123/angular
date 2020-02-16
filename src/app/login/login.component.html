@@ -1,29 +1,42 @@
-<!-- <div class="container" >
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<ng-template #login >
+
+<div class="container" >
     <br>
-    
+    <br>
+    <br>
+    <br>
 <div class="row">
         <div class="col-md-4">
           </div>
           <div class="col-md-4">
+              <p style="font-size:16px;text-align:center;padding-top: 4%;color:green" *ngIf="ResetPass=='reset-password-success'" >Your password has been reset successfully!<br> please log in to continue.. </p>
        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
             <div class="form-group" > 
                 <label for="username" class="control-label txtcolor" >Username</label>
                 <input type="text" formControlName="username" title="Registered Username or Email. " 
                 class="form-control"[ngClass]="{ 'is-invalid': invalidUserName() }" 
-                id="username" name="username" >
+                id="username" (keypress)="UsernamekeyPress($event)" name="username" >
                 <p *ngIf="invalidUserName()" id="username_error" class="invalid-feedback">Invalid Username.</p>
             </div>
         
-            <div class="form-group" > 
-                <label for="password" class="control-label">Password</label>
-                <input type="password" formControlName="password"  title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }" id="password" name="password" >
-                <p *ngIf="invalidPassword()" id="password_error" class="invalid-feedback">Invalid password.</p>
-            </div>
+            <div class="form-group" > <!-- Password -->
+              <label for="password" class="control-label">Password</label>
+              <show-hide-password size="md" btnStyle="primary" [btnOutline]="false">
+              <input type="password" formControlName="password"  title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }"  (keypress)="PasswordkeyPress($event)" id="password" name="password"autocomplete="off">
+            </show-hide-password>
+              <p *ngIf="invalidPassword()" id="password_error" style=" width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">Invalid password.</p>
+              <p style="font-size:14px;text-align:center;color:red;padding-top: 4%" *ngIf="param=='incorrectPassword'">Incorrect password..</p>
+              <p style="font-size:14px;text-align:center;color:red;padding-top: 4%" *ngIf="param=='invalidUsername'">Cannot find user..</p>
+          </div>
+          <br>
             <div class="form-group" style="text-align:center" >
                     <button type="submit" class="btn btn-primary">Login</button>
-                    <a style="text-decoration: none;" routerLink="/register" class="btn btn-link">Forgot Password?</a>
+                    <a style="text-decoration: none;" routerLink="/password-reset" class="btn btn-link">Forgot Password?</a>
             </div>
-            <div style="text-align:center;" >
+            <div style="text-align:center;padding-top: 2%;padding-right: 3%" >
               <a>Don't have an account?</a> &nbsp;&nbsp;
                 <a style="text-decoration: none;" routerLink="/register" >Sign up</a>
                
@@ -32,8 +45,8 @@
         </form>	
     </div>
 </div>
-</div> -->
-
+</div>
+</ng-template>
 <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title">Sign In</h4>
@@ -51,17 +64,21 @@
                 <input type="text" formControlName="username" title="Registered Username or Email. " 
                 class="form-control"[ngClass]="{ 'is-invalid': invalidUserName() }" 
                 id="username" name="username" >
-                <p *ngIf="invalidUserName()" id="username_error" class="invalid-feedback">Invalid Username.</p>
+                <p *ngIf="invalidUserName()" id="username_error" class="invalid-feedback">Invalid username.</p>
             </div>
         
             <div class="form-group" > <!-- Password -->
                 <label for="password" class="control-label">Password</label>
-                <input type="password" formControlName="password"  title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }" id="password" name="password" >
-                <p *ngIf="invalidPassword()" id="password_error" class="invalid-feedback">Invalid password.</p>
+                <show-hide-password size="md" btnStyle="primary" [btnOutline]="false">
+                  <input type="password" formControlName="password"  title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }"  (keypress)="PasswordkeyPress($event)" id="password" name="password" autocomplete="off">
+                </show-hide-password>
+                <p *ngIf="invalidPassword()" id="password_error" style=" width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">Invalid password.</p>
+                <p style="font-size:14px;text-align:center;color:red;padding-top: 4%" *ngIf="param=='incorrectPassword'">Incorrect password..</p>
+                <p style="font-size:14px;text-align:center;color:red;padding-top: 4%" *ngIf="param=='invalidUsername'">Cannot find user..</p>
             </div>
-            <div class="form-group" style="text-align:center" >
+            <div class="form-group" style="text-align:center;padding-top: 2%" >
                     <button type="submit"class="btn btn-primary">Login</button>
-                    <a style="text-decoration: none;"(click)="modal.close('Close click')" routerLink="/register" class="btn btn-link">Forgot Password?</a>
+                    <a style="text-decoration: none;"(click)="modal.close('Close click')" routerLink="/password-reset" class="btn btn-link">Forgot password?</a>
             </div>
             <div style="text-align:center;" >
               <a>Don't have an account?</a> &nbsp;&nbsp;
@@ -79,7 +96,7 @@
       <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>
 </ng-template>  
- <div class="container" >
+ <div class="container" *ngIf="!loginPage; else login">
     <br>
     
 <div class="row">

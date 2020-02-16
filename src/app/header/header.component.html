@@ -1,13 +1,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <!-- for rupee icon below css -->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a data-toggle="collapse" data-target=".navbar-collapse.show">
     <a class="navbar-brand" routerLink="/" (click)="onSelect('home')" >ADF FASHION</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    </a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="navbutton">
       <span class="navbar-toggler-icon"></span>
     </button>
   
@@ -25,8 +26,13 @@
         <!-- <li  class="nav-item" >
           <a class="nav-link"  router-link="/home" (click)="onSelect('home')">ADF FASHION</a>
           </li> -->
+<!-- 
           <li>
-            <a class="navbar-brand" routerLink='/cart' routerLinkActive="active">&nbsp;&nbsp;Cart</a>
+            <a class="navbar-brand" routerLink='/cart' routerLinkActive="active" >&nbsp;&nbsp;Cart</a>
+        </li> -->
+        
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" routerLink='/cart' routerLinkActive="active" >&nbsp;&nbsp;Cart</a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,8 +50,8 @@
         </li> -->
       </ul>
       <ul class="navbar-nav text-right">
-        <li class="nav-item">
-            <a class="nav-link" router-link="/" (click)="LogOut()">LogOut</a>
+        <li class="nav-item"   data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link"   [ngClass]="{'disabled': LogOutDisabled}" router-link="/" (click)="LogOut()">LogOut</a>
         </li>
         </ul>
       <!-- <form class="form-inline my-2 my-lg-0">

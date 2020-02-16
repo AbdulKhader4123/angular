@@ -5,7 +5,7 @@ import { User } from '../shared/User.model';
 import { Tokens } from './token.model';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService   implements OnInit{
@@ -17,18 +17,23 @@ export class AuthenticationService   implements OnInit{
     //  feature$ =this.feature.asObservable();
       featureSelected =new EventEmitter<string>();
 
+      private ModuleTitle = new BehaviorSubject<string>("");
+      currentModuleTitle = this.ModuleTitle.asObservable();
+      
     constructor(private http: HttpClient,private route:Router) {
       
     }
-    // featureSelect(todo){
-// this.feature.next(todo)
-//     }
+ 
     ngOnInit() {
       // if(localStorage.getItem("REFRESH_TOKEN")==""){
       //   localStorage.setItem("REFRESH_TOKEN",'REFRESH_TOKEN')
       // localStorage.setItem("JWT_TOKEN",'JWT_TOKEN');
 
       // }
+    }
+ 
+    observableMethod(){
+this.ModuleTitle.next("");
     }
 
     isLoggedIn() {

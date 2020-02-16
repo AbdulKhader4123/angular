@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 // import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -28,6 +28,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { AnonymousGuard } from './auth/guards/anonymous-guard.service';
 import { RecipeService } from './shared/recipe.service';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { RecipeService } from './shared/recipe.service';
     DropdownDirective,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { RecipeService } from './shared/recipe.service';
     routing,
     HttpClientModule,
     AuthModule,
-    NgbModule
+    NgbModule,
+    ShowHidePasswordModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},ShoppingService,AuthGuard,AuthenticationService,AnonymousGuard,RecipeService],
   bootstrap: [AppComponent]

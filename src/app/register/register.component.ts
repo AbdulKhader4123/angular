@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
         CustomValidators.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
         CustomValidators.patternValidator(/[a-z]/, { hasSmallCase: true }),
       ])],
-      confirmPassword: [null, Validators.compose([Validators.required])]
+      confirmPassword: ['', Validators.compose([Validators.required])]
         
     },
     {
@@ -84,7 +84,11 @@ export class RegisterComponent implements OnInit {
       validator: [CustomValidators.passwordMatchValidator]
    })
   }
-
+  PasswordkeyPress(event: any) {
+    if (event.charCode==32) {
+      event.preventDefault();
+    }
+  }
   onSubmit()  
   {
     
@@ -106,6 +110,7 @@ export class RegisterComponent implements OnInit {
           console.log(res);
             if(res['msg']=="User sucessfully created"){
 this.authService.doLoginUser(this.userForm.value.name,res['token'])
+this.authService.observableMethod();
 this.router.navigate(['/home'])
 
             }
