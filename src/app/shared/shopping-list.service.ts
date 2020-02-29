@@ -2,7 +2,7 @@ import { Ingredients } from './Ingredients.model';
 import { EventEmitter } from '@angular/core';
 
 export class ShoppingService{
-  ingredients:Ingredients[]=[new Ingredients("Appple",5),new Ingredients("Tomatoes",5)]
+  ingredients:Ingredients[]=[]
 
   shoppingEvent= new EventEmitter<Ingredients[]>();
   getShoppingList(){

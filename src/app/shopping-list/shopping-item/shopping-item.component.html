@@ -1,27 +1,103 @@
-<div class="conatiner jumbotron">
-  <!-- <div class="col-md-6">
-    <form>
-      <div class="row">
-        <div class="col-sm-5 form-group"> 
-          <label for="name"> Name </label>
-          <input type="text" id="name" class="form-control" #nameInput>
+<div class="row">
+<div class="col-md-4" style="padding-top: 1%;margin-left:-5px;padding-left:8px;display: inline-block;">
+    <div *ngFor="let product of CartProductArray" >
+        <div class="card flex-row flex-wrap column" style="width:350px;margin-bottom: -40px;margin-left:15px;">
+            <div class="card-header column3"style="padding: 4px 4px 4px 7px;">
+                <img class="column4" style="height:12rem"[src]="product.imagePath[0]"
+                alt="{{product.name}}">
+            </div>
+            
+            <div class="card-block px-1 column2"style="padding-top:6px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a style="color: grey; cursor: pointer;font-size:17px" >
+                            <span class="fa fa-trash" (click)="deleteProduct(product,content)"></span>
+                            </a>
+                            <div style="padding-left: 5%">
+                            <p class="card-text"style="color:grey;font-size:16px;padding-top: 5%;margin-bottom: 0%">{{product.name}}</p>
+                            <p class="card-text"style="font-size:14px;  padding-top: 0%;margin-bottom: 0%">{{product.description}}</p>
+                            <p class="card-text discountPrice"style="display:inline-block;font-weight:bold;padding-top: 0%;margin-bottom: 0%"><i class="fa fa-inr"></i>{{product.price-(product.price*(product.discount/100)) | number:'1.0-0'}}</p>&nbsp;&nbsp;
+                            <p class="card-text price"style="display:inline-block;text-decoration:line-through;padding-top: 0%;margin-bottom: 0%"><i class="fa fa-inr"></i>{{product.price}}</p>&nbsp;
+                            <p class="card-text"style="display:inline-block;color:grey;font-size:14px;padding-top: 0%;margin-bottom: 0%">{{(product.discount/100) | percent}} off</p>
+                           </div>
+                           <div class="quantity" style="padding-left: 12px">
+                            <button class="minus-btn" type="button" name="button" >
+                                <img src="assets/images/minus.svg" alt="" />
+                              </button>
+                            <input id="txt_{{product.productId}}" class="txtValue" type="text" name="name"  value="1" readonly>
+                            <button class="plus-btn" type="button" name="button" >
+                                <img src="assets/images/plus.svg" alt="" />
+                              </button>
+                           
+                          </div>
+                          <p class="card-text   finalPrice"style="padding-top: 9%;padding-right: 2%;float: right;"><i class="fa fa-inr"></i>{{product.price-(product.price*(product.discount/100)) | number:'1.0-0'}}</p>
+            </div>
         </div>
-        <div class="col-sm-3 form-group"> 
-            <label for="amount"> Amount </label>
-            <input type="number" id="amount" class="form-control" #amountInput>
-        </div>
-      </div>
-      <div class="row">
-              <div class="col-sm-2 form-group"> 
-                  <button class="btn btn-success" type="submit" (click)="AddIngredient()">Add</button>
-                </div>
-                <div class="col-sm-2 form-group"> 
-                    <button class="btn btn-danger" type="button">Delete</button>
-                  </div>
-                  <div class="col-sm-2 form-group"> 
-                      <button class="btn btn-primary" type="button">Clear</button>
-          </div>
-      </div>
-     </form>
-  </div> -->
+        <br>
+    </div>
+    <br>
+    <br>
+    </div>
+
+
+<div class="col-md-5 " style="padding-top: 1%;margin-left:-5px;padding-left:8px;display: inline-block;">
+        <div class="card flex-row flex-wrap column1" >
+            <div class="card-text"style="height:150px;padding: 4px 4px 4px 7px;width:100%">
+                <p class="card-text"style="font-size:18px;font-weight:bold;padding-left:8px;padding-top: 2%;margin-bottom: 0%;">Order Summary</p>
+                <hr style="margin-top: 0.2rem;">
+                <p class="card-text"style="display:inline-block;font-size:15px;padding-left:4%;padding-top: 0%;margin-bottom: 0%;font-weight:bold;">Order total</p>
+                <p id="cartTotal" class="card-text"style="display:inline-block;padding-top: 0%;margin-bottom: 0%;float: right;padding-right:3%"><i class="fa fa-inr"></i></p>
+                <br>
+                <p class="card-text"style="display:inline-block;font-size:15px;padding-left:4%;padding-top: 0%;margin-bottom: 0%;font-weight:bold;">Savings</p>
+                <p id="cartSavings" class="card-text"style="display:inline-block;padding-top: 0%;margin-bottom: 0%;float: right;padding-right:3%"><i class="fa fa-inr"></i></p>
+            </div>
+           
+            <!-- <div class="card-block px-1"style="padding-top:6px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a style="color: grey; cursor: pointer;font-size:17px" >
+                            <span class="fa fa-trash" (click)="deleteProduct(product,content)"></span>
+                            </a>
+                            <div style="padding-left: 5%">
+                            <p class="card-text"style="color:grey;font-size:16px;padding-top: 5%;margin-bottom: 0%">{{product.name}}</p>
+                            <p class="card-text"style="font-size:14px;  padding-top: 0%;margin-bottom: 0%">{{product.description}}</p>
+                            <p class="card-text discountPrice"style="display:inline-block;font-weight:bold;padding-top: 0%;margin-bottom: 0%"><i class="fa fa-inr"></i>{{product.price-(product.price*(product.discount/100)) | number:'1.0-0'}}</p>&nbsp;&nbsp;
+                            <p class="card-text price"style="display:inline-block;text-decoration:line-through;padding-top: 0%;margin-bottom: 0%"><i class="fa fa-inr"></i>{{product.price}}</p>&nbsp;
+                            <p class="card-text"style="display:inline-block;color:grey;font-size:14px;padding-top: 0%;margin-bottom: 0%">{{(product.discount/100) | percent}} off</p>
+                           </div>
+                           <div class="quantity" style="padding-left: 12px">
+                            <button class="minus-btn" type="button" name="button" >
+                                <img src="assets/images/minus.svg" alt="" />
+                              </button>
+                            <input type="text" name="name" value="1" autocomplete="off">
+                            <button class="plus-btn" type="button" name="button" >
+                                <img src="assets/images/plus.svg" alt="" />
+                              </button>
+                           
+                          </div>
+                          <p class="card-text finalPrice"style="padding-top: 9%;padding-right: 2%;float: right;"><i class="fa fa-inr"></i>&nbsp;{{product.price-(product.price*(product.discount/100)) | number:'1.0-0'}}</p>
+            </div> -->
+        <br>
+    </div>
+        <br>
+    <br>
+    <br>
 </div>
+</div>
+
+<ng-template #content let-modal >
+    <div class="modal-header col-md-12" style="padding: 4px 4px 4px 7px;width:100%">
+        <div class=col-md-2 style="padding-left:0px;padding-right:0px;width:50%" >
+                <img style="height:7rem" [src]="modalImage"
+                >
+        </div>
+        <div class=col-md-8 style="padding-left:0px;text-align: left" >
+                <h6 class="modal-title" id="modal-title">Remove from cart?</h6>
+<div style="margin-top:15px">
+    <button type="button" class="btn btn-outline-secondary" style="margin-right: 6px;font-size: 14px;" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" style="margin-left: 10px;font-size: 14px;" (click)="modal.close('Ok click')">Ok</button>
+</div>
+                
+        </div>  
+                  
+      </div>
+     
+</ng-template>  

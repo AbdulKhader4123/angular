@@ -7,7 +7,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomValidators } from '../custom-validators';
 import * as $ from 'jquery';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-login',
@@ -43,6 +42,7 @@ export class LoginComponent implements OnInit  {
 }
 
 openBackDropCustomClass(content) {
+  //console.log(content)
   this.modalService.open(content, {backdropClass: 'light-blue-backdrop',centered: true,backdrop: 'static'});
 }
   invalidUserName()

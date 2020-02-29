@@ -44,11 +44,18 @@
           <div class="panel-body">
             <div *ngFor="let prodDetail of prodDetails">
                 <p class="col-md-2"style="width:40%;display:inline-block;color:grey;font-size:14px;padding-top: 0%;margin-bottom: 1%;font-weight:bold" >{{prodDetail.split('|')[0]}} </p>
-                <p class="col-md-2"style="width:60%;display:inline-block;font-size:14px;padding-top: 0%;margin-bottom: 1%" >{{prodDetail.split('|')[1]}} </p>
+                <p class="col-md-4"style="width:60%;display:inline-block;font-size:14px;padding-top: 0%;margin-bottom: 1%" >{{prodDetail.split('|')[1]}} </p>
             </div>
             
           </div>
       </div>
+      <div style="padding-top: 1% ;" >
+          <button  
+          type="button" 
+          class="btn btn-primary" style="background-color: orange;border: none;color: white;padding: 10px 25px;text-align: center;
+          font-size: 16px;
+          cursor: pointer;" (click)="AddToShoppingList()">ADD TO CART
+          </button></div>
   </div>
 </div>
 
@@ -75,6 +82,7 @@
       </div>
     </div> -->
 </div>
+      
 </div>
 
 

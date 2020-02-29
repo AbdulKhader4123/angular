@@ -39,7 +39,7 @@ this.isLoaded =false;
             this.product= this.prodarr[i];
             for (let [key, value] of Object.entries(this.product.productDetails)) {
               if(value!=""){
-                console.log(key + '|' + value)
+                // console.log(key + '|' + value)
                 this.prodDetails.push(key + '|' + value)
               }
            }
@@ -72,6 +72,6 @@ this.isLoaded =true;
   }
   AddToShoppingList(){
     console.log("a")
-// this.recipeService.AddToShoppingService(this.recipes.ingredients);
+ this.recipeService.AddToCart(this.product);
   }
 }

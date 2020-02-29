@@ -1,3 +1,160 @@
+ //for media screen
+ @media screen and (max-width: 330px)  {
+  .column1{
+    width: 310px!important;
+    margin-top: -26px!important;
+    margin-left: 7px!important;
+  }
+  .column{
+    width: 305px!important;
+    margin-left: 7px!important;
+}
+  .column2{
+    margin-left: 0px!important;
+    width:166px !important;
+    margin: 0px!important;
+    padding: 0px!important;
+
+
+  }
+  .column4{
+    height: 13rem!important;
+    width: 8rem!important;
+  }
+  
+}
+
+ @media screen and (min-width: 340px) and (max-width: 370px)  {
+  .column1{
+    width: 350px!important;
+        margin-left: 9px!important;
+        margin-top: -26px !important;
+  }
+  .column{
+    width: 350px!important;
+    margin-left: 9px!important;
+}
+}
+
+ @media screen and (min-width: 370px) and (max-width: 400px) {
+  .column1{
+    width: 351px;
+        margin-bottom: -40px;
+        margin-top: -26px !important;
+        margin-right: 17px;
+        margin-left: 15px;
+  }
+  
+ }
+ 
+//  @media screen and (min-width: 500px) {
+//   .column1{
+//        width: 400px;
+//     margin-top: 20px;
+//     margin-left: 28px;
+//   }
+  
+//  }
+ @media screen and (min-width: 500px)  {
+  .column1{
+       width: 392px;
+    margin-top: 20px;
+    margin-left: 113px;
+  }
+  
+ }
+ @media screen and (min-width: 500px) and (max-width: 600px) {
+  .column1{
+    margin-left: 10px;
+    margin-top: -22px !important;
+      
+  }
+}
+  
+ @media screen and (min-width: 400px) and (max-width: 500px) {
+  .column1{
+       width: 394px;
+       margin-top: -26px!important;
+       margin-left: 15px!important;
+   }
+   .column{
+    width: 392px!important;
+    margin-left: 15px!important;
+}
+.column2{
+  margin-left: 21px!important;
+}
+// .column3{
+// width: 9rem !important;
+// }
+ }
 .jumbotron{
     height: 100vh;
 }
+body {
+    background-color:  #eee;
+  }
+  .title {
+   
+      margin-bottom: 50px;
+      text-transform: uppercase;
+  }
+  .card-block {
+      font-size: 1em;
+      position: relative;
+      margin: 0;
+      padding: 1em;
+      border: none;
+      border-top: 1px solid rgba(34, 36, 38, .1);
+      box-shadow: none;
+       
+  }
+  .card {
+      font-size: 1em;
+      overflow: hidden;
+      padding: 5;
+      border: none;
+      border-radius: .28571429rem;
+      box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+      margin-top:20px;
+  }
+
+
+  // BELOW FOR QUANTITY BUTTONS
+  
+  .quantity {
+    padding-top: 13px;
+    margin-right: 60px;
+  }
+  .quantity input {
+    -webkit-appearance: none;
+    border: none;
+    text-align: center;
+    width: 32px;
+    font-size: 16px;
+    color: #43484D;
+    font-weight: 300;
+  }
+   
+ .quantity button[class*=btn] {
+    width: 23px;
+    height: 23px;
+    background-color: #E1E8EE;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  .minus-btn img {
+    margin-bottom: 4px;
+  }
+  .plus-btn img {
+    margin-top: -3px;
+  }
+   
+  button:focus,
+  input:focus {
+    outline:0;
+  }
+
+ 
+  

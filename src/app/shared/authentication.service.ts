@@ -19,7 +19,13 @@ export class AuthenticationService   implements OnInit{
 
       private ModuleTitle = new BehaviorSubject<string>("");
       currentModuleTitle = this.ModuleTitle.asObservable();
+
+      private CartProducts = new BehaviorSubject<string>("");
+      currentCartProducts = this.CartProducts.asObservable();
       
+      private CartTotal = new BehaviorSubject<string>("");
+      CartTotalObservable = this.CartProducts.asObservable();
+
     constructor(private http: HttpClient,private route:Router) {
       
     }
@@ -31,9 +37,14 @@ export class AuthenticationService   implements OnInit{
 
       // }
     }
- 
+    CartProductsobMethod(){
+      this.CartProducts.next("");
+          }
     observableMethod(){
 this.ModuleTitle.next("");
+    }
+    cartTotalobsMethod(){
+      this.CartTotal.next("");
     }
 
     isLoggedIn() {

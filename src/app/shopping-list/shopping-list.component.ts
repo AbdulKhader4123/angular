@@ -17,8 +17,10 @@ export class ShoppingListComponent implements OnInit {
   ingredients:Ingredients[];
 UserLoggedIn=false;
   ngOnInit() {
-
-if (this._authService.isLoggedIn()) {
+    this._authService.currentCartProducts.subscribe(()=>{
+      this.UserLoggedIn =false;
+         })
+if (this._authService.isLoggedIn()||(localStorage.getItem("CartProducts")!=null && localStorage.getItem("CartProducts")!="[]")) {
 this.UserLoggedIn=true;
 
  }
