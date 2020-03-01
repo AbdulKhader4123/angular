@@ -29,13 +29,11 @@ LogOutDisabled =true;
     });
       this.authService.currentModuleTitle.subscribe(()=>{
    this.LogOutDisabled =false;
-   console.log("123456")
       })
    if(this.authService.getJwtToken()){
    this.LogOutDisabled =false;
    }
    else{
-       console.log("77777777777")
     this.LogOutDisabled =true;
    }
 }

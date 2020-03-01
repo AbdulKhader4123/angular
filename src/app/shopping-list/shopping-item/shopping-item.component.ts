@@ -22,7 +22,7 @@ export class ShoppingItemComponent implements OnInit {
 
   ngOnInit() {
     $(document).ready(function (e){
-      $("#txtValue").val(1);
+     // $("#txtValue").val(1);
       //var PriceArray= document.getElementsByClassName("discountPrice");
       var PriceArray= document.getElementsByClassName("price");
 
@@ -38,6 +38,7 @@ for(var i=0;i<finalPriceArray.length;i++){
 
 $('#cartTotal').html("<i class='fa fa-inr'></i>"+sumvar)
 $('#cartSavings').html("<i class='fa fa-inr'></i>"+(Pricevar-sumvar))
+
       $('.minus-btn').on('click', function(e) {
         e.preventDefault();
         var $this = $(this);
@@ -88,15 +89,29 @@ $('#cartSavings').html("<i class='fa fa-inr'></i>"+(Pricevar-sumvar))
             value =100;
             itemPrice.html("<i class='fa fa-inr'></i>"+( 100* Number(discountPrice.text())))
         }
+       
+        
      
         $input.val(value);
-
+//console.log( $this.closest('div').find('input').attr('id').split('_')[1])
         var sumvar=0;
         var Pricevar=0;
       var PriceArray= document.getElementsByClassName("price");
         var finalPriceArray= document.getElementsByClassName("finalPrice");
         var txtValueArray= document.getElementsByClassName("txtValue");
         
+        var ProductArray= localStorage.getItem("CartProducts")!=null?JSON.parse(localStorage.getItem("CartProducts")):[];
+       var ProductId= Number($this.closest('div').find('input').attr('id').split('_')[1].trim())
+
+      for (var j in ProductArray) {
+        if (ProductArray[j].productId == ProductId) {
+          ProductArray[j].quantity = value;
+           break; //Stop this loop, we found it!
+        }
+      }
+      //console.log(JSON.stringify(ProductArray))
+        localStorage.setItem("CartProducts",JSON.stringify(ProductArray));
+
    for(var i=0;i<finalPriceArray.length;i++){
      //(txtValueArray[i].id);
      //console.log( document.getElementById(txtValueArray[i].id).innerText )
