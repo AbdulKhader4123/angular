@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from '../shared/User.model';
 import { Tokens } from './token.model';
-import { tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators/tap';
 import { Router } from '@angular/router';
 import { Subject, BehaviorSubject } from 'rxjs';
 

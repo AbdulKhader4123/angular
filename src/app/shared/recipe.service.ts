@@ -1,9 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Product } from '../recipes/products.model';
-import { Ingredients } from './Ingredients.model';
 import { ShoppingService } from './shopping-list.service';
 import { HttpClient } from '@angular/common/http';
-import {Observable } from 'rxjs';
 
 @Injectable()
 export class RecipeService{
