@@ -31,11 +31,11 @@ export class AuthenticationService   implements OnInit{
     }
  
     ngOnInit() {
-      // if(localStorage.getItem("REFRESH_TOKEN")==""){
-      //   localStorage.setItem("REFRESH_TOKEN",'REFRESH_TOKEN')
-      // localStorage.setItem("JWT_TOKEN",'JWT_TOKEN');
+      if(localStorage.getItem("REFRESH_TOKEN")==""){
+        localStorage.setItem("REFRESH_TOKEN",'REFRESH_TOKEN')
+      localStorage.setItem("JWT_TOKEN",'JWT_TOKEN');
 
-      // }
+      }
     }
     CartProductsobMethod(){
       this.CartProducts.next("");
