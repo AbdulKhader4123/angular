@@ -58,8 +58,7 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
     NgbModule,
     ShowHidePasswordModule
   ],
-  // providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},ShoppingService,AuthGuard,AuthenticationService,AnonymousGuard,RecipeService],
-  providers: [ShoppingService,AuthGuard,AuthenticationService,AnonymousGuard,RecipeService],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},ShoppingService,AuthGuard,AuthenticationService,AnonymousGuard,RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
