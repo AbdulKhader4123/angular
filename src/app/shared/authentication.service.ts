@@ -77,7 +77,7 @@ this.ModuleTitle.next("");
       refreshToken() {
         return this.http.post<any>("/api/refreshToken/refresh", {
           'refreshToken': this.getRefreshToken()
-        }).pipe(tap((jwt: any) => {
+        },{responseType: 'json'}).pipe(tap((jwt: any) => {
         
           this.storejwtTokens(jwt.jwt);
         }));
