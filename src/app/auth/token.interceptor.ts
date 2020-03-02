@@ -1,5 +1,5 @@
 import { Injectable, ErrorHandler } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap, tap } from 'rxjs/operators';
 import { AuthenticationService } from '../shared/authentication.service';
@@ -19,7 +19,7 @@ console.log(token)
       request = this.addToken(request, token);
 
     return next.handle(request).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && error.status === 401) {
+     if (error instanceof HttpErrorResponse && error.status === 401) {
         return this.handle401Error(request, next);
       } else {
         console.log("error")
@@ -33,7 +33,7 @@ console.log(token)
       setHeaders: {
         'Authorization': `${token}`,
         'Cache-Control': 'no-cache',
-        responseType: 'text' 
+        responseType: 'json' 
       }
     });
   }
@@ -41,7 +41,7 @@ console.log(token)
     return request.clone({
       setHeaders: {
         'Authorization': "",
-        responseType: 'text' 
+        responseType: 'json' 
 
       }
     })
