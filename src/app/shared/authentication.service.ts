@@ -6,6 +6,7 @@ import { Tokens } from './token.model';
 import { tap } from 'rxjs/operators/tap';
 import { Router } from '@angular/router';
 import { Subject, BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService   implements OnInit{
@@ -13,6 +14,7 @@ export class AuthenticationService   implements OnInit{
     loggedUser:string
      JWT_TOKEN :string 
      REFRESH_TOKEN : string
+     baseUrl: string = environment.backend.baseURL;
     //  private feature= new Subject();
     //  feature$ =this.feature.asObservable();
       featureSelected =new EventEmitter<string>();
@@ -75,7 +77,7 @@ this.ModuleTitle.next("");
         localStorage.setItem("JWT_TOKEN", tokens);
       }
       refreshToken() {
-        return this.http.post<any>("/api/refreshToken/refresh", {
+        return this.http.post<any>(`${this.baseUrl}`+"/api/refreshToken/refresh", {
           'refreshToken': this.getRefreshToken()
         },{responseType: 'json'}).pipe(tap((jwt: any) => {
         

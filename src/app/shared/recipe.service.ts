@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Product } from '../recipes/products.model';
 import { ShoppingService } from './shopping-list.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable()
 export class RecipeService{
@@ -9,7 +10,7 @@ product:Product[]=[];
 CartProduct:Product[]=[]
 CartProductString:string=""
 CartProductArray:Product[]=[]
-
+baseUrl: string = environment.backend.baseURL;
 productSelected = new EventEmitter<Product>();
 
       constructor(private shoppingService:ShoppingService,private http:HttpClient){
@@ -22,13 +23,13 @@ productSelected = new EventEmitter<Product>();
           if(this.product.length==0 ){
 
                 //   return this.recipes.slice();
-                this.http.get("/api/products/getProducts").subscribe((res) => {
-console.log(res)
-                  //     for (var i in res) {
-                  //       //      console.log(res[i])
-                  //           let prod = new Product(res[i]);
-                  //           this.product.push(prod)
-                  //     }
+                this.http.get(`${this.baseUrl}`+"/api/products/getProducts").subscribe((res) => {
+// console.log(res)
+                      for (var i in res) {
+                        //      console.log(res[i])
+                            let prod = new Product(res[i]);
+                            this.product.push(prod)
+                      }
 });
 return  this.product;
 }
