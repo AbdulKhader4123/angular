@@ -32,14 +32,17 @@ console.log(token)
     return request.clone({
       setHeaders: {
         'Authorization': `${token}`,
-        'Cache-Control': 'no-cache'
+        'Cache-Control': 'no-cache',
+        responseType: 'text' 
       }
     });
   }
   private endToken(request: HttpRequest<any>, token: string) {
     return request.clone({
       setHeaders: {
-        'Authorization': ""
+        'Authorization': "",
+        responseType: 'text' 
+
       }
     })
   }

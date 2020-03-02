@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Product } from '../recipes/products.model';
 import { ShoppingService } from './shopping-list.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class RecipeService{
@@ -22,13 +22,17 @@ productSelected = new EventEmitter<Product>();
           if(this.product.length==0 ){
 
                 //   return this.recipes.slice();
-                this.http.get("/api/products/getProducts").subscribe((res) => {
+                this.http.get("/api/products/getProducts",
+                {
+                   headers: new HttpHeaders().set('Content-Type', 'application/json'),
+                   responseType: 'text' 
+                }).subscribe((res) => {
 
-                      for (var i in res) {
-                        //      console.log(res[i])
-                            let prod = new Product(res[i]);
-                            this.product.push(prod)
-                      }
+                  //     for (var i in res) {
+                  //       //      console.log(res[i])
+                  //           let prod = new Product(res[i]);
+                  //           this.product.push(prod)
+                  //     }
 });
 return  this.product;
 }
