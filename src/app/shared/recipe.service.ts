@@ -22,11 +22,7 @@ productSelected = new EventEmitter<Product>();
           if(this.product.length==0 ){
 
                 //   return this.recipes.slice();
-                this.http.get("/api/products/getProducts",
-                {
-                   headers: new HttpHeaders().set('Content-Type', 'application/json'),
-                   responseType: 'text' 
-                }).subscribe((res) => {
+                this.http.get("/api/products/getProducts").subscribe((res) => {
 console.log(res)
                   //     for (var i in res) {
                   //       //      console.log(res[i])

@@ -33,7 +33,6 @@ console.log(token)
       setHeaders: {
         'Authorization': `${token}`,
         'Cache-Control': 'no-cache',
-        responseType: 'json' 
       }
     });
   }
@@ -41,7 +40,6 @@ console.log(token)
     return request.clone({
       setHeaders: {
         'Authorization': "",
-        responseType: 'json' 
 
       }
     })
