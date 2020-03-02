@@ -27,7 +27,7 @@ productSelected = new EventEmitter<Product>();
                    headers: new HttpHeaders().set('Content-Type', 'application/json'),
                    responseType: 'text' 
                 }).subscribe((res) => {
-
+console.log(res)
                   //     for (var i in res) {
                   //       //      console.log(res[i])
                   //           let prod = new Product(res[i]);
