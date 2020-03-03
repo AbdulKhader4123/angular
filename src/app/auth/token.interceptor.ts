@@ -34,7 +34,7 @@ baseUrl: string = environment.backend.baseURL;
     //     'Cache-Control': 'no-cache',
     //   }
     // });
-    const Url="https://sleepy-basin-67900.herokuapp.com"+request.url;
+    const Url="https://sleepy-basin-67900.herokuapp.com"+request.url.replace("https://sleepy-basin-67900.herokuapp.com", "");
     console.log(Url)
     return request.clone({
        url: Url,
