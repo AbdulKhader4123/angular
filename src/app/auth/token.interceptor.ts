@@ -3,20 +3,19 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap, tap } from 'rxjs/operators';
 import { AuthenticationService } from '../shared/authentication.service';
-import { Tokens } from '../shared/token.model';
-
+import { environment } from 'src/environments/environment.prod';
+import { isDevMode } from '@angular/core';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  private isRefreshing = false;
+baseUrl: string = environment.backend.baseURL;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(public authService: AuthenticationService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-const token=this.authService.getJwtToken();
-console.log(token)
-      request = this.addToken(request, token);
+  const token=this.authService.getJwtToken();
+  request = this.addToken(request, token);
 
     return next.handle(request).pipe(catchError(error => {
      if (error instanceof HttpErrorResponse && error.status === 401) {
@@ -29,6 +28,7 @@ console.log(token)
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
+    if(isDevMode()) {
     return request.clone({
       setHeaders: {
         'Authorization': `${token}`,
@@ -36,7 +36,18 @@ console.log(token)
       }
     });
   }
+  else{
+    return request.clone({
+      url: `${this.baseUrl}${request.url}` ,
+      setHeaders: {
+        'Authorization': `${token}`,
+        'Cache-Control': 'no-cache',
+      }
+    });
+  }
+  }
   private endToken(request: HttpRequest<any>, token: string) {
+    if(isDevMode()) {
     return request.clone({
       setHeaders: {
         'Authorization': "",
@@ -44,10 +55,18 @@ console.log(token)
       }
     })
   }
+  else{
+    return request.clone({
+      url: `${this.baseUrl}${request.url}` ,
+      setHeaders: {
+        'Authorization': "",
+
+      }
+    })
+  }
+  }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    //  if (!this.isRefreshing) {
-      this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
      this.authService.refreshToken().subscribe((res)=>{
        if(res['jwt']==""){
@@ -64,31 +83,8 @@ console.log(token)
         switchMap((jwt: any) => {
           // step 2 inner observable is created and subscribed to(map)
           //step 4 new inner observable is created and it subscribed to(map)
-          this.isRefreshing = false;
           this.refreshTokenSubject.next(jwt.jwt);
           return next.handle(this.addToken(request, jwt.jwt));
         }));
-
-  //   } else {
-  //     return this.refreshTokenSubject.pipe(
-  //       filter(jwt => jwt != null),
-  //       take(1),
-  //       switchMap(jwt => {
-  //         return next.handle(this.addToken(request, jwt));
-  //       }));
-  //   }
-  // }
 }
 }
-
-// const token =this.authService.getJwtToken()
-// let newHeaders = request.headers;
-
-//     if (token) { 
-//       console.log('INTERCEPTOR');
-//       newHeaders = newHeaders.append('authtoken', token);
-//     }
-//       const authReq = request.clone({headers: newHeaders});
-//       // request = this.addToken(request, this.authService.getJwtToken());
-//       return next.handle(authReq);
-//   }

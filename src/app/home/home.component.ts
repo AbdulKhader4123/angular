@@ -9,31 +9,25 @@ import { AuthenticationService } from '../shared/authentication.service';
 })
 
 export class HomeComponent implements OnInit {
- @Input() loadedFeature='home';
+
+@Input() loadedFeature='home';
  
-  onNavigate(feature : string){
-this.loadedFeature=feature;
-  }
-  constructor(private authService: AuthenticationService)
-  {
+onNavigate(feature : string)
+{
+  this.loadedFeature=feature;
+}
 
-    this.authService.featureSelected.subscribe((feature : string)=>{
-      this.loadedFeature=feature;
-    })
-    // this.authService.feature$.subscribe(()=>{
-      console.log( this.loadedFeature)
-    // })
-  }
-  
+constructor(private authService: AuthenticationService)
+{
+  this.authService.featureSelected.subscribe((feature : string)=>{
+  this.loadedFeature=feature;
+})
+}
 
-  ngOnInit()
-  {
-    console.log("1")
-    this.onNavigate(this.loadedFeature);
-    this.authService.featureSelected.subscribe((feature : string)=>{
-      this.loadedFeature=feature;
-    })
-  }
-  
-
-  };
+ngOnInit()
+{
+ this.onNavigate(this.loadedFeature);
+ this.authService.featureSelected.subscribe((feature : string)=>{   this.loadedFeature=feature;
+})
+}
+};
