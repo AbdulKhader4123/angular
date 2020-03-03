@@ -35,7 +35,7 @@ baseUrl: string = environment.backend.baseURL;
     //   }
     // });
     return request.clone({
-      url: `${this.baseUrl}${request.url}` ,
+      url: `${request.url}` ,
       setHeaders: {
         'Authorization': `${token}`,
         'Cache-Control': 'no-cache',
@@ -50,7 +50,7 @@ baseUrl: string = environment.backend.baseURL;
     //   }
     // })
     return request.clone({
-      url: `${this.baseUrl}${request.url}` ,
+      url: `${request.url}` ,
       setHeaders: {
         'Authorization': "",
 
