@@ -54,7 +54,6 @@ this.isLoaded =false;
      this.product= new Product(res);
      for (let [key, value] of Object.entries(this.product.productDetails)) {
        if(value!=""){
-         console.log("1111")
          this.prodDetails.push(key + '|' + value)
        }
     }
@@ -71,7 +70,6 @@ this.isLoaded =true;
   
   }
   AddToShoppingList(){
-    console.log("a")
  this.recipeService.AddToCart(this.product);
   }
 }

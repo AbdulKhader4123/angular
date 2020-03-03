@@ -1,9 +1,9 @@
 {
     "/api/*":{
-        "target":"https://sleepy-basin-67900.herokuapp.com/",
+        "target":"http://localhost:4000",
         "secure":false,
         "logLevel":"debug",
         "changeOrigin":true,
-        "pathRewrite": {"^/api" : "https://sleepy-basin-67900.herokuapp.com/api"}
+        "pathRewrite": {"^/api" : "http://localhost:4000/api"}
     }
-}
+} 

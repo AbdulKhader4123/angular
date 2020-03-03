@@ -138,6 +138,7 @@ $('#cartSavings').html("<i class='fa fa-inr'></i>"+(Pricevar-sumvar))
   }
 
   deleteProduct(product,content){
+    console.log("sss")
 // console.log(productId)
     //this.CartProductArray= JSON.parse(localStorage.getItem("CartProducts"));
   //console.log(content)

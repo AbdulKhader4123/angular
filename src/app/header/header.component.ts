@@ -20,7 +20,7 @@ LogOutDisabled =true;
       $(document).on('click', function (e){
           if(e.hasOwnProperty('originalEvent')){
             var menu_opened = $('#navbutton').hasClass('collapsed');
-            console.log(menu_opened)
+            //console.log(menu_opened)
             if(!menu_opened === true){
                 $('#navbutton').click();  
             }

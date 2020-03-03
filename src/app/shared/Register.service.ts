@@ -13,18 +13,18 @@ export class RegisterService{
     }
 postUser(user:User){
     
-    return this.http.post("/api/user/registerUser",user)
+    return this.http.post("api/user/registerUser",user)
 }
 checkUser(username:String){
-    return this.http.post("/api/user/checkUser",{name:username})
+    return this.http.post("api/user/checkUser",{name:username})
 }
    SendPasswordToMAIL(email:String){
-    return this.http.post("/api/password-reset/req-reset-password",{email:email})
+    return this.http.post("api/password-reset/req-reset-password",{email:email})
    }
    ValidateToken(token:string){
-    return this.http.post("/api/password-reset/response-reset-password",{resettoken:token})
+    return this.http.post("api/password-reset/response-reset-password",{resettoken:token})
    }
    ChangePassword(token:string,password:string){
-return this.http.post("/api/password-reset/new-password",{resettoken:token,newPassword:password})
+return this.http.post("api/password-reset/new-password",{resettoken:token,newPassword:password})
    }
 }   
