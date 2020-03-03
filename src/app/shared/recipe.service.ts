@@ -18,7 +18,7 @@ constructor(private shoppingService:ShoppingService,private http:HttpClient){ }
 getProducts(){
       if(this.product.length==0 ){
                // this.http.get(`${this.baseUrl}`+"/api/products/
-               this.http.get("api/products/getProducts").subscribe((res) => {
+               this.http.get("/api/products/getProducts").subscribe((res) => {
                       for (var i in res) {
                             let prod = new Product(res[i]);
                             this.product.push(prod)
@@ -32,7 +32,7 @@ else{
    }
         
 getProduct(id:number){
-             return this.http.post("api/products/getProduct",{Id:id})
+             return this.http.post("/api/products/getProduct",{Id:id})
             }
 
 AddToCart(product:Product){

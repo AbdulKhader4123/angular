@@ -28,6 +28,7 @@ baseUrl: string = environment.backend.baseURL;
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
+    console.log(request.url)
     // return request.clone({
     //   setHeaders: {
     //     'Authorization': `${token}`,
@@ -35,7 +36,7 @@ baseUrl: string = environment.backend.baseURL;
     //   }
     // });
     return request.clone({
-       url: `${request.url}` ,
+      // url: `${request.url}` ,
       setHeaders: {
         'Authorization': `${token}`,
         'Cache-Control': 'no-cache',
