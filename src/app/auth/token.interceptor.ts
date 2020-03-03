@@ -28,15 +28,12 @@ baseUrl: string = environment.backend.baseURL;
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
-    if(isDevMode()) {
-    return request.clone({
-      setHeaders: {
-        'Authorization': `${token}`,
-        'Cache-Control': 'no-cache',
-      }
-    });
-  }
-  else{
+    // return request.clone({
+    //   setHeaders: {
+    //     'Authorization': `${token}`,
+    //     'Cache-Control': 'no-cache',
+    //   }
+    // });
     return request.clone({
       url: `${this.baseUrl}${request.url}` ,
       setHeaders: {
@@ -44,18 +41,14 @@ baseUrl: string = environment.backend.baseURL;
         'Cache-Control': 'no-cache',
       }
     });
-  }
   }
   private endToken(request: HttpRequest<any>, token: string) {
-    if(isDevMode()) {
-    return request.clone({
-      setHeaders: {
-        'Authorization': "",
+    // return request.clone({
+    //   setHeaders: {
+    //     'Authorization': "",
 
-      }
-    })
-  }
-  else{
+    //   }
+    // })
     return request.clone({
       url: `${this.baseUrl}${request.url}` ,
       setHeaders: {
@@ -63,7 +56,6 @@ baseUrl: string = environment.backend.baseURL;
 
       }
     })
-  }
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
