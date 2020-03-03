@@ -28,15 +28,15 @@ baseUrl: string = environment.backend.baseURL;
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
-    console.log(request.url)
     // return request.clone({
     //   setHeaders: {
     //     'Authorization': `${token}`,
     //     'Cache-Control': 'no-cache',
     //   }
     // });
+    const Url="https://sleepy-basin-67900.herokuapp.com"+request.url;
     return request.clone({
-      // url: `${request.url}` ,
+       url: Url,
       setHeaders: {
         'Authorization': `${token}`,
         'Cache-Control': 'no-cache',
@@ -50,8 +50,9 @@ baseUrl: string = environment.backend.baseURL;
 
     //   }
     // })
+    const Url="https://sleepy-basin-67900.herokuapp.com"+request.url;
     return request.clone({
-      url: `${request.url}` ,
+      url: Url,
       setHeaders: {
         'Authorization': "",
 
