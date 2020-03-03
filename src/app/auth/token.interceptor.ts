@@ -34,7 +34,8 @@ baseUrl: string = environment.backend.baseURL;
     //     'Cache-Control': 'no-cache',
     //   }
     // });
-    const Url="https://sleeeepy-basin-67900.herokuapp.com"+request.url;
+    const Url="https://sleepy-basin-67900.herokuapp.com"+request.url;
+    console.log(Url)
     return request.clone({
        url: Url,
       setHeaders: {
@@ -50,7 +51,7 @@ baseUrl: string = environment.backend.baseURL;
 
     //   }
     // })
-    const Url="https://slepy-basin-67900.herokuapp.com"+request.url;
+    const Url="https://sleepy-basin-67900.herokuapp.com"+request.url;
     return request.clone({
       url: Url,
       setHeaders: {
