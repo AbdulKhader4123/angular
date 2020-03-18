@@ -18,13 +18,23 @@ postUser(user:User){
 checkUser(username:String){
     return this.http.post("/api/user/checkUser",{name:username})
 }
+SendOTPtoPhone(phone:String){
+    return this.http.post("/api/password-reset/GenerateOTP",{phoneNumber:phone})
+}
+VerifyOTP(Otp:String,sessionId:string){
+    return this.http.post("/api/password-reset/VerifyGenerateOTP",{OTP:Otp,sessionID:sessionId})
+}
    SendPasswordToMAIL(email:String){
     return this.http.post("/api/password-reset/req-reset-password",{email:email})
    }
    ValidateToken(token:string){
     return this.http.post("/api/password-reset/response-reset-password",{resettoken:token})
-   }
+   }  
    ChangePassword(token:string,password:string){
 return this.http.post("/api/password-reset/new-password",{resettoken:token,newPassword:password})
    }
+
+   ChangePasswordByPhone(userName:string,password:string){
+    return this.http.post("/api/password-reset/new-password-phone",{UserName:userName,newPassword:password})
+       }
 }   

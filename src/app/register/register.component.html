@@ -2,7 +2,6 @@
         <br>
         <br>
         <br>
-        <br>
 <div class="row">
     <div class="col-md-4">
       </div>
@@ -12,7 +11,7 @@
     <!-- && (userForm.get('name').dirty || userForm.get('name').touched -->
         <div class="form-group" > <!-- First Name -->
             <label for="name" class="control-label">UserName</label>
-            <input type="text" formControlName="name" class="form-control"[ngClass]="{ 'is-invalid':( userForm.controls['name'].hasError('required')|| userExistError!='') && this.submitted}" id="name" name="name" (keyup)="ChangeHandler()">
+            <input type="text" formControlName="name" class="form-control"[ngClass]="{ 'is-invalid':( userForm.controls['name'].hasError('required')|| userExistError!='') && this.submitted}" id="name" name="name" (keyup)="ChangeHandler()" (keypress)="UsernamekeyPress($event)">
             <p *ngIf="userForm.controls['name'].hasError('required') && this.submitted" id="userName_error" class="invalid-feedback">User name is required.</p>
             <p *ngIf="userExistError!='' && !userForm.controls['name'].hasError('required')" id="userName_error1" class="invalid-feedback">User name already exists.</p>
             <!-- <label
@@ -26,11 +25,16 @@
     
         <div class="form-group" > <!-- Email -->
             <label for="email" class="control-label">E-mail</label>
-            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': invalidEmail() }" id="email" name="email" >
+            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': invalidEmail() }" id="email" name="email" (keypress)="UsernamekeyPress($event)" >
             <p *ngIf="invalidEmail() && !userForm.controls['email'].hasError('required')" id="email_error" class="invalid-feedback">Invalid email address.</p>
             <p *ngIf="userForm.controls['email'].hasError('required') " id="email_error" class="invalid-feedback">Email is required.</p>
         </div>
-    
+        <div class="form-group" > <!-- Email -->
+            <label for="phone" class="control-label">Phone #</label>
+            <input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': invalidPhone() }" id="phone" name="phone" (keypress)="PhonekeyPress($event)" (paste)="onPaste($event)"minlength=10 maxlength=10>
+            <p *ngIf="invalidPhone() && !userForm.controls['phone'].hasError('required')" id="phone_error" class="invalid-feedback">Invalid phone #</p>
+            <p *ngIf="userForm.controls['phone'].hasError('required') " id="phone_error" class="invalid-feedback">Phone # is required.</p>
+        </div>
         <div class="form-group" > <!-- Password -->
             <label for="password" class="control-label">Password</label>
             <show-hide-password size="md" btnStyle="primary" [btnOutline]="false">

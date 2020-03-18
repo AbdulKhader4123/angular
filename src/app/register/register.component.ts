@@ -29,29 +29,10 @@ export class RegisterComponent implements OnInit {
   	return (this.submitted && this.userForm.value.name != "");
   }
 
-//   private UserNameExist(): ValidatorFn {
-//     return (control: AbstractControl): {[key: string]: any} => {
-//       this.registerService.checkUser((control.get('name').value).subscribe((res)=>{
-//         this.data=res;
-//       }))
-//         if(this.data['msg']="Username Available"){
-//           // this.userExistError=true;
-//         return null;
-//         }
-//         else{
-//           return {'AlreadyExist': true};
-//           // this.userExistError=false;
-//         } 
-//     }
-// }
-
-
-  //  UserNameExist(control: AbstractControl) 
-  // {
-      
-    // return this.userExistError;
-  // }
-
+  invalidPhone()
+  {
+  return (this.submitted && this.userForm.controls.phone.errors != null);
+  }
   invalidEmail()
   {
   	return (this.submitted && this.userForm.controls.email.errors != null);
@@ -69,7 +50,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit()
   {
   	this.userForm = this.formBuilder.group({
-  		name: ['', Validators.required],
+      name: ['', Validators.required],
+      phone:['', Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
   		email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.compose([Validators.required,Validators.minLength(8),
         CustomValidators.patternValidator(/\d/, { hasNumber: true }),
@@ -86,6 +68,31 @@ export class RegisterComponent implements OnInit {
   }
   PasswordkeyPress(event: any) {
     if (event.charCode==32) {
+      event.preventDefault();
+    }
+  }
+  UsernamekeyPress(event: any) {
+    if (event.charCode==32) {
+      event.preventDefault();
+    }
+  }
+  PhonekeyPress(event: any) {
+    if (event.charCode==32) {
+      event.preventDefault();
+    }
+    const pattern = /[0-9]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+  onPaste(event: ClipboardEvent) {
+    let clipboardData = event.clipboardData;
+    const pattern = /^[0-9]*$/;
+    let pastedText = clipboardData.getData('text');
+    console.log(pastedText)
+    if (!pattern.test(pastedText)) {
       event.preventDefault();
     }
   }
@@ -107,7 +114,7 @@ export class RegisterComponent implements OnInit {
           this.userExistError="";
           this.registered = true;
           this.registerService.postUser(this.userForm.value).subscribe((res)=>{
-          console.log(res);
+         // console.log(res);
             if(res['msg']=="User sucessfully created"){
 this.authService.doLoginUser(this.userForm.value.name,res['token'])
 this.authService.observableMethod();

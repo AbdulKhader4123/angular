@@ -62,7 +62,7 @@
             <div class="form-group" > <!-- First Name -->
                 <label for="username" class="control-label txtcolor" >Username</label>
                 <input type="text" formControlName="username" title="Registered Username or Email. " 
-                class="form-control"[ngClass]="{ 'is-invalid': invalidUserName() }" 
+                class="form-control"[ngClass]="{ 'is-invalid': invalidUserName() }" (keypress)="UsernamekeyPress($event)"
                 id="username" name="username" >
                 <p *ngIf="invalidUserName()" id="username_error" class="invalid-feedback">Invalid username.</p>
             </div>
