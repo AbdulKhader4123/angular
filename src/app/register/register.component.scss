@@ -1,0 +1,17 @@
+@media screen and (max-width: 500px) {
+    .column {
+       margin-top:20%;
+     }
+   }
+
+@media screen and (min-width: 500px) and (max-width: 800px) {
+    .column {
+       margin-top:15%;
+     }
+   }
+   @media screen and (min-width: 1000px) {
+    .column {
+        margin-top:7%;
+
+     }
+   }

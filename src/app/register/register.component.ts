@@ -16,9 +16,12 @@ export class RegisterComponent implements OnInit {
   registered = false;
   submitted = false;
   userExistError ="";
+  emailExistError="";
+  emailError="";
   userForm: FormGroup;
+  otpForm:FormGroup;
   data:object;
-
+  param: string="register";
   constructor(private formBuilder: FormBuilder,private registerService:RegisterService,private authService:AuthenticationService,private router:Router)
   {
 
@@ -40,15 +43,26 @@ export class RegisterComponent implements OnInit {
   ChangeHandler(){
     this.userExistError="";
   }
-  
+  EmailHandler(){
+    this.emailExistError="";
+    this.emailError="";
+  }
 
   invalidPassword()
   {
   	return (this.submitted && this.userForm.controls.password.errors != null);
   }
+  invalidOTP()
+  {
+  	return (this.submitted && this.otpForm.controls.otpCode.errors != null );
+  }
 
   ngOnInit()
   {
+    this.otpForm=  this.formBuilder.group({
+      // phonenumber:["", [Validators.required]],
+      otpCode:["", [Validators.required]]
+      })
   	this.userForm = this.formBuilder.group({
       name: ['', Validators.required],
       phone:['', Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
@@ -65,6 +79,9 @@ export class RegisterComponent implements OnInit {
       // check whether our password and confirm password match
       validator: [CustomValidators.passwordMatchValidator]
    })
+   if(this.router.url.indexOf("verifyphone")>0){
+     this.param="Otp";
+   }
   }
   PasswordkeyPress(event: any) {
     if (event.charCode==32) {
@@ -84,6 +101,13 @@ export class RegisterComponent implements OnInit {
 
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+  otpkeyPress(event: any) {
+    const pattern = /[0-9 ]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if ((event.key != 8 && !pattern.test(inputChar))||event.charCode==32) {
       event.preventDefault();
     }
   }
@@ -107,28 +131,76 @@ export class RegisterComponent implements OnInit {
   	}
   	else
   	{
-      this.registerService.checkUser(this.userForm.value.name).subscribe((res)=>{
-        console.log(res);
+      this.registerService.checkRegisterUser(this.userForm.value).subscribe((res)=>{
+       // console.log(res);
         this.data=res;
         if(this.data['msg']=="Username Available"){
+          this.param="Otp"
+         this.submitted = false;
+
           this.userExistError="";
           this.registered = true;
-          this.registerService.postUser(this.userForm.value).subscribe((res)=>{
-         // console.log(res);
-            if(res['msg']=="User sucessfully created"){
-this.authService.doLoginUser(this.userForm.value.name,res['token'])
-this.authService.observableMethod();
-this.router.navigate(['/home'])
-
+           this.router.navigate(['/register'],{ queryParams: { verifyphone: this.userForm.value.phone} })
+          this.registerService.SendOTPtoPhone(this.userForm.value.phone)
+          .subscribe((res)=>{
+           // console.log(res)
+            if(res['message']=='OTP Sent successfully.'){
+              localStorage.setItem("OTP_SessionId",res['SessionId']);
+          this.router.navigate(['/register'],{ queryParams: { verifyphone: this.userForm.value.phone} })
             }
-          console.log(res);
-          });
+           },
+           err => {console.log( err)},
+           );
         }
         else{
-        this.userExistError="aaa";
-        return;
+          if(this.data['msg']=="Username Already Exists"){
+            this.userExistError="aaa";
+            return;
+          }else if(this.data['msg']=="Email Already Exists"){
+            this.emailExistError="aaa";
+            return;
+          }
+          else if(this.data['msg']=="Invalid Email"){
+            this.emailError="aaaa"
+            return;
+          }
+          else{
+            this.userExistError="aaa";
+            this.emailExistError="aaa";
+            return;
+          }
+        
         }
       })
     }
+  }
+  onOTPSubmit(){
+    this.submitted = true;
+    
+  	if(this.otpForm.invalid == true)
+  	{
+  		return;
+  	}
+  	else
+  	{
+  //  this.registerService.VerifyOTP(this.otpForm.value.otpCode,localStorage.getItem("OTP_SessionId")).subscribe((res)=>{
+  //   if(res['message']=='OTP Verified successfully.'){
+      this.submitted = false;
+               this.registerService.postUser(this.userForm.value).subscribe((res)=>{
+                console.log(res['msg'])
+            if(res['msg']=="User sucessfully created"){
+              console.log(res['msg'])
+this.authService.doLoginUser(this.userForm.value.name,res['token'])
+this.authService.observableMethod();
+this.router.navigate(['/home'])
+          //   }
+          // });
+   }
+    
+   },
+   err => {console.log( err)},
+   );
+// th
+  	}
   }
 };

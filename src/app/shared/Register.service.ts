@@ -18,6 +18,9 @@ postUser(user:User){
 checkUser(username:String){
     return this.http.post("/api/user/checkUser",{name:username})
 }
+checkRegisterUser(user:User){
+    return this.http.post("/api/user/checkRegisterUser",user)
+}
 SendOTPtoPhone(phone:String){
     return this.http.post("/api/password-reset/GenerateOTP",{phoneNumber:phone})
 }

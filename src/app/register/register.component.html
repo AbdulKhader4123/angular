@@ -1,8 +1,7 @@
 <div class="container">
-        <br>
-        <br>
-        <br>
-<div class="row">
+        
+<div class="row column" *ngIf="param=='register'">
+        
     <div class="col-md-4">
       </div>
       <div class="col-md-4">
@@ -25,9 +24,11 @@
     
         <div class="form-group" > <!-- Email -->
             <label for="email" class="control-label">E-mail</label>
-            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': invalidEmail() }" id="email" name="email" (keypress)="UsernamekeyPress($event)" >
+            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': (invalidEmail() || emailExistError!=''|| emailError!='')}" id="email" name="email" (keyup)="EmailHandler()" (keypress)="UsernamekeyPress($event)" >
             <p *ngIf="invalidEmail() && !userForm.controls['email'].hasError('required')" id="email_error" class="invalid-feedback">Invalid email address.</p>
             <p *ngIf="userForm.controls['email'].hasError('required') " id="email_error" class="invalid-feedback">Email is required.</p>
+            <p *ngIf="emailExistError!='' && !userForm.controls['email'].hasError('required')" id="email_error1" class="invalid-feedback">Email already Registered.</p>
+            <p *ngIf="emailError!='' && !userForm.controls['email'].hasError('required')" id="email_error2" class="invalid-feedback">Invalid Email.</p>
         </div>
         <div class="form-group" > <!-- Email -->
             <label for="phone" class="control-label">Phone #</label>
@@ -60,6 +61,40 @@
     </form>	
 </div>
 </div>
+<div class="row"style="margin-top: 70px;margin-right:10px;margin-left:5px" *ngIf="param=='Otp'">
+        <br>
+        
+                <div class="col-md-4">
+                  </div>
+                  <div class="col-md-4">
+        <div class="card card-outline-secondary">
+            
+            <div class="card-body">
+                    <h5 class="mb-0" style="text-align:center">Login verification</h5>
+                    <p style="font-size:14px;text-align:center;padding-top: 4%" >We sent a verification code to</p>
+    
+                    <p style="font-size:14px;text-align:center;padding-top: 3%" >Please check your phone for a text message with your code. Your code is 6 characters in length...</p>
+                   
+             
+               <div style="Padding-top: 4%;"> 
+                <form [formGroup]="otpForm" autocomplete="off" (ngSubmit)="onOTPSubmit()" >
+                        <div class="form-group" style="padding-left: 12%;padding-right: 12%"> 
+                                <!-- <label for="email" class="control-label txtcolor" style="font-size:14px;" >Username</label> -->
+                                <input type="text" formControlName="otpCode" title="Received OTP. " 
+                                class="form-control" 
+                                id="otpCode" name="otpCode"  (keypress)="otpkeyPress($event)"  [ngClass]="{ 'is-invalid':(invalidOTP()) && this.submitted}" placeholder="Enter Code">
+                                <p *ngIf="invalidOTP()" id="OTP_error" class="invalid-feedback">Invalid OTP.</p>
+                            </div>
+                <div style="text-align:center;padding-top:3%" >
+                    <button type="submit" class="btn btn-outline-success">Submit</button>
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+      </div>
 </div>
 
 

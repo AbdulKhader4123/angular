@@ -16,7 +16,6 @@ export class PasswordResetComponent implements OnInit {
   tokenCheck=false;
   token:string="";
   phoneNumber:string;
-  sessionId:string;
   UserNameForPhone:string="";
 private sub: any;
 phoneForm:FormGroup;
@@ -163,7 +162,7 @@ this.UserNameForPhone=this.phoneForm.value.email;
             console.log(res)
             if(res['message']=='OTP Sent successfully.'){
               this.submitted = false;
-              this.sessionId=res['SessionId']
+              localStorage.setItem("OTP_SessionId",res['SessionId']);
               this.param='phoneSuccess';
             }
            },
@@ -183,7 +182,7 @@ this.UserNameForPhone=this.phoneForm.value.email;
   	else
   	{
      // console.log(this.emailForm.value.email)
-   this.registerService.VerifyOTP(this.otpForm.value.otpCode,this.sessionId).subscribe((res)=>{
+   this.registerService.VerifyOTP(this.otpForm.value.otpCode,localStorage.getItem("OTP_SessionId")).subscribe((res)=>{
     if(res['message']=='OTP Verified successfully.'){
       this.submitted = false;
       this.param='reset-password';
@@ -206,9 +205,7 @@ this.UserNameForPhone=this.phoneForm.value.email;
   	}
   	else
   	{
-      console.log(this.emailForm.value.email)
    this.registerService.SendPasswordToMAIL(this.emailForm.value.email).subscribe((res)=>{
-    console.log(res)
    },
    err => {console.log( err)},
    );
