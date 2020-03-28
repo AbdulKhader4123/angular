@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit{
    
 //   @Output() featureSelected =new EventEmitter<string>();
 LogOutDisabled =true;
+username:string="";
   constructor(private authService:AuthenticationService){
    
   }
@@ -26,8 +27,10 @@ LogOutDisabled =true;
             }
           }
         
-    });
+    });    
       this.authService.currentModuleTitle.subscribe(()=>{
+       this.username= localStorage.getItem("UserName");
+
    this.LogOutDisabled =false;
       })
    if(this.authService.getJwtToken()){
@@ -37,6 +40,15 @@ LogOutDisabled =true;
     this.LogOutDisabled =true;
    }
 }
+public loadScript(url: string) {
+    const body = <HTMLDivElement> document.body;
+    const script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = url;
+    script.async = false;
+    script.defer = true;
+    body.appendChild(script);
+  }
 onSelect(feature : string){
     console.log(feature)
         this.authService.featureSelected.emit(feature);

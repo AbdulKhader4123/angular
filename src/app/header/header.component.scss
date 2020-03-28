@@ -1,4 +1,22 @@
-.navbar-expand-sm .navbar-nav .nav-link {
-    padding-right: 3.5rem !important;
-    padding-left: .5rem;
-}
+// .navbar-expand-sm .navbar-nav .nav-link {
+//     padding-right: 1.0rem !important;
+//     padding-left: .5rem;
+// }
+
+//for dropdown menu alignmnet
+@media screen and (max-width: 800px) {
+    .dropcolumn {
+     position:relative!important;
+     width: 100%
+    }
+    .navbar .dropdown-menu {
+        position:relative!important;
+    }
+   }
+   @media screen and (min-width: 850px) {
+    .dropcolumn {
+        position: absolute!important;
+        width: 100%
+     }
+
+    }

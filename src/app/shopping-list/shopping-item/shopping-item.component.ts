@@ -12,8 +12,8 @@ import { AuthenticationService } from 'src/app/shared/authentication.service';
 })
 export class ShoppingItemComponent implements OnInit {
 
-  @ViewChild('nameInput', {static: false}) nameInputRef :ElementRef;
-  @ViewChild('amountInput', {static: false}) amountInputRef :ElementRef;
+  @ViewChild('nameInput',{static: true}) nameInputRef :ElementRef;
+  @ViewChild('amountInput',{static: true}) amountInputRef :ElementRef;
   CartProductArray:Product[]=[]
   closeResult: string;
   modalImage :string;

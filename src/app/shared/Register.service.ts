@@ -40,4 +40,17 @@ return this.http.post("/api/password-reset/new-password",{resettoken:token,newPa
    ChangePasswordByPhone(userName:string,password:string){
     return this.http.post("/api/password-reset/new-password-phone",{UserName:userName,newPassword:password})
        }
+
+       checkUpdateUser(user:User){
+        return this.http.post("/api/user/checkUpdateUser",user)
+       }
+       SendOTPToMAIL(email:String){
+        return this.http.post("/api/user/sendOtp",{email:email})
+       }
+       verifyOTPToMail(emailOtp:String,secretKey:string){
+        return this.http.post("/api/user/totpvalidate",{token:emailOtp,secret:secretKey})
+       }
+       changeEmailPhone(name:string,email:String,phone:string){
+        return this.http.post("/api/user/EditUser",{username:name,email:email,phone:phone})
+       }
 }   

@@ -8,11 +8,11 @@ import { AuthenticationService } from './shared/authentication.service';
 })
 export class AppComponent implements OnInit{
   ngOnInit(): void {
-  
+    
   }
   title = 'abuka';
 
   constructor(private authService:AuthenticationService){
-  }
+  } 
 }
  

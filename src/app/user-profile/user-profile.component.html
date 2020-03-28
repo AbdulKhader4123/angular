@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design Bootstrap Template</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+<!-- Bootstrap core CSS -->
+<link  href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<!-- Material Design Bootstrap -->
+<link  href="/assets/css/mdb.min.css" rel="stylesheet" type="text/css">
+
+
+  <style>
+    html,
+    body,
+    header,
+    .jarallax {
+      height: 700px;
+    }
+
+    @media (max-width: 740px) {
+      html,
+      body,
+      header,
+      .jarallax {
+        height: 100vh;
+      }
+    }
+
+     @media (min-width: 800px) and (max-width: 850px) {
+      html,
+      body,
+      header,
+      .jarallax {
+        height: 100vh;
+      }
+    }
+
+    @media (min-width: 560px) and (max-width: 660px) {
+      header .jarallax h5 {
+        display: none !important;
+      }
+    }
+
+    .page-footer {
+      margin-top: 0px;
+      padding-top: 0px;
+    }
+
+  </style>
+  
+</head>
+
+<body>
+<br>
+<br>
+        <div class="container-fluid">
+    
+          <!-- Section: Edit Account -->
+          <section class="section"  *ngIf="param=='profile'" >
+            <!-- First row -->
+            <div class="row">
+              <!-- First column -->
+              <div class="col-lg-4 mb-4">
+    
+                <!-- Card -->
+                <div class="card card-cascade narrower">
+    
+                  <!-- Card image -->
+                  <div class="view view-cascade gradient-card-header mdb-color lighten-3">
+                    <h5 class="mb-0 font-weight-bold">Edit Photo</h5>
+                  </div>
+                  <!-- Card image -->
+                
+                  <!-- Card content -->
+                  <div class="card-body card-body-cascade text-center">
+                    <img src="assets/images/user.png" class="img-fluid rounded-circle z-depth-1" alt="User Photo"  />
+    
+                    <div class="row flex-center" style="padding-top: 2%">
+                      <button class="btn btn-info btn-rounded btn-md">Upload New Photo</button><br>
+                      <button class="btn btn-danger btn-rounded btn-md">Delete</button>
+                    </div>
+                  </div>
+                  <!-- Card content -->
+    
+                </div>
+                <!-- Card -->
+    
+              </div>
+              <!-- First column -->
+    
+              <!-- Second column -->
+              <div class="col-lg-8 mb-4">
+    
+                <!-- Card -->
+                <div class="card card-cascade narrower">
+    
+                  <!-- Card image -->
+                  <div class="view view-cascade gradient-card-header mdb-color lighten-3">
+                    <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+                  </div>
+                  <!-- Card image -->
+    
+                  <!-- Card content -->
+                  <div class="card-body card-body-cascade text-center">
+    
+                    <!-- Edit Form -->
+                    <form  [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                      <!-- First row -->
+                      <div class="row">
+       <!-- First column -->
+       <div class="col-md-6 form-group">
+          <div class="md-form  md-outline">
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': (invalidEmail() || emailExistError!=''|| emailError!=''|| emailOTPFailed!='')}" id="email" name="email" (keyup)="EmailHandler()" (keypress)="UsernamekeyPress($event)" autocomplete="off">
+                <label for="email" id="emaillabel"class="control-label" [ngClass]="{'active':lblactive}">E-mail</label>
+            <p *ngIf="invalidEmail() && !userForm.controls['email'].hasError('required')" id="email_error" class="invalid-feedback">Invalid email address.</p>
+            <p *ngIf="userForm.controls['email'].hasError('required') " id="email_error" class="invalid-feedback">Email is required.</p>
+            <p *ngIf="emailExistError!='' && !userForm.controls['email'].hasError('required')" id="email_error1" class="invalid-feedback">Email already Registered.</p>
+            <p *ngIf="emailError!='' && !userForm.controls['email'].hasError('required')" id="email_error2" class="invalid-feedback">Invalid Email.</p>
+            <p *ngIf="emailOTPFailed!='' && !userForm.controls['email'].hasError('required') " id="emailError2" class="invalid-feedback">Unable to send Otp to email.</p>
+          </div>
+        </div>
+                        <!-- Second column --> 
+                        <div class="col-md-6 form-group">
+          <div class="md-form  md-outline">
+              <input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': invalidPhone() ||phoneOTPFailed!='' }" id="phone" name="phone"  (keyup)="ChangeHandler()" (keypress)="PhonekeyPress($event)" (paste)="onPaste($event)"minlength=10 maxlength=10 autocomplete="off">
+           
+          <label for="phone" id="phonelabel" class="control-label"  [ngClass]="{'active':lblactive}">Phone #</label>
+          <p *ngIf="invalidPhone() && !userForm.controls['phone'].hasError('required')" id="phone_error" class="invalid-feedback">Invalid phone #</p>
+          <p *ngIf="userForm.controls['phone'].hasError('required') " id="phone_error" class="invalid-feedback">Phone # is required.</p>
+          <p *ngIf="phoneOTPFailed!='' && !userForm.controls['phone'].hasError('required') " id="phone_error2" class="invalid-feedback">Unable to send Otp to phone.</p>
+        </div>
+      </div>
+                        
+                      </div>
+                      <!-- First row -->
+                      <div *ngIf="changeAlert!=''" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>No Fields changed!</strong> You must change some fields to update.
+                        <button type="button" class="close" (click)="changeAlertmethod()"data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <!-- Fourth row -->
+                      <div class="row">
+                        <div class="col-md-12 text-center my-4">
+                          <input type="submit" value="Update Account" [ngClass]="{'disabled':buttonEnabler}" class="btn btn-info btn-rounded">
+                        </div>
+                      </div>
+                      <!-- Fourth row -->
+    
+                    </form>
+                    <!-- Edit Form -->
+    
+                  </div>
+                  <!-- Card content -->
+    
+                </div>
+                <!-- Card -->
+    
+              </div>
+              <!-- Second column -->
+    
+            </div>
+            <!-- First row -->
+    
+          </section>
+          <section *ngIf="param=='OtpVerify'" >
+            <div class="row" style="margin: auto">
+                <div class="col-lg-4 mb-4">
+                  </div>
+              <!-- Second column -->
+              <div class="col-lg-4 mb-4">
+    
+                <!-- Card -->
+                <div class="card card-cascade narrower">
+    
+                  <!-- Card image -->
+                  <div class="view view-cascade gradient-card-header mdb-color lighten-3">
+                    <h5 class="mb-0 font-weight-bold">Verify </h5>
+                  </div>
+                  <!-- Card image -->
+    
+                  <!-- Card content -->
+                  <div class="card-body card-body-cascade text-center">
+    
+                    <!-- Material form subscription -->
+
+
+
+
+      <!-- Form -->
+      <form [formGroup]="OTPForm" (ngSubmit)="onOTPSubmit()" class="text-center" style="color: #757575;" >
+
+          <!-- Name -->
+          <div class="md-form mt-3">
+              <input type="text"  formControlName="phone" class="form-control" id="phoneOTP" name="phone"  (keypress)="otpkeyPress($event)"  maxlength="6" autocomplete="off" [ngClass]="{ 'is-invalid': invalidphoneOTP() || phoneOTPError!=''}" >
+              <label for="phoneOTP">Enter Otp sent to  {{phonetext}}</label>
+          
+          <p *ngIf="OTPForm.controls['phone'].hasError('required') " id="phoneOtp_error"  class="invalid-feedback">OTP is required.</p>
+          <p *ngIf="phoneOTPError!='' && !OTPForm.controls['phone'].hasError('required') " id="phone_error1" class="invalid-feedback">Invalid OTP.</p>
+          </div>
+          <!-- E-mai -->
+          <div class="md-form">
+              <input type="text" formControlName="email" id="emailOTP" name="email"   (keypress)="otpkeyPress($event)" class="form-control" maxlength="6"autocomplete="off" [ngClass]="{ 'is-invalid': invalidemailOTP() || emailOTPError!='' }" >
+              <label for="emailOTP">Enter Otp sent to {{emailtext}}</label>
+              <p *ngIf="OTPForm.controls['email'].hasError('required') && invalidemailOTP()" id="emailOtp_error" class="invalid-feedback">OTP is required.</p>
+              <p *ngIf="emailOTPError!='' && !OTPForm.controls['email'].hasError('required') " id="emailOtp_error1" class="invalid-feedback">Invalid OTP.</p>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 text-center my-4">
+              <input type="submit" value="Verify" class="btn btn-info btn-rounded" [ngClass]="{'disabled':buttonEnabler}">
+            </div>
+          </div>
+      </form>
+      <!-- Form -->
+<!-- Material form subscription -->
+    
+                  </div>
+                  <!-- Card content -->
+                </div>
+                <!-- Card -->
+              </div>
+              <!-- Second column -->
+            </div>
+          </section>
+          <section *ngIf="param=='phoneVerify'" >
+            <div class="row" style="margin: auto">
+                <div class="col-lg-4 mb-4">
+                  </div>
+              <!-- Second column -->
+              <div class="col-lg-4 mb-4">
+    
+                <!-- Card -->
+                <div class="card card-cascade narrower">
+    
+                  <!-- Card image -->
+                  <div class="view view-cascade gradient-card-header mdb-color lighten-3">
+                    <h5 class="mb-0 font-weight-bold">Verify </h5>
+                  </div>
+                  <!-- Card image -->
+    
+                  <!-- Card content -->
+                  <div class="card-body card-body-cascade text-center">
+    
+                    <!-- Material form subscription -->
+      <!-- Form -->
+      <form [formGroup]="OTPForm" (ngSubmit)="onphoneOTPSubmit()" class="text-center" style="color: #757575;" >
+          <!-- Name -->
+          <div class="md-form mt-3">
+              <input type="text"  formControlName="phone" class="form-control" id="phoneOTP" name="phone"  (keypress)="otpkeyPress($event)"  maxlength="6" autocomplete="off" [ngClass]="{ 'is-invalid': invalidphoneOTP() || phoneOTPError!=''}" >
+              <label for="phoneOTP">Enter Otp sent to  {{phonetext}}</label>
+          
+          <p *ngIf="OTPForm.controls['phone'].hasError('required') " id="phoneOtp_error"  class="invalid-feedback">OTP is required.</p>
+          <p *ngIf="phoneOTPError!='' && !OTPForm.controls['phone'].hasError('required') " id="phone_error1" class="invalid-feedback">Invalid OTP.</p>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center my-4">
+              <input type="submit" value="Verify" class="btn btn-info btn-rounded" [ngClass]="{'disabled':buttonEnabler}">
+            </div>
+          </div>
+      </form>
+      <!-- Form -->
+      
+
+<!-- Material form subscription -->
+    
+                  </div>
+                  <!-- Card content -->
+    
+                </div>
+                <!-- Card -->
+    
+              </div>
+              <!-- Second column -->
+    
+            </div>
+          </section>
+          <section *ngIf="param=='emailVerify'" >
+            <div class="row" style="margin: auto">
+                <div class="col-lg-4 mb-4">
+                  </div>
+              <!-- Second column -->
+              <div class="col-lg-4 mb-4">
+    
+                <!-- Card -->
+                <div class="card card-cascade narrower">
+    
+                  <!-- Card image -->
+                  <div class="view view-cascade gradient-card-header mdb-color lighten-3">
+                    <h5 class="mb-0 font-weight-bold">Verify </h5>
+                  </div>
+                  <!-- Card image -->
+    
+                  <!-- Card content -->
+                  <div class="card-body card-body-cascade text-center">
+    
+                    <!-- Material form subscription -->
+      <!-- Form -->
+      <form [formGroup]="OTPForm" (ngSubmit)="onemailOTPSubmit()" class="text-center" style="color: #757575;" >
+           <!-- E-mai -->
+           <div class="md-form">
+            <input type="text" formControlName="email" id="emailOTP" name="email"   (keypress)="otpkeyPress($event)" class="form-control" maxlength="6"autocomplete="off" [ngClass]="{ 'is-invalid': invalidemailOTP() || emailOTPError!='' }" >
+            <label for="emailOTP">Enter Otp sent to {{emailtext}}</label>
+            <p *ngIf="OTPForm.controls['email'].hasError('required') && invalidemailOTP()" id="emailOtp_error" class="invalid-feedback">OTP is required.</p>
+            <p *ngIf="emailOTPError!='' && !OTPForm.controls['email'].hasError('required') " id="emailOtp_error1" class="invalid-feedback">Invalid OTP.</p>
+        </div>
+
+          <div class="row">
+            <div class="col-md-12 text-center my-4">
+              <input type="submit" value="Verify" [ngClass]="{'disabled':buttonEnabler}" class="btn btn-info btn-rounded" [ngClass]="{'disabled':buttonEnabler}">
+            </div>
+          </div>
+      </form>
+      <!-- Form -->
+      
+
+<!-- Material form subscription -->
+    
+                  </div>
+                  <!-- Card content -->
+    
+                </div>
+                <!-- Card -->
+    
+              </div>
+              <!-- Second column -->
+    
+            </div>
+          </section>
+          <!-- Section: Edit Account -->
+        </div>
+    
+      <!-- Main layout -->
+
+
+  <!--  SCRIPTS  -->
+  <!-- JQuery -->
+
+  <script>
+    new WOW().init();
+
+    // MDB Lightbox Init
+    $(function () {
+      $("#mdb-lightbox-ui").load("/mdb-addons/mdb-lightbox-ui.html");
+    });
+
+  </script>
+</body>
+
+</html>

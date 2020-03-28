@@ -89,7 +89,9 @@ this.ResetPass="reset-password-success"
     //to hide incorrect error message error
     this.param="";
     this.ResetPass="";
-    if (event.charCode==32) {
+    const pattern = /[0-9a-zA-Z]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if ((event.key != 8 && !pattern.test(inputChar))||event.charCode==32) {
       event.preventDefault();
     }
   }
@@ -109,6 +111,9 @@ this.ResetPass="reset-password-success"
         console.log(res)
 this.authService.doLoginUser(res['userName'],res['token'])
 // this.authService.featureSelected.emit("home")
+localStorage.setItem("UserName", res['userName']);
+localStorage.setItem("phone", res['phone']);
+localStorage.setItem("email",res['email']);
 this.authService.observableMethod();
 
      this.modalService.dismissAll()
@@ -132,11 +137,7 @@ this.param="incorrectPassword";
       );
   	}
   }
-//   ngOnDestroy() {
-//     console.log("267")
-// this.authService.featureSelected.emit("home")
-    
-//   }
+
 }
               // in scripts array in angular.json
               // "node_modules/jquery/dist/jquery.min.js",

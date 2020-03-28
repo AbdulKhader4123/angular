@@ -99,6 +99,7 @@ this.ModuleTitle.next("");
        doLogoutUser() {
         console.log(localStorage.getItem("REFRESH_TOKEN"))
         console.log(localStorage.getItem("JWT_TOKEN"))
+        localStorage.removeItem("UserName");
         this.loggedUser = null;
         this.removeTokens();
  this.route.navigate(['/login'])

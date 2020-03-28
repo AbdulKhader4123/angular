@@ -29,6 +29,8 @@
     "ng": "0.0.0",
     "ngx-bootstrap": "^5.2.0",
     "ngx-show-hide-password": "^2.1.0",
+    "ngx-toastr": "^11.3.3",
+    "ngx-ui-loader": "^8.0.0",
     "popper.js": "^1.16.0",
     "rxjs": "~6.5.3",
     "rxjs-compat": "^6.5.3",
