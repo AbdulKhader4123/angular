@@ -1,20 +1,75 @@
 .jumbotron{
     height: 100vh;
 }
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 330px)  {
+  .column {
+     margin-left:-8px!important;
+  
+    //  flex: 70%;
+     margin-top:-22px!important;
+   }
+ }
+@media screen and (max-width: 365px) and (min-width: 340px)  {
+  .column {
+     margin-left:-5px!important;
+  
+    //  flex: 70%;
+     margin-top:-22px!important;
+   }
+ }
+ @media screen and (max-width: 400px) and (min-width: 370px){
+  .column {
+    margin-left:-5px !important;
+ 
+   //  flex: 70%;
+    margin-top:-22px!important;
+  }
+}
+@media screen and (max-width: 420px) and (min-width: 390px){
+  .column {
+    margin-left:-4px !important;
+ 
+   //  flex: 70%;
+    margin-top:-22px!important;
+  }
+}
+@media screen and (min-width: 590px) and (max-width: 650px){
+  .column {
+    margin-left:18px !important;
+ 
+   //  flex: 70%;
+    margin-top:-22px!important;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 800px){
+  .column {
+    margin-left:1px !important;
+ 
+   //  flex: 70%;
+    margin-top:-22px!important;
+  }
+}
+   @media screen and (max-width: 950px) and (min-width: 900px ) {
     .column {
-       margin-left: 7%;
-       padding-left : 1%;
-       flex: 70%;
-       margin-top:-4%;
+       margin-left : 12px!important;
+      //  flex: 70%;
+       margin-top:-2% !important;
+       
      }
    }
-   @media screen and (min-width: 500px) {
+   @media screen and(max-width: 1100px) and (min-width: 1000px ){
     .column {
-       padding-left : 1%;
-       margin-left : 10px;
-       flex: 70%;
-       margin-left: 10px
+       margin-left : 5px!important;
+      //  flex: 70%;
+       margin-top:-2% !important;
+       
+     }
+   }
+   @media screen and (min-width: 1100px) {
+    .column {
+       margin-left : 3%;
+      //  flex: 70%;
+       margin-top:-2% !important;
        
      }
    }

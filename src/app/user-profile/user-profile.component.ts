@@ -209,6 +209,7 @@ if(this.editSuccess){
            })
         }
         else{
+          this.buttonEnabler=false;
           this.emailOTPError="aaa"
         }
       })
@@ -242,6 +243,7 @@ if(this.editSuccess){
            })
         }
         else{
+          this.buttonEnabler=false;
             this.phoneOTPError="aaa"
         }
       })
@@ -285,12 +287,13 @@ if(this.editSuccess){
  })
             }
             else{
-              console.log("4353")
+              this.buttonEnabler=false;
               this.emailOTPError="aaa"
             }
           })
         }
         else{
+          this.buttonEnabler=false;
             this.phoneOTPError="aaa"
         }
       })
@@ -348,6 +351,7 @@ if(this.editSuccess){
                             }
                           }
                           else{
+                            this.buttonEnabler=false;
                             this.phoneOTPFailed="aaa"
                           }
                           },
@@ -355,13 +359,14 @@ if(this.editSuccess){
                           );
                   }
                   else{
+                    this.buttonEnabler=false;
                     //email otp failed.
                     this.emailOTPFailed="aaa"
                   }
                   })
         }
         else{
-          console.log("error")
+          this.buttonEnabler=false;
            if(res['msg']=="Email Already Exists"){
             this.emailExistError="aaa";
             return;
@@ -385,6 +390,10 @@ if(this.editSuccess){
     localStorage.setItem("OTP_SessionId",res['SessionId']);
  this.router.navigate(['/profile'],{ queryParams: { type: "phoneVerify"} })
    }
+   else{
+    this.buttonEnabler=false;
+    this.phoneOTPFailed="aaa"
+  }
   },
   err => {console.log( err)},
   );
@@ -399,9 +408,15 @@ if(this.editSuccess){
                 localStorage.setItem("secret_key",res['secret'])
              this.router.navigate(['/profile'],{ queryParams: { type: "emailVerify"} })
             }
+            else{
+              this.buttonEnabler=false;
+              //email otp failed.
+              this.emailOTPFailed="aaa"
+            }
             })
            }
            else{
+            this.buttonEnabler=false;
               if(res['msg']=="Email Already Exists"){
                this.emailExistError="aaa";
                return;
