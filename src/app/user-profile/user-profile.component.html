@@ -117,7 +117,7 @@
        <!-- First column -->
        <div class="col-md-6 form-group">
           <div class="md-form  md-outline">
-                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': (invalidEmail() || emailExistError!=''|| emailError!=''|| emailOTPFailed!='')}" id="email" name="email" (keyup)="EmailHandler()" (keypress)="UsernamekeyPress($event)" autocomplete="off">
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': (invalidEmail() || emailExistError!=''|| emailError!=''|| emailOTPFailed!='')}" id="email" name="email" (keyup)="EmailHandler()" (keypress)="emailkeyPress($event)" (paste)="onemailPaste($event)" autocomplete="off">
                 <label for="email" id="emaillabel"class="control-label" [ngClass]="{'active':lblactive}">E-mail</label>
             <p *ngIf="invalidEmail() && !userForm.controls['email'].hasError('required')" id="email_error" class="invalid-feedback">Invalid email address.</p>
             <p *ngIf="userForm.controls['email'].hasError('required') " id="email_error" class="invalid-feedback">Email is required.</p>

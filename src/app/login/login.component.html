@@ -18,7 +18,7 @@
                 <label for="username" class="control-label txtcolor" >Username</label>
                 <input type="text" formControlName="username" title="Registered Username or Email. " 
                 class="form-control"[ngClass]="{ 'is-invalid': invalidUserName() }" 
-                id="username" (keypress)="UsernamekeyPress($event)" name="username" >
+                id="username" (keypress)="UsernamekeyPress($event)" (keyup)="Usernamekeyup(username.value)" name="username" #username >
                 <p *ngIf="invalidUserName()" id="username_error" class="invalid-feedback">Invalid Username.</p>
             </div>
         
@@ -62,8 +62,8 @@
             <div class="form-group" > <!-- First Name -->
                 <label for="username" class="control-label txtcolor" >Username</label>
                 <input type="text" formControlName="username" title="Registered Username or Email. " 
-                class="form-control"[ngClass]="{ 'is-invalid': invalidUserName() }" (keypress)="UsernamekeyPress($event)"
-                id="username" name="username" >
+                class="form-control"[ngClass]="{ 'is-invalid': invalidUserName() }" (keypress)="UsernamekeyPress($event)" (keyup)="Usernamekeyup1(usernamemodal.value)"
+                id="username" name="username" #usernamemodal >
                 <p *ngIf="invalidUserName()" id="username_error" class="invalid-feedback">Invalid username.</p>
             </div>
         

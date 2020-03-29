@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy, HostBinding, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef, ViewEncapsulation, EventEmitter, Output, ɵConsole } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {LoginService} from '../shared/login.Service'
 import { Tokens } from '../shared/token.model';
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit  {
   constructor(private fb:FormBuilder,private loginService:LoginService,private authService:AuthenticationService,private router:Router,private modalService:NgbModal,private route:ActivatedRoute) { 
 
   }
+  @ViewChild('username',{static: false}) usernameInputRef :ElementRef;
   @Output() dismissError: EventEmitter<any> = new EventEmitter();
   loginForm:FormGroup;
   submitted = false;
@@ -89,11 +90,19 @@ this.ResetPass="reset-password-success"
     //to hide incorrect error message error
     this.param="";
     this.ResetPass="";
-    const pattern = /[0-9a-zA-Z]/;
+    const pattern = /[0-9a-zA-Z@.]/;
     const inputChar = String.fromCharCode(event.charCode);
     if ((event.key != 8 && !pattern.test(inputChar))||event.charCode==32) {
       event.preventDefault();
     }
+  }
+  Usernamekeyup(value: string) {
+this.usernameInputRef.nativeElement.value=value.toLowerCase();
+  }
+  Usernamekeyup1(value: string) {
+    //NOT WORKING FOR MODAL
+   // this.usernameInputRef1.nativeElement.value=value.toLowerCase();
+   this.loginForm.controls['username'].setValue(value.toLowerCase());
   }
   onSubmit()
   {

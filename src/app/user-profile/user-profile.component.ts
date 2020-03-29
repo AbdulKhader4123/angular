@@ -119,8 +119,11 @@ if(this.editSuccess){
   {
   	return (this.submitted && this.userForm.controls.email.errors != null);
   }
-  UsernamekeyPress(event: any) {
-    if (event.charCode==32) {
+  emailkeyPress(event: any) {
+    //to hide incorrect error message error
+    const pattern = /[0-9a-zA-Z@.]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if ((event.key != 8 && !pattern.test(inputChar))||event.charCode==32) {
       event.preventDefault();
     }
   }
@@ -139,6 +142,15 @@ if(this.editSuccess){
 
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+  onemailPaste(event: ClipboardEvent) {
+    let clipboardData = event.clipboardData;
+    const pattern =/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
+    let pastedText = clipboardData.getData('text');
+    console.log(pastedText)
+    if (!pattern.test(pastedText)) {
       event.preventDefault();
     }
   }

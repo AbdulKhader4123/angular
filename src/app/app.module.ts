@@ -64,11 +64,12 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "pbDirection": "ltr",
   "pbThickness": 3,
   "hasProgressBar": true,
-  "text": "Adf fashion",
-  "textColor": "#FFFFFF",
-  "textPosition": "center-center",
+  // "text": "Adf fashion",
+  // "textColor": "#FFFFFF",
+  // "textPosition": "center-center",
   "maxTime": -1,
-  "minTime": 300
+  //set 300 or more to view foreground spinner
+  "minTime": 0
 };
 @NgModule({
   declarations: [

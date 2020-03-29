@@ -10,7 +10,7 @@
     <!-- && (userForm.get('name').dirty || userForm.get('name').touched -->
         <div class="form-group" > <!-- First Name -->
             <label for="name" class="control-label">UserName</label>
-            <input type="text" formControlName="name" class="form-control"[ngClass]="{ 'is-invalid':( userForm.controls['name'].hasError('required')|| userExistError!='') && this.submitted}" id="name" name="name" (keyup)="ChangeHandler()" (keypress)="UsernamekeyPress($event)">
+            <input type="text" formControlName="name" class="form-control"[ngClass]="{ 'is-invalid':( userForm.controls['name'].hasError('required')|| userExistError!='') && this.submitted}" id="name" name="name" (keyup)="Usernamekeyup(username.value)" (keypress)="UsernamekeyPress($event)" #username>
             <p *ngIf="userForm.controls['name'].hasError('required') && this.submitted" id="userName_error" class="invalid-feedback">User name is required.</p>
             <p *ngIf="userExistError!='' && !userForm.controls['name'].hasError('required')" id="userName_error1" class="invalid-feedback">User name already exists.</p>
             <!-- <label
@@ -24,7 +24,7 @@
     
         <div class="form-group" > <!-- Email -->
             <label for="email" class="control-label">E-mail</label>
-            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': (invalidEmail() || emailExistError!=''|| emailError!='')}" id="email" name="email" (keyup)="EmailHandler()" (keypress)="UsernamekeyPress($event)" >
+            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': (invalidEmail() || emailExistError!=''|| emailError!='')}" id="email" name="email" (keyup)="EmailHandler()" (keypress)="UsernamekeyPress($event)" (paste)="onemailPaste($event)" >
             <p *ngIf="invalidEmail() && !userForm.controls['email'].hasError('required')" id="email_error" class="invalid-feedback">Invalid email address.</p>
             <p *ngIf="userForm.controls['email'].hasError('required') " id="email_error" class="invalid-feedback">Email is required.</p>
             <p *ngIf="emailExistError!='' && !userForm.controls['email'].hasError('required')" id="email_error1" class="invalid-feedback">Email already Registered.</p>

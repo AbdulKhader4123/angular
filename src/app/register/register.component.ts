@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { RegisterService } from '../shared/Register.service';
 import { CustomValidators } from '../custom-validators';
@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 
 })
 export class RegisterComponent implements OnInit {
+  
+  @ViewChild('username',{static: false}) usernameInputRef :ElementRef;
   registered = false;
   submitted = false;
   userExistError ="";
@@ -40,8 +42,9 @@ export class RegisterComponent implements OnInit {
   {
   	return (this.submitted && this.userForm.controls.email.errors != null);
   }
-  ChangeHandler(){
+  Usernamekeyup(value: string) {
     this.userExistError="";
+this.usernameInputRef.nativeElement.value=value.toLowerCase();
   }
   EmailHandler(){
     this.emailExistError="";
@@ -88,8 +91,12 @@ export class RegisterComponent implements OnInit {
       event.preventDefault();
     }
   }
-  UsernamekeyPress(event: any) {
-    if (event.charCode==32) {
+ 
+UsernamekeyPress(event: any) {
+    //to hide incorrect error message error
+    const pattern = /[0-9a-zA-Z@.]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if ((event.key != 8 && !pattern.test(inputChar))||event.charCode==32) {
       event.preventDefault();
     }
   }
@@ -114,6 +121,15 @@ export class RegisterComponent implements OnInit {
   onPaste(event: ClipboardEvent) {
     let clipboardData = event.clipboardData;
     const pattern = /^[0-9]*$/;
+    let pastedText = clipboardData.getData('text');
+    console.log(pastedText)
+    if (!pattern.test(pastedText)) {
+      event.preventDefault();
+    }
+  }
+  onemailPaste(event: ClipboardEvent) {
+    let clipboardData = event.clipboardData;
+    const pattern =/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
     let pastedText = clipboardData.getData('text');
     console.log(pastedText)
     if (!pattern.test(pastedText)) {

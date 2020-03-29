@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Router } from '@angular/router';
 import { CompileShallowModuleMetadata } from '@angular/compiler';
-
+import * as $ from 'jquery';
 @Component({
     templateUrl:'./header.component.html',
     selector:'app-header',
