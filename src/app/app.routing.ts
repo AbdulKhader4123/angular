@@ -32,5 +32,7 @@ const appRoutes: Routes = [
 ];
 
 export const routing = RouterModule.forRoot(appRoutes, {
-    scrollPositionRestoration: 'enabled', // Add options right here
+    enableTracing: false,
+	onSameUrlNavigation: 'reload',
+	scrollPositionRestoration: 'enabled',
   });
