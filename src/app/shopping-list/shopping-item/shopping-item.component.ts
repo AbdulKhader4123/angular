@@ -129,19 +129,16 @@ $('#cartSavings').html("<i class='fa fa-inr'></i>"+(Pricevar-sumvar))
     
    
   }
-  AddIngredient(){
-    const ingName=this.nameInputRef.nativeElement.value;
-    const ingAmount=this.amountInputRef.nativeElement.value;
-    const ingredient=new Ingredients(ingName,ingAmount);
-    // this.IngredientsAdded.emit(ingredient);
-    this.shoppingService.AddIngredient(ingredient);
-  }
+  // AddIngredient(){
+  //   const ingName=this.nameInputRef.nativeElement.value;
+  //   const ingAmount=this.amountInputRef.nativeElement.value;
+  //   const ingredient=new Ingredients(ingName,ingAmount);
+  //   // this.IngredientsAdded.emit(ingredient);
+  //   this.shoppingService.AddIngredient(ingredient);
+  // }
 
   deleteProduct(product,content){
-    console.log("sss")
-// console.log(productId)
     //this.CartProductArray= JSON.parse(localStorage.getItem("CartProducts"));
-  //console.log(content)
   this.modalImage=product.imagePath[0];
     this.modalService.open(content, {size: 'sm',centered: false,backdrop: true}).result.then((result) => {
       //this.closeResult = `Closed with: ${result}`;

@@ -59,8 +59,8 @@ this.ModuleTitle.next("");
       }
     
       private storeTokens(tokens: Tokens) {
-      console.log(localStorage.getItem("REFRESH_TOKEN"))
-      console.log(localStorage.getItem("JWT_TOKEN"))
+      // console.log(localStorage.getItem("REFRESH_TOKEN"))
+      // console.log(localStorage.getItem("JWT_TOKEN"))
 
         localStorage.setItem("JWT_TOKEN", tokens["jwt"]);
         localStorage.setItem("REFRESH_TOKEN",tokens["refreshToken"]);

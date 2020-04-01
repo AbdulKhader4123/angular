@@ -1,3 +1,14 @@
+.big-banner{
+  background-image: url('../../login/images/cartempty.png');
+    /* Full height */
+height: 200% !important;
+width: 100%;
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: fill;
+}
+ 
  //for media screen
  @media screen and (max-width: 330px)  {
   .column1{

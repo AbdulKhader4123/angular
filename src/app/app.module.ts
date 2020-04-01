@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule,NgxUiLoaderHttpModule  } from 'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
 // import { AppRoutingModule } from './app-routing.module';
+//import {RegstrLognModule} from './regstr-logn/regstr-logn.module';
 
 import { AppComponent } from './app.component';
 import { routing }   from './app.routing';
@@ -17,37 +18,39 @@ import {HeaderComponent} from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingItemComponent } from './shopping-list/shopping-item/shopping-item.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import {DropdownDirective} from './shared/DropDownDirective';
 import { from } from 'rxjs';
 import { ShoppingService } from './shared/shopping-list.service';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+//import { LoginComponent } from './login/login.component';
+// import { RegisterComponent } from './register/register.component';
+// import { PasswordResetComponent } from './password-reset/password-reset.component';
+//import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+//import { ShoppingItemComponent } from './shopping-list/shopping-item/shopping-item.component';
 import { AuthGuard } from './auth/guards/auth-guard.service';
 import { AuthenticationService } from './shared/authentication.service';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { AnonymousGuard } from './auth/guards/anonymous-guard.service';
 import { RecipeService } from './shared/recipe.service';
-import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { RegisterService } from './shared/Register.service';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+//import { UserProfileComponent } from './user-profile/user-profile.component';
 import {
   NgxUiLoaderConfig,
   SPINNER,
   POSITION,
   PB_DIRECTION
 } from 'ngx-ui-loader';
+import { LoginService } from './shared/login.Service';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "bgsColor": "#563d7c",
   "bgsOpacity": 0.7,
   "bgsPosition": "center-center",
-  "bgsSize": 90,
-  "bgsType": "square-jelly-box",
+  "bgsSize": 70,
+  "bgsType": "three-strings",
+  // "bgsType": "square-jelly-box",
   "blur": 6,
   "delay": 0,
   "fgsColor": "#563d7c",
@@ -60,7 +63,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "masterLoaderId": "master",
   "overlayBorderRadius": "0",
   "overlayColor": "rgba(40, 40, 40, 0.8)",
-  "pbColor": "#fffbfb",
+  // "pbColor": "#fffbfb",
+  "pbColor": "#edeb00",
   "pbDirection": "ltr",
   "pbThickness": 3,
   "hasProgressBar": true,
@@ -78,33 +82,34 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     RecipesComponent,
     RecipeListComponent,
     RecipeItemComponent,
-    ShoppingListComponent,
-    ShoppingItemComponent,
+    // ShoppingListComponent,
+    // ShoppingItemComponent,
     RecipeDetailComponent,
     DropdownDirective,
     HomeComponent,
-    LoginComponent,
-    RegisterComponent,
-    PasswordResetComponent,
-    UserProfileComponent
+    // LoginComponent,
+    // RegisterComponent,
+    // PasswordResetComponent,
+    //UserProfileComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    //RegstrLognModule,
     routing,
     HttpClientModule,
     AuthModule,
     NgbModule,
-    ShowHidePasswordModule,
+     ShowHidePasswordModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,// import NgxUiLoaderRouterModule. By default, it will show foreground loader.
     NgxUiLoaderHttpModule 
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},ShoppingService,AuthGuard,AuthenticationService,AnonymousGuard,RecipeService,RegisterService],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},ShoppingService,AuthGuard,AuthenticationService,AnonymousGuard,RecipeService,RegisterService,LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

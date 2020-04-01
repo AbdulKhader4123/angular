@@ -13,7 +13,7 @@ import * as $ from 'jquery';
   templateUrl: './login.component.html',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./login.component.scss'],
-  providers:[LoginService]
+  providers:[]
 })
 export class LoginComponent implements OnInit  {
 
@@ -113,11 +113,12 @@ this.usernameInputRef.nativeElement.value=value.toLowerCase();
   	}
   	else
   	{
+     console.log(this.loginForm.value)
 // this.authService.featureSelected.emit("home")
       this.param="";
       this.loggedIn = true;
       this.loginService.LoginUser(this.loginForm.value).subscribe((res)=>{
-        console.log(res)
+        // console.log(res)
 this.authService.doLoginUser(res['userName'],res['token'])
 // this.authService.featureSelected.emit("home")
 localStorage.setItem("UserName", res['userName']);

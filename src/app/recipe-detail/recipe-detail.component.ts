@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../recipes/products.model';
 import { RecipeService } from '../shared/recipe.service';
 import {ActivatedRoute} from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -16,7 +17,7 @@ prodarr:Product[];
 prodDetails:string[]=[];
  prodId :number;
  isLoaded =false;
-  constructor(private recipeService: RecipeService,private route: ActivatedRoute) { }
+  constructor(private recipeService: RecipeService,private route: ActivatedRoute,private toastr:ToastrService) { }
 
   ngOnInit() {
     // debugger;
@@ -71,5 +72,6 @@ this.isLoaded =true;
   }
   AddToShoppingList(){
  this.recipeService.AddToCart(this.product);
+ this.toastr.success('Product added to cart',"",{timeOut: 3000});
   }
 }
