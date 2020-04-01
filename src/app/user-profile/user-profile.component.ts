@@ -435,6 +435,8 @@ if(this.editSuccess){
       else{
         // if user clicks on update button withouth changing values
         this.changeAlert="aaa";
+  this.buttonEnabler=false;
+
       }
     }
   }
