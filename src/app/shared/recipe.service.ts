@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment.prod';
 @Injectable()
 export class RecipeService{
 product:Product[]=[];
+Kurtiproduct:Product[]=[];
 CartProduct:Product[]=[]
 CartProductString:string=""
 CartProductArray:Product[]=[]
@@ -30,6 +31,9 @@ else{
       return  this.product;
 }
    }
+   getFilteredProducts(productType:string){
+      return this.http.post("/api/products/getFilteredProducts",{category:productType})
+     }
         
 getProduct(id:number){
              return this.http.post("/api/products/getProduct",{Id:id})

@@ -9,6 +9,8 @@ export class Product{
     public discount:number;
     public productDetails:object;
     public quantity:number;
+    public category:string;
+    public size:string;
     // public ingredients:Ingredients[];
 
     // constructor(name :string,description:string,imagePath:string,ingredients:Ingredients[]){
@@ -23,6 +25,8 @@ export class Product{
         this.discount=Response.discount;
         this.productDetails=Response.ProductDetails
         this.quantity=Response.quantity
+        this.category=Response.category
+        this.size=Response.size
         // this.ingredients=ingredients;
     }
 

@@ -19,10 +19,11 @@ username:string="";
   ngOnInit(): void {
    
       $(document).on('click', function (e){
+        let elementId: string = (event.target as Element).id;
           if(e.hasOwnProperty('originalEvent')){
             var menu_opened = $('#navbutton').hasClass('collapsed');
             //console.log(menu_opened)
-            if(!menu_opened === true){
+            if(!menu_opened === true && elementId!="navbarDropdownMenuLink-333"){
                 $('#navbutton').click();  
             }
           }

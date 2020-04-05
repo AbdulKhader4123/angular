@@ -28,16 +28,14 @@ export class AuthenticationService   implements OnInit{
       private CartTotal = new BehaviorSubject<string>("");
       CartTotalObservable = this.CartProducts.asObservable();
 
+      private tabChange = new BehaviorSubject<string>("");
+      currenttab = this.tabChange.asObservable();
+
     constructor(private http: HttpClient,private route:Router) {
       
     }
  
     ngOnInit() {
-      // if(localStorage.getItem("REFRESH_TOKEN")==""){
-      //   localStorage.setItem("REFRESH_TOKEN",'REFRESH_TOKEN')
-      // localStorage.setItem("JWT_TOKEN",'JWT_TOKEN');
-
-      // }
     }
     CartProductsobMethod(){
       this.CartProducts.next("");
@@ -47,6 +45,9 @@ this.ModuleTitle.next("");
     }
     cartTotalobsMethod(){
       this.CartTotal.next("");
+    }
+    TabChangeobsMethod(tab:string){
+      this.tabChange.next(tab);
     }
 
     isLoggedIn() {

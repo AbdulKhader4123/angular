@@ -26,8 +26,22 @@ constructor(private authService: AuthenticationService)
 
 ngOnInit()
 {
+  var self = this;
+  $(function() {
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var selectedds = (e.target as Element).id;
+            self.tabChange(selectedds); 
+         }); 
+
+  }); 
+ 
  this.onNavigate(this.loadedFeature);
  this.authService.featureSelected.subscribe((feature : string)=>{   this.loadedFeature=feature;
 })
+}
+
+tabChange(selectedds:string){
+   this.authService.TabChangeobsMethod(selectedds);
 }
 };
