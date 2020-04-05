@@ -9,7 +9,9 @@
       <div class="carousel-inner">
           <ng-container *ngFor="let products of product.imagePath; let i = index">
         <div class="carousel-item" [class.active]="i==  0">
+            <pinch-zoom>
           <img class="d-block w-100" style="height:50% !important;" [src]="products" alt="First slide">
+          </pinch-zoom>
         </div>
       </ng-container>
       </div>

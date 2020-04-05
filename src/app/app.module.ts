@@ -8,6 +8,7 @@ import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule,NgxUiLoaderHttpModule  } from 'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
+import { PinchZoomModule } from 'ngx-pinch-zoom';
 // import { AppRoutingModule } from './app-routing.module';
 //import {RegstrLognModule} from './regstr-logn/regstr-logn.module';
 
@@ -105,6 +106,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
      ShowHidePasswordModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    PinchZoomModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,// import NgxUiLoaderRouterModule. By default, it will show foreground loader.
     NgxUiLoaderHttpModule 
