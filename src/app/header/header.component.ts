@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Router } from '@angular/router';
-import { CompileShallowModuleMetadata } from '@angular/compiler';
 import * as $ from 'jquery';
 @Component({
     templateUrl:'./header.component.html',
@@ -13,12 +12,13 @@ export class HeaderComponent implements OnInit{
 //   @Output() featureSelected =new EventEmitter<string>();
 LogOutDisabled =true;
 username:string="";
-  constructor(private authService:AuthenticationService){
+  constructor(private authService:AuthenticationService,private route:Router){
    
   }
   ngOnInit(): void {
    
       $(document).on('click', function (e){
+        //$(event.target).attr('id')
         let elementId: string = (event.target as Element).id;
           if(e.hasOwnProperty('originalEvent')){
             var menu_opened = $('#navbutton').hasClass('collapsed');
@@ -51,9 +51,10 @@ public loadScript(url: string) {
     body.appendChild(script);
   }
 onSelect(feature : string){
-    console.log(feature)
         this.authService.featureSelected.emit(feature);
-        // this.authService.featureSelect(feature);
+        if(this.route.url!='/'){
+          this.authService.TabChangeobsMethod("kurti");
+        }
     }
 
     LogOut(){

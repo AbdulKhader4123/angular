@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment.prod';
 export class RecipeService{
 product:Product[]=[];
 Kurtiproduct:Product[]=[];
+sareeProduct:Product[]=[];
 CartProduct:Product[]=[]
 CartProductString:string=""
 CartProductArray:Product[]=[]
