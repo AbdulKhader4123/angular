@@ -22,8 +22,8 @@
         <p class="card-text"style="color:grey;font-size:16px;padding-top: 0%;margin-bottom: 0%">{{product.name}}</p>
         <p class="card-text"style="font-size:14px;  padding-top: 0%;margin-bottom: 0%">{{product.description}}</p>
         <p class="card-text"style="display:inline-block;font-weight:bold;padding-top: 0%;margin-bottom: 0%;font-size:14px"><i class="fa fa-inr"></i>{{product.price-(product.price*(product.discount/100)) | number:'1.0-0'}}</p>&nbsp;&nbsp;
-        <p class="card-text"style="display:inline-block;text-decoration:line-through;padding-top: 0%;margin-bottom: 0%;font-size:13px"><i class="fa fa-inr"></i>{{product.price}}</p>&nbsp;
-        <p class="card-text"style="display:inline-block;color:grey;font-size:14px;padding-top: 0%;margin-bottom: 0%">{{(product.discount/100) | percent}} off</p>
+        <p class="card-text"style="display:inline-block;text-decoration:line-through;padding-top: 0%;margin-bottom: 0%;font-size:14px"><i class="fa fa-inr"></i>{{product.price}}</p>&nbsp;
+        <p class="card-text"style="display:inline-block;color:grey;font-size:12px;padding-top: 0%;margin-bottom: 0%">{{(product.discount/100) | percent}} off</p>
 <!-- added css import link in header component for rupee icon -->
       </div>
     </div>
