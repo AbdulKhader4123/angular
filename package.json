@@ -26,7 +26,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.1.5",
     "bootstrap": "^4.4.1",
     "core-js": "^2.6.11",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng": "0.0.0",
     "ngx-bootstrap": "^5.2.0",
     "ngx-pinch-zoom": "^2.4.4",
