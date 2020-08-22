@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { RegisterService } from '../shared/Register.service';
 import { CustomValidators } from '../custom-validators';
-import { stringify } from '@angular/compiler/src/util';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Router } from '@angular/router';
 
@@ -85,6 +84,24 @@ this.usernameInputRef.nativeElement.value=value.toLowerCase();
    if(this.router.url.indexOf("verifyphone")>0){
      this.param="Otp";
    }
+  }
+  ngAfterViewInit(){
+    if(document.getElementById("icon")!=undefined){
+
+    document.getElementById("icon").addEventListener("click", () => {
+  
+      if(document.getElementById("icon").classList.contains("fa-eye-slash")){
+        document.getElementById("password").setAttribute("type","text")
+        document.getElementById("icon").classList.add("fa-eye")
+        document.getElementById("icon").classList.remove("fa-eye-slash")
+      }
+      else{
+        document.getElementById("password").setAttribute("type","password")
+        document.getElementById("icon").classList.add("fa-eye-slash")
+        document.getElementById("icon").classList.remove("fa-eye")
+      }
+    });
+  }
   }
   PasswordkeyPress(event: any) {
     if (event.charCode==32) {

@@ -6,6 +6,16 @@
     display: flex;
     flex: auto;
   }
+  .icon{
+    position: absolute;
+    top: 33px;
+    right: 7px;
+    color: blueviolet;
+    font-size: 22px;
+  }
+  .user-box{
+    position: relative;
+  }
 @import '../node_modules/@syncfusion/ej2-base/styles/material.css';  
 @import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';  
 @import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';  

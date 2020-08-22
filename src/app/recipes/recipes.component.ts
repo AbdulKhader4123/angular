@@ -74,7 +74,6 @@ this.subscription=  this.authservice.currenttab.pipe(
   }
   }
   )).subscribe((res)=>{
-    console.log(res)
   if(res[0]!=undefined   && res!="No Products found"){
     if(res[0].category=="kurti"){
       for (var i in res) {
@@ -113,7 +112,6 @@ this.subscription=  this.authservice.currenttab.pipe(
   })
 }
 onScroll(){
-  console.log(this.recipeService.Kurtiproduct)
 if(this.done){
   return
 }

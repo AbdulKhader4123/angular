@@ -76,9 +76,26 @@ this.ResetPass="reset-password-success"
     if(this.router.url.indexOf("login")>0){
      this.loginPage =true;
     }
-
+   
 }
+ngAfterViewInit(){
+  if(document.getElementById("icon")!=undefined){
 
+  document.getElementById("icon").addEventListener("click", () => {
+
+    if(document.getElementById("icon").classList.contains("fa-eye-slash")){
+      document.getElementById("password").setAttribute("type","text")
+      document.getElementById("icon").classList.add("fa-eye")
+      document.getElementById("icon").classList.remove("fa-eye-slash")
+    }
+    else{
+      document.getElementById("password").setAttribute("type","password")
+      document.getElementById("icon").classList.add("fa-eye-slash")
+      document.getElementById("icon").classList.remove("fa-eye")
+    }
+  });
+}
+}
   PasswordkeyPress(event: any) {
     //to hide incorrect error message error
     this.param="";

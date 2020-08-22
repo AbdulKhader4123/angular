@@ -31,7 +31,6 @@ data:object;
 }
 
   ngOnInit() {
-
     this.userExistError=""
     this.phoneForm=  this.fb.group({
       // phonenumber:["", [Validators.required]],
@@ -206,6 +205,7 @@ this.UserNameForPhone=this.phoneForm.value.email;
   	else
   	{
    this.registerService.SendPasswordToMAIL(this.emailForm.value.email).subscribe((res)=>{
+     console.log(res)
    },
    err => {console.log( err)},
    );
@@ -241,6 +241,24 @@ if(res['msg']=="Password changed sucessfully"){
       
     }
   }
+  ngAfterViewInit(){
+    if(document.getElementById("icon")!=undefined){
+      document.getElementById("icon").addEventListener("click", () => {
+  
+      if(document.getElementById("icon").classList.contains("fa-eye-slash")){
+        document.getElementById("password").setAttribute("type","text")
+        document.getElementById("icon").classList.add("fa-eye")
+        document.getElementById("icon").classList.remove("fa-eye-slash")
+      }
+      else{
+        document.getElementById("password").setAttribute("type","password")
+        document.getElementById("icon").classList.add("fa-eye-slash")
+        document.getElementById("icon").classList.remove("fa-eye")
+      }
+    });
+  }
+  }
+
   // unsubscribe to avoid memory leaks
 ngOnDestroy() {
   if(this.sub !=undefined){

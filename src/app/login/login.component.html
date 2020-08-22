@@ -20,11 +20,9 @@
                 <p *ngIf="invalidUserName()" id="username_error" class="invalid-feedback">Invalid Username.</p>
             </div>
         
-            <div class="form-group" > <!-- Password -->
+            <div class="form-group user-box" > <!-- Password -->
               <label for="password" class="control-label">Password</label>
-              <show-hide-password size="md" btnStyle="primary" [btnOutline]="false">
-              <input type="password" formControlName="password"  title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }"  (keypress)="PasswordkeyPress($event)" id="password" name="password"autocomplete="off">
-            </show-hide-password>
+              <input type="password" formControlName="password"  title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }"  (keypress)="PasswordkeyPress($event)" id="password" name="password"autocomplete="off"><span class="icon" ><i id="icon" class="fa  fa-eye-slash"  aria-hidden="true"></i></span>
               <p *ngIf="invalidPassword()" id="password_error" style=" width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">Invalid password.</p>
               <p style="font-size:14px;text-align:center;color:red;padding-top: 4%" *ngIf="param=='incorrectPassword'">Incorrect password..</p>
               <p style="font-size:14px;text-align:center;color:red;padding-top: 4%" *ngIf="param=='invalidUsername'">Cannot find user..</p>
@@ -65,11 +63,9 @@
                 <p *ngIf="invalidUserName()" id="username_error" class="invalid-feedback">Invalid username.</p>
             </div>
         
-            <div class="form-group" > <!-- Password -->
+            <div class="form-group user-box" > <!-- Password -->
                 <label for="password" class="control-label">Password</label>
-                <show-hide-password size="md" btnStyle="primary" [btnOutline]="false">
-                  <input type="password" formControlName="password"  title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }"  (keypress)="PasswordkeyPress($event)" id="password" name="password" autocomplete="off">
-                </show-hide-password>
+                  <input type="password" formControlName="password"  title="Password Must contain Atleast one Upper-case,lower-case,numeric letter & should be min 8 characters" class="form-control"[ngClass]="{ 'is-invalid': invalidPassword() }"  (keypress)="PasswordkeyPress($event)" id="password" name="password" autocomplete="off"><span class="icon" ><i id="icon" class="fa  fa-eye-slash" aria-hidden="true"></i></span>
                 <p *ngIf="invalidPassword()" id="password_error" style=" width: 100%;margin-top: .25rem;font-size: 80%;color: #dc3545;">Invalid password.</p>
                 <p style="font-size:14px;text-align:center;color:red;padding-top: 4%" *ngIf="param=='incorrectPassword'">Incorrect password..</p>
                 <p style="font-size:14px;text-align:center;color:red;padding-top: 4%" *ngIf="param=='invalidUsername'">Cannot find user..</p>

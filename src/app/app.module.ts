@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule,NgxUiLoaderHttpModule  } from 'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
@@ -84,7 +83,6 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     HttpClientModule,
     AuthModule,
     NgbModule,
-     ShowHidePasswordModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     PinchZoomModule,

@@ -74,7 +74,6 @@ return of({});
 this.products=this.recipeService.Kurtiproduct;
 //this is for detail component
 this.recipeService.product=this.products
-console.log("done")
           }
           else if(res[0].category=="saree"){
             for (var i in res) {

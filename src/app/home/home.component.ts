@@ -20,7 +20,6 @@ onNavigate(feature : string)
 constructor(private authService: AuthenticationService,private recipeService: RecipeService)
 {
   this.authService.featureSelected.subscribe((feature : string)=>{
-    console.log(feature)
   this.loadedFeature=feature;
 })
 }
