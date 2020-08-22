@@ -1,6 +1,10 @@
 .jumbotron{
     height: 100vh;
 }
+.search-results {
+  height: 20rem;
+  overflow: scroll;
+}
 @media screen and (max-width: 330px)  {
   .column {
      margin-left:-8px!important;
@@ -74,7 +78,15 @@
      }
    }
 
+.pagination{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
+  margin-left: -70px;
+  margin-bottom: 10px;
 
+}
 //    footer.page-footer{bottom:0;color:#fff}footer.page-footer .container-fluid{width:auto}footer.page-footer .footer-copyright{overflow:hidden;color:rgba(255,255,255,0.6);background-color:rgba(0,0,0,0.2)}
 
 //    .deep-purple{background-color:#673ab7 !important}

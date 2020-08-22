@@ -17,20 +17,18 @@ import { AnonymousGuard } from './guards/anonymous-guard.service';
     AuthGuard,
     AnonymousGuard,
     AuthenticationService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true
+    // }
   ],
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    // MatButtonModule,
-    // MatFormFieldModule,
-    // MatInputModule
+
   ]
 })
 export class AuthModule { }

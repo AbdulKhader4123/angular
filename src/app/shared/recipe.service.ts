@@ -4,36 +4,46 @@ import { ShoppingService } from './shopping-list.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 
-@Injectable()
+@Injectable({
+      providedIn: 'root'
+    })
 export class RecipeService{
 product:Product[]=[];
+AllProductString:Object[]=[];
 Kurtiproduct:Product[]=[];
+kurtiDone=false
+sareeDone=false
 sareeProduct:Product[]=[];
 CartProduct:Product[]=[]
 CartProductString:string=""
 CartProductArray:Product[]=[]
 //baseUrl: string = environment.backend.baseURL;
 productSelected = new EventEmitter<Product>();
-
-constructor(private shoppingService:ShoppingService,private http:HttpClient){ }
+selectedCat;
+check;
+constructor(private http:HttpClient){ }
 
 getProducts(){
-      if(this.product.length==0 ){
+      if(this.AllProductString.length!=0){
                // this.http.get(`${this.baseUrl}`+"/api/products/
                this.http.get("/api/products/getProducts").subscribe((res) => {
                       for (var i in res) {
-                            let prod = new Product(res[i]);
-                            this.product.push(prod)
+                            this.AllProductString.push(res[i])
+                      }
+      return  this.AllProductString
+
       }
-});
-return  this.product;
+);
 }
 else{
-      return  this.product;
+      return this.AllProductString
 }
    }
-   getFilteredProducts(productType:string){
-      return this.http.post("/api/products/getFilteredProducts",{category:productType})
+   getFilteredProducts(productType:string,id:string){
+      if(this.check){
+            return this.http.post("/api/products/getFilteredProducts",{category:productType,last_id:id,mobile:true})
+      }
+      return this.http.post("/api/products/getFilteredProducts",{category:productType,last_id:id})
      }
         
 getProduct(id:number){

@@ -1,0 +1,27 @@
+<br>
+<div class="control-section">
+    <ejs-grid #batchgrid id='Batchgrid'(beforeBatchSave)="batchSave($event)" [dataSource]='data' allowPaging='true' [pageSettings]='pageSettings' [editSettings]='editSettings' [toolbar]='toolbar' [allowFiltering]='true'>
+        <e-columns>
+            <e-column field='productId' headerText='Product ID'  width='110' textAlign='Right' [validationRules]='productIdrules' isPrimaryKey='true'   type='number'></e-column>
+            <e-column field='description' headerText='Description' width='180' [validationRules]='descriptionrules' type='string'></e-column>
+            <e-column field='price' headerText='Price' width='100' format='###.##' textAlign='Right' editType='numericedit' [validationRules]='pricerules'  type='number'></e-column>
+            <e-column field='discount' headerText='Discount' width='100'  textAlign='Right' editType='numericedit' [validationRules]='pricerules'  type='number'></e-column>
+            <e-column field='image.0' headerText='Image1' width='160' default="" type='string' [validationRules]='imagerules'></e-column>
+            <e-column field=image.1 headerText='Image2' width='160' default="" type='string'></e-column>
+            <e-column field='image.2' headerText='Image3' width='160' default="" type='string'></e-column>
+            <e-column field='image.3' headerText='Image4' width='160' default="" type='string'></e-column>
+            <e-column field='category' headerText='Category' width='120' editType='dropdownedit' [edit]='editparams' type='string' [validationRules]='pricerules'></e-column>
+            <e-column field='ProductDetails.Fabric' headerText='Fabric' width='180' type='string' ></e-column>
+            <e-column field='ProductDetails.Color' headerText='Color' width='120' type='string' ></e-column>
+            <e-column field='ProductDetails.size' headerText='Size' width='60' type='string'></e-column>
+            <e-column field='ProductDetails.Neck' headerText='Neck' width='120' type='string'></e-column>
+            <e-column field='ProductDetails.Pattern' headerText='Pattern' width='120' type='string'  ></e-column>
+            <e-column field='ProductDetails.SleeveLength' headerText='Sleeve Len' width='120' type='string' ></e-column>
+            <e-column field='ProductDetails.FabricCare' headerText='Fabric Care' width='180'type='string' ></e-column>
+            <e-column field='ProductDetails.Description' headerText='Prod Desc' width='270' type='string'></e-column>
+            <!-- <e-column field='OrderDate' headerText='Order Date' width='130' format='yMd' editType='datepickeredit' textAlign='Right'></e-column> -->
+            <!-- <e-column field='ShipCountry' headerText='Ship Country' width='150' editType='dropdownedit' [edit]='editparams'></e-column> -->
+        </e-columns>
+    </ejs-grid>
+
+</div>

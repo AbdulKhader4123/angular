@@ -3,15 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule,NgxUiLoaderHttpModule  } from 'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { PinchZoomModule } from 'ngx-pinch-zoom';
-// import { AppRoutingModule } from './app-routing.module';
-//import {RegstrLognModule} from './regstr-logn/regstr-logn.module';
-
+import { GridModule } from '@syncfusion/ej2-angular-grids';
+import {  SortService, FilterService, GroupService } from '@syncfusion/ej2-angular-grids';
 import { AppComponent } from './app.component';
 import { routing }   from './app.routing';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
@@ -21,29 +19,17 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import {DropdownDirective} from './shared/DropDownDirective';
-import { from } from 'rxjs';
-import { ShoppingService } from './shared/shopping-list.service';
 import { HomeComponent } from './home/home.component';
-//import { LoginComponent } from './login/login.component';
-// import { RegisterComponent } from './register/register.component';
-// import { PasswordResetComponent } from './password-reset/password-reset.component';
-//import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-//import { ShoppingItemComponent } from './shopping-list/shopping-item/shopping-item.component';
 import { AuthGuard } from './auth/guards/auth-guard.service';
-import { AuthenticationService } from './shared/authentication.service';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { AnonymousGuard } from './auth/guards/anonymous-guard.service';
-import { RecipeService } from './shared/recipe.service';
-import { RegisterService } from './shared/Register.service';
-//import { UserProfileComponent } from './user-profile/user-profile.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {
   NgxUiLoaderConfig,
-  SPINNER,
-  POSITION,
-  PB_DIRECTION
+
 } from 'ngx-ui-loader';
-import { LoginService } from './shared/login.Service';
+import { EditproductComponent } from './editproduct/editproduct.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "bgsColor": "#563d7c",
@@ -83,22 +69,17 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     RecipesComponent,
     RecipeListComponent,
     RecipeItemComponent,
-    // ShoppingListComponent,
-    // ShoppingItemComponent,
     RecipeDetailComponent,
     DropdownDirective,
     HomeComponent,
-    // LoginComponent,
-    // RegisterComponent,
-    // PasswordResetComponent,
-    //UserProfileComponent
+    EditproductComponent,
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    //RegstrLognModule,
     routing,
     HttpClientModule,
     AuthModule,
@@ -109,9 +90,16 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     PinchZoomModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,// import NgxUiLoaderRouterModule. By default, it will show foreground loader.
-    NgxUiLoaderHttpModule 
+    NgxUiLoaderHttpModule ,
+    GridModule,
+    // NgxPaginationModule,
+    InfiniteScrollModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},ShoppingService,AuthGuard,AuthenticationService,AnonymousGuard,RecipeService,RegisterService,LoginService],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},AuthGuard,AnonymousGuard,
+    SortService,
+    FilterService,
+    GroupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

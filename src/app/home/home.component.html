@@ -1,80 +1,27 @@
-<!-- <app-header (featureSelected)="onNavigate($event)"></app-header>
- -->
-<!-- <app-header ></app-header> -->
-      <!-- <app-recipes *ngIf="loadedFeature==='home'"></app-recipes> -->
-     <!-- <app-shopping-list  *ngIf="loadedFeature==='cart'"></app-shopping-list> -->
-     <link rel="stylesheet" href="assets/css1/style.css">
-   
-<style>
-      .latest-product-area .single-product .product-img .new-product {
-    position: absolute;
-    top: 25px;
-    left: 23px;
-}
-.new-product span {
-    background: #ff003c;
-    padding: 3px 16px;
-    border-radius: 30px;
-    color: #fff;
-}
+<section class="latest-product-area">
+                <div class="product-btn d-flex justify-content-end align-items-end">
+                    <!-- Section Tittle -->
+                    <div class="col-md-12">
+                        <div class="properties__button f-right">
+                            <!--Nav Button  -->
+                            <nav>                                                                                                
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="Kurti" data-toggle="tab" href="#nav-Kurti" role="tab" aria-controls="nav-Kurti" aria-selected="true">Kurti's</a>
+                                    <a class="nav-item nav-link" id="Saree" data-toggle="tab" href="#nav-Saree" role="tab" aria-controls="nav-Saree" aria-selected="true">Saree</a>
+                                    <a class="nav-item nav-link" id="Palazo" data-toggle="tab" href="#nav-Palazo" role="tab" aria-controls="nav-Palazo" aria-selected="false">Palazo</a>
+                                    <a class="nav-item nav-link" id="Designer" data-toggle="tab" href="#nav-Designer" role="tab" aria-controls="nav-Designer" aria-selected="false">Designer Tops</a>
+                                    <!-- <a class="nav-item nav-link" id="nav-Lingeries-tab" data-toggle="tab" href="#nav-Lingeries" role="tab" aria-controls="nav-Lingeries" aria-selected="false">Lingeries</a> -->
+                                    <a class="nav-item nav-link" id="Jeggings" data-toggle="tab" href="#nav-Jeggings" role="tab" aria-controls="nav-Jeggings" aria-selected="false">Jeggings</a>
+                                    <a class="nav-item nav-link" id="shawls" data-toggle="tab" href="#nav-shawls" role="tab" aria-controls="nav-shawls" aria-selected="false">shawls</a>
+                                </div>
+                            </nav>
+                            <!--End Nav Button  -->
+                        </div>
+                    </div>
+                </div>
+                
+        </section>
 
-</style>
-<!-- <link rel="manifest" href="site.webmanifest"> -->
-    <!-- CSS here -->
-    <!-- <link rel="stylesheet" href="assets/css1/slicknav.css"> -->
-
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-        <section class="latest-product-area">
-                      <div class="product-btn d-flex justify-content-end align-items-end">
-                          <!-- Section Tittle -->
-                          <div class="col-md-12">
-                              <div class="properties__button f-right">
-                                  <!--Nav Button  -->
-                                  <nav>                                                                                                
-                                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                          <a class="nav-item nav-link active" id="Kurti" data-toggle="tab" href="#nav-Kurti" role="tab" aria-controls="nav-Kurti" aria-selected="true">Kurti's</a>
-                                          <a class="nav-item nav-link" id="Saree" data-toggle="tab" href="#nav-Saree" role="tab" aria-controls="nav-Saree" aria-selected="true">Saree</a>
-                                          <a class="nav-item nav-link" id="Palazo" data-toggle="tab" href="#nav-Palazo" role="tab" aria-controls="nav-Palazo" aria-selected="false">Palazo</a>
-                                          <a class="nav-item nav-link" id="Designer" data-toggle="tab" href="#nav-Designer" role="tab" aria-controls="nav-Designer" aria-selected="false">Designer Tops</a>
-                                          <!-- <a class="nav-item nav-link" id="nav-Lingeries-tab" data-toggle="tab" href="#nav-Lingeries" role="tab" aria-controls="nav-Lingeries" aria-selected="false">Lingeries</a> -->
-                                          <a class="nav-item nav-link" id="Jeggings" data-toggle="tab" href="#nav-Jeggings" role="tab" aria-controls="nav-Jeggings" aria-selected="false">Jeggings</a>
-                                          <a class="nav-item nav-link" id="shawls" data-toggle="tab" href="#nav-shawls" role="tab" aria-controls="nav-shawls" aria-selected="false">shawls</a>
-                                      </div>
-                                  </nav>
-                                  <!--End Nav Button  -->
-                              </div>
-                          </div>
-                      </div>
-                     
-              </section>
-              <div style="margin-top: -35px">
-              <app-recipes *ngIf="loadedFeature==='home'"></app-recipes>
-
-              </div>
-
-<!-- <div class="col-md-12">
-      <div class="col-md-4"style="height: 300px;">
-      <div class="card" style="margin-top:21px;">
-            <img src="../../assets/images/palazo.PNG" class="card-img-top" alt="..." style=" object-fit: contain;
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;">
-            <div class="card-img-overlay">
-                        <h5 class="card-title">Kurti's</h5>
-                      </div>
-          </div>
-      </div> 
-</div> -->
-
-
-
-
-
-
-
+        <div style="margin-top: -35px">
+        <app-recipes *ngIf="loadedFeature==='home'"></app-recipes>
+        </div>

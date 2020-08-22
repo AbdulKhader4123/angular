@@ -1,7 +1,9 @@
 import { Ingredients } from './Ingredients.model';
 import { EventEmitter, Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ShoppingService{
   ingredients:Ingredients[]=[]
 

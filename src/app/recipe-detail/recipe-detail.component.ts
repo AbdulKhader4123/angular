@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RecipeDetailComponent implements OnInit {
 
-//  @Input() product:Product
 @Input() product:Product;
 prodarr:Product[];
 prodDetails:string[]=[];
@@ -20,13 +19,6 @@ prodDetails:string[]=[];
   constructor(private recipeService: RecipeService,private route: ActivatedRoute,private toastr:ToastrService) { }
 
   ngOnInit() {
-    // debugger;
-//  this.recipeService.productSelected.subscribe(
-//       (product:Product)=>{
-//         this.product=product;
-//         console.log(this.product)
-//       }
-//     )
 this.isLoaded =false;
     this.route.queryParams.subscribe(params => {
       // debugger;
@@ -40,7 +32,6 @@ this.isLoaded =false;
             this.product= this.prodarr[i];
             for (let [key, value] of Object.entries(this.product.productDetails)) {
               if(value!=""){
-                // console.log(key + '|' + value)
                 this.prodDetails.push(key + '|' + value)
               }
            }
@@ -58,11 +49,6 @@ this.isLoaded =false;
          this.prodDetails.push(key + '|' + value)
        }
     }
-// this.product.imagePath=res[6];
-// this.product.description=res["description"]
-// this.product.name=res["title"]
-//         this.product.discount= res["discount"];
-//         this.product.price=res["price"];
 this.isLoaded =true;
         })
   }

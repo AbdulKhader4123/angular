@@ -3,7 +3,9 @@ import {HttpClient} from '@angular/common/http'
 
 import{User} from './LoginUser.model'
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class LoginService{
 
     user:User;

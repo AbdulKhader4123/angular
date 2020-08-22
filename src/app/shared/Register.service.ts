@@ -4,7 +4,9 @@ import {HttpClient} from '@angular/common/http'
 import {User} from './User.model'
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class RegisterService{
 
     user:User;

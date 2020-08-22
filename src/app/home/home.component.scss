@@ -1,7 +1,14 @@
-// .custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .was-validated .form-control:invalid {
-//     border-color: #f0ad4e !important;
-// }
-
+.latest-product-area .single-product .product-img .new-product {
+  position: absolute;
+  top: 25px;
+  left: 23px;
+}
+.new-product span {
+  background: #ff003c;
+  padding: 3px 16px;
+  border-radius: 30px;
+  color: #fff;
+}
 
 .jumbotron{
     height: 100vh;
@@ -311,10 +318,110 @@
 //   @media (min-width: 600px){.fixed-sn main,.fixed-sn .page-footer .container-fluid{margin-right:2%;margin-left:2%}}@media (min-width: 992px){.fixed-sn main,.fixed-sn .page-footer .container-fluid{margin-right:5%;margin-left:5%}}@media (min-width: 1200px){.fixed-sn main,.fixed-sn .page-footer .container-fluid{margin-right:6%;margin-left:6%}}
 //   footer.page-footer{bottom:0;color:#fff}footer.page-footer .container-fluid{width:auto}footer.page-footer .footer-copyright{overflow:hidden;color:rgba(255,255,255,0.6);background-color:rgba(0,0,0,0.2)}footer.page-footer a{color:#fff}
  
-  
+.latest-product-area .single-product .product-img .new-product span {
+  background: #ff003c;
+  background-color: transparent;
+  padding: 3px 16px;
+  border-radius: 30px;
+  color: #fff;
+}
+.latest-product-area .nav-tabs .nav-item.show .nav-link, .latest-product-area .nav-tabs .nav-link.active {
+  color: #ff003c;
+  background-color: transparent;
 
+}
+.latest-product-area .nav-tabs .nav-link {
+  border: 0;
+  border-bottom: 2px solid transparent;
+}
+
+@media (max-width: 767px) {
+  /* line 88, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
+  .latest-product-area .nav-tabs .nav-link {
+    padding: .5rem .6rem;
+  }
+}
+
+/* line 96, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
+.latest-product-area .nav-tabs .nav-item.show .nav-link, .latest-product-area .nav-tabs .nav-link.active {
+  color: #ff003c;
+  background-color: transparent;
+
+}
+
+/* line 99, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
+.latest-product-area .nav-tabs .nav-item {
+  padding-bottom: 10px;
+  display: block;
+  color: #8f8f96;
+  text-transform: capitalize;
+  font-size: 16px;
+}
+
+/* line 106, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
+.latest-product-area .nav-tabs {
+  margin-bottom: 15px;
+  padding-bottom: 0px;
+  position: relative;
+  border: 0;
+  display: flex;
+  justify-content: center;
+}
+.latest-product-area .product-btn {
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 80px;
+  padding: 0 11px;
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  /* line 6, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
+  .latest-product-area .product-btn {
+    border-bottom: none;
+    margin-bottom: 24px;
+    padding: 0 11px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* line 6, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
+  .latest-product-area .product-btn {
+    border-bottom: none;
+    margin-bottom: 24px;
+    padding: 0 11px;
+  }
+}
+@media (max-width: 767px) {
+  /* line 78, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
+  .latest-product-area .properties__button {
+    float: left;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  /* line 78, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_latest_products.scss */
+  .latest-product-area .properties__button {
+    float: left;
+  }
+}
+.f-right {
+  float: right;
+}
+.most_p_list .media .d-flex {
+  padding-right: 20px;
+}
+.review_item .media .d-flex {
+  padding-right: 15px;
+}
+.cart_inner .table tbody tr td .media .d-flex {
+  padding-right: 30px;
+}
+
+/* line 1129, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
+.cart_inner .table tbody tr td .media .d-flex img {
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+  max-width: 150px;
+}
    /* Footer */
-@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 section {
     padding-top: 30px;
 }

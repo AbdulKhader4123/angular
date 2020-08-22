@@ -39,9 +39,9 @@ export class UserProfileComponent implements OnInit ,AfterViewInit {
   }
 
   ngOnInit() {
-    this.loadScript('../assets/js/jquery.min.js');
-   // this.loadScript('../assets/js/bootstrap.min.js');
-    this.loadScript('../assets/js/mdb.min.js');
+  //   this.loadScript('../assets/js/jquery.min.js');
+  //  // this.loadScript('../assets/js/bootstrap.min.js');
+  //   this.loadScript('../assets/js/mdb.min.js');
   let username= localStorage.getItem("UserName")
   let email =localStorage.getItem("email")
   let phone= localStorage.getItem("phone")
@@ -89,15 +89,15 @@ if(this.editSuccess){
   ngAfterViewInit(){
   }
 
-  public loadScript(url: string) {
-    const body = <HTMLDivElement> document.body;
-    const script = document.createElement('script');
-    script.innerHTML = '';
-    script.src = url;
-    script.async = false;
-    script.defer = true;
-    body.appendChild(script);
-  }
+  // public loadScript(url: string) {
+  //   const body = <HTMLDivElement> document.body;
+  //   const script = document.createElement('script');
+  //   script.innerHTML = '';
+  //   script.src = url;
+  //   script.async = false;
+  //   script.defer = true;
+  //   body.appendChild(script);
+  // }
   invalidUserName()
   {
   	return (this.submitted && this.userForm.value.name != "");

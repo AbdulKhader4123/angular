@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { AuthenticationService } from './shared/authentication.service';
 import {  Router, NavigationStart,NavigationEnd, Scroll} from '@angular/router';
 import { Location, PopStateEvent, ViewportScroller } from "@angular/common";
 import { filter, delay } from 'rxjs/operators';
@@ -9,14 +8,11 @@ import { filter, delay } from 'rxjs/operators';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit{
-  // footerEnabler=false;
   title = 'abuka';
-  // private sub: any;
   private lastPoppedUrl: string;
-    private yScrollStack: number[] = [];
+  private yScrollStack: number[] = [];
 
-  constructor(private authService:AuthenticationService,private router: Router,private location: Location,private cd: ChangeDetectorRef,
-    private viewportScroller: ViewportScroller,){
+  constructor(private router: Router,private viewportScroller: ViewportScroller){
       this.router.events
       .pipe(
         filter((e: Scroll): e is Scroll => e instanceof Scroll),
@@ -33,7 +29,7 @@ export class AppComponent implements OnInit{
       });
   } 
 
-  ngOnInit(): void {
+ngOnInit(): void {
 
 //     this.location.subscribe((ev:any) => {
 //       alert(ev.url)
@@ -65,17 +61,11 @@ export class AppComponent implements OnInit{
 //     else{
 // this.footerEnabler=false;
 // console.log(this.footerEnabler)
-
-
 //     }
 //   }
 // });
 }
 ngOnDestroy() {
-  // if(this.sub !=undefined){
-  
-  // this.sub.unsubscribe();
-  // }
 }
 }
  

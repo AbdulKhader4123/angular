@@ -31,6 +31,9 @@ export class AuthenticationService   implements OnInit{
       private tabChange = new BehaviorSubject<string>("");
       currenttab = this.tabChange.asObservable();
 
+      private displayFooter = new Subject<string>();
+      displayFooterObs = this.displayFooter.asObservable();
+
     constructor(private http: HttpClient,private route:Router) {
       
     }
@@ -49,7 +52,9 @@ this.ModuleTitle.next("");
     TabChangeobsMethod(tab:string){
       this.tabChange.next(tab);
     }
-
+    DisplayFooterobMethod(){
+      this.displayFooter.next("");
+          }
     isLoggedIn() {
         return this.getJwtToken();
       }

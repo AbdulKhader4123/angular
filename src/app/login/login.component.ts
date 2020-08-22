@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit  {
 
 openBackDropCustomClass(content) {
   //console.log(content)
-  this.modalService.open(content, {backdropClass: 'light-blue-backdrop',centered: true,backdrop: 'static'});
+  this.modalService.open(content, {centered: true,backdrop: 'static'});
 }
   invalidUserName()
   {
@@ -113,17 +113,15 @@ this.usernameInputRef.nativeElement.value=value.toLowerCase();
   	}
   	else
   	{
-     console.log(this.loginForm.value)
-// this.authService.featureSelected.emit("home")
       this.param="";
       this.loggedIn = true;
       this.loginService.LoginUser(this.loginForm.value).subscribe((res)=>{
-        // console.log(res)
 this.authService.doLoginUser(res['userName'],res['token'])
-// this.authService.featureSelected.emit("home")
 localStorage.setItem("UserName", res['userName']);
 localStorage.setItem("phone", res['phone']);
 localStorage.setItem("email",res['email']);
+localStorage.setItem("role",res['role']);
+
 this.authService.observableMethod();
 
      this.modalService.dismissAll()
