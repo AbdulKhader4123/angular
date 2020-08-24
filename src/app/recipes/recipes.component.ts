@@ -47,6 +47,7 @@ this.subscription=  this.authservice.currenttab.pipe(
     }
     else{
     this.products=this.recipeService.Kurtiproduct;
+    this.done=false;
     this.cd.detectChanges();
     //this is for detail component
     this.recipeService.product=this.products
@@ -63,6 +64,7 @@ this.subscription=  this.authservice.currenttab.pipe(
     }
     else{
       this.products=this.recipeService.sareeProduct;
+      this.done=false;
       //this is for detail component
       this.recipeService.product=this.products
       this.cd.detectChanges();
