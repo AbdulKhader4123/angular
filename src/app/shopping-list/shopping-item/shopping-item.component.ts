@@ -17,13 +17,11 @@ export class ShoppingItemComponent implements OnInit {
   CartProductArray:Product[]=[]
   closeResult: string;
   modalImage :string;
-// @Output() IngredientsAdded = new EventEmitter<Ingredients>();
   constructor(private shoppingService:ShoppingService,private modalService:NgbModal,private authservice:AuthenticationService) { }
 
   ngOnInit() {
     $(document).ready(function (e){
-     // $("#txtValue").val(1);
-      //var PriceArray= document.getElementsByClassName("discountPrice");
+     
       var PriceArray= document.getElementsByClassName("price");
 
       var sumvar=0;
@@ -35,9 +33,11 @@ for(var i=0;i<finalPriceArray.length;i++){
   sumvar+=Number(finalPriceArray[i].textContent.trim());
   Pricevar+=Number(PriceArray[i].textContent.trim());
 }
+ document.getElementById('cartTotal').innerHTML="<i class='fa fa-inr'></i>"+sumvar;
+ document.getElementById('cartSavings').innerHTML="<i class='fa fa-inr'></i>"+(Pricevar-sumvar);
 
-$('#cartTotal').html("<i class='fa fa-inr'></i>"+sumvar)
-$('#cartSavings').html("<i class='fa fa-inr'></i>"+(Pricevar-sumvar))
+// $('#cartTotal').html("<i class='fa fa-inr'></i>"+sumvar)
+// $('#cartSavings').html("<i class='fa fa-inr'></i>"+(Pricevar-sumvar))
 
       $('.minus-btn').on('click', function(e) {
         e.preventDefault();

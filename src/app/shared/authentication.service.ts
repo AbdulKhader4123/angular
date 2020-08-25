@@ -1,7 +1,6 @@
 import { Injectable, OnInit, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { User } from '../shared/User.model';
 import { Tokens } from './token.model';
 import { tap } from 'rxjs/operators/tap';
 import { Router } from '@angular/router';
@@ -19,13 +18,13 @@ export class AuthenticationService   implements OnInit{
     //  feature$ =this.feature.asObservable();
       featureSelected =new EventEmitter<string>();
 
-      private ModuleTitle = new BehaviorSubject<string>("");
+      private ModuleTitle = new Subject<string>();
       currentModuleTitle = this.ModuleTitle.asObservable();
 
-      private CartProducts = new BehaviorSubject<string>("");
+      private CartProducts = new Subject<string>();
       currentCartProducts = this.CartProducts.asObservable();
       
-      private CartTotal = new BehaviorSubject<string>("");
+      private CartTotal = new Subject<string>();
       CartTotalObservable = this.CartProducts.asObservable();
 
       private tabChange = new BehaviorSubject<string>("");
