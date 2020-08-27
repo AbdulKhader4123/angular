@@ -1,19 +1,20 @@
-import { Component, OnInit,ViewChild,ElementRef, ViewEncapsulation, EventEmitter, Output, ɵConsole } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef, ViewEncapsulation, EventEmitter, Output, ɵConsole, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {LoginService} from '../shared/login.Service'
-import { Tokens } from '../shared/token.model';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomValidators } from '../custom-validators';
 import * as $ from 'jquery';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./login.component.scss'],
-  providers:[]
+  
+
 })
 export class LoginComponent implements OnInit  {
 
@@ -21,7 +22,10 @@ export class LoginComponent implements OnInit  {
 
   }
   @ViewChild('username',{static: false}) usernameInputRef :ElementRef;
+  @ViewChild('content',{static: false}) content1InputRef :ElementRef;
+
   @Output() dismissError: EventEmitter<any> = new EventEmitter();
+  @Input() parent;
   loginForm:FormGroup;
   submitted = false;
   loggedIn=false;
@@ -29,7 +33,7 @@ export class LoginComponent implements OnInit  {
   loginPage =false;
   param:string="";
   ResetPass:string="";
-
+  obs:Subscription;
  
   // myBackgroundImageUrl = './login/login.jpg'
  
@@ -71,18 +75,21 @@ openBackDropCustomClass(content) {
 this.ResetPass="reset-password-success"
  this.loginForm.controls['username'].setValue(this.route.snapshot.queryParamMap.get('username'))
     }  
-
+//     if(this.router.url.indexOf("PlaceOrder")>0){
+//       //  this.modalService.open(this.content1InputRef, {centered: true,backdrop: 'static'});
+//           }  
 //if url has login i.e main login page
-    if(this.router.url.indexOf("login")>0){
+//    else 
+   if(this.router.url.indexOf("login")>0){
      this.loginPage =true;
     }
    
+   this.obs= this.authService.doLoginForOrderObs.subscribe((res)=>{
+   this.modalService.open(this.content1InputRef, {centered: true,backdrop: 'static'});
+    })
 }
-ngAfterViewInit(){
-  if(document.getElementById("icon")!=undefined){
 
-  document.getElementById("icon").addEventListener("click", () => {
-
+  showHidePass(){
     if(document.getElementById("icon").classList.contains("fa-eye-slash")){
       document.getElementById("password").setAttribute("type","text")
       document.getElementById("icon").classList.add("fa-eye")
@@ -93,9 +100,7 @@ ngAfterViewInit(){
       document.getElementById("icon").classList.add("fa-eye-slash")
       document.getElementById("icon").classList.remove("fa-eye")
     }
-  });
-}
-}
+  }
   PasswordkeyPress(event: any) {
     //to hide incorrect error message error
     this.param="";
@@ -162,5 +167,10 @@ this.param="incorrectPassword";
       );
   	}
   }
+  ngOnDestroy(){
+    if(this.obs){
+    this.obs.unsubscribe();
 
+    }
+}
 }

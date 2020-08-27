@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 
 import {User} from './User.model'
+import { Address } from './address';
 
 
 @Injectable({
@@ -9,6 +10,12 @@ import {User} from './User.model'
   })
 export class RegisterService{
 
+    constants={
+        success:"Address changed successfully",
+        address_not_exists:"Address not found",
+        address_exists:"Address found",
+    }
+    addresssObj;
     user:User;
     // readonly baseUrl='http://localhost:4000/api'
     constructor(private http:HttpClient){
@@ -55,4 +62,12 @@ return this.http.post("/api/password-reset/new-password",{resettoken:token,newPa
        changeEmailPhone(name:string,email:String,phone:string){
         return this.http.post("/api/user/EditUser",{username:name,email:email,phone:phone})
        }
+       editAddress(addressObj:Address){
+          addressObj.email=localStorage.getItem("email")
+          console.log(addressObj)
+         return this.http.post("/api/user/EditAddress",addressObj)
+       }
+       getAddress(email:string){
+       return this.http.post("/api/user/getAddress",{email:email})
+     }
 }   

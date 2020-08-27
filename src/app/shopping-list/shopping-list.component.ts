@@ -1,6 +1,6 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import{Ingredients} from '../shared/Ingredients.model';
-import { ShoppingService } from '../shared/shopping-list.service';
+
 import { AuthenticationService } from '../shared/authentication.service';
 import { Subscription } from 'rxjs';
 @Component({

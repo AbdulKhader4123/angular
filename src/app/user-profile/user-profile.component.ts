@@ -1,7 +1,6 @@
-import { Component, OnInit, AfterViewInit, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../shared/Register.service';
-import { AuthenticationService } from '../shared/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -9,13 +8,16 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class UserProfileComponent implements OnInit ,AfterViewInit {
   private sub: any;
   userForm: FormGroup;
   OTPForm:FormGroup;
+  addressForm: FormGroup;
   submitted = false;
+  submitted1 = false;
   OTPsubmitted = false;
   userExistError ="";
   emailExistError="";
@@ -30,20 +32,38 @@ export class UserProfileComponent implements OnInit ,AfterViewInit {
   emailtext="";
   param="";
   changeAlert="";
+  changeAlert1="";
   lblactive=true;
   editSuccess=false;
   //to disable button
   buttonEnabler=false;
-  constructor(private formBuilder: FormBuilder,private registerService:RegisterService,private authService:AuthenticationService,private router:Router,private route: ActivatedRoute,private toastr: ToastrService)
+  enableEdit=false;
+  enableEdit1=false;
+  constructor(private formBuilder: FormBuilder,private registerService:RegisterService,private router:Router,private route: ActivatedRoute,private toastr: ToastrService,private cd:ChangeDetectorRef)
   { 
   }
 
   ngOnInit() {
-  //   this.loadScript('../assets/js/jquery.min.js');
-  //  // this.loadScript('../assets/js/bootstrap.min.js');
-  //   this.loadScript('../assets/js/mdb.min.js');
-  let username= localStorage.getItem("UserName")
   let email =localStorage.getItem("email")
+
+    this.registerService.getAddress(email).subscribe((res:any)=>{
+      if(res['msg']=this.registerService.constants.address_exists){
+        this.registerService.addresssObj=res['address1'];
+        this.addressForm = this.formBuilder.group({
+          name: [res['address1'].name,Validators.compose([Validators.required ])],
+          phone:[res['address1'].phone, Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+          pincode: [res['address1'].pincode, Validators.compose([Validators.required, Validators.pattern("[0-9]{6}")])],
+          address: [res['address1'].address, Validators.compose([Validators.required])],
+          city: [res['address1'].city, Validators.compose([Validators.required])],
+          state: [res['address1'].state, Validators.compose([Validators.required])]
+        },
+        )
+        this.cd.detectChanges()
+      }
+  
+    })
+  
+  let username= localStorage.getItem("UserName")
   let phone= localStorage.getItem("phone")
   this.userForm = this.formBuilder.group({
     name: [username ],
@@ -53,16 +73,28 @@ export class UserProfileComponent implements OnInit ,AfterViewInit {
   },
   )
  
+  this.addressForm = this.formBuilder.group({
+    name: ["",Validators.compose([Validators.required ])],
+    phone:["", Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+    pincode: ["", Validators.compose([Validators.required, Validators.pattern("[0-9]{6}")])],
+    address: ["", Validators.compose([Validators.required])],
+    city: ["", Validators.compose([Validators.required])],
+    state: ["", Validators.compose([Validators.required])]
+  },
+  )
+ 
 this.sub=  this.route.queryParams
 .subscribe(params => {
   this.buttonEnabler=false;
   if(params["type"]!=undefined){
   this.param=params['type']
+  console.log(this.param)
 
   }
   else{
 this.param="profile"
 if(this.editSuccess){
+  this.userForm.disable()
   this.showSuccess();
 }
     //on browser back button to set values
@@ -77,6 +109,7 @@ if(this.editSuccess){
     phone:["",[Validators.required]],
       email:["",[Validators.required]]
     })
+    this.cd.detectChanges()
  });
  this.OTPForm=  this.formBuilder.group({
   phone:["",[Validators.required]],
@@ -87,17 +120,11 @@ if(this.editSuccess){
   }
 
   ngAfterViewInit(){
+   this.userForm.disable()
+   this.addressForm.disable()
+
   }
 
-  // public loadScript(url: string) {
-  //   const body = <HTMLDivElement> document.body;
-  //   const script = document.createElement('script');
-  //   script.innerHTML = '';
-  //   script.src = url;
-  //   script.async = false;
-  //   script.defer = true;
-  //   body.appendChild(script);
-  // }
   invalidUserName()
   {
   	return (this.submitted && this.userForm.value.name != "");
@@ -114,6 +141,31 @@ if(this.editSuccess){
   {
 
   return (this.submitted && this.userForm.controls.phone.errors != null);
+  }
+  invalidPhone1()
+  {
+
+  return (this.submitted1 && this.addressForm.controls.phone.errors != null);
+  }
+  invalidPincode(){
+  return (this.submitted1 && this.addressForm.controls.pincode.errors != null
+     );
+  }
+  invalidUserName1()
+  {
+  	return (this.submitted1 && this.addressForm.controls.name.errors != null);
+  }
+  invalidState(){
+  	return (this.submitted1 && this.addressForm.controls.state.errors != null );
+
+  }
+  invalidCity(){
+  	return (this.submitted1 && this.addressForm.controls.city.errors != null);
+
+  }
+  invalidAddress(){
+  	return (this.submitted1 && this.addressForm.controls.address.errors != null  );
+
   }
   invalidEmail()
   {
@@ -166,9 +218,16 @@ if(this.editSuccess){
   changeAlertmethod(){
     this.changeAlert="";
   }
+  changeAlertmethod1(){
+    this.changeAlert1="";
+  }
   ChangeHandler(){
     this.changeAlert="";
    this.phoneOTPError=""
+
+  }
+  ChangeHandler1(){
+    this.changeAlert1="";
 
   }
   EmailHandler(){
@@ -177,8 +236,13 @@ if(this.editSuccess){
     this.emailError="";
      this.emailOTPError=""
   }
-  showSuccess() {
-    this.toastr.success('Profile Updated Successfully',"",{timeOut: 3000});
+  showSuccess(param?:any) {
+    if(param="ADDRESS"){
+      this.toastr.success('Address Updated Successfully',"",{timeOut: 3000});
+    }
+    else{
+      this.toastr.success('Profile Updated Successfully',"",{timeOut: 3000});
+    }
   }
   onemailOTPSubmit(){
     //to disable updATE BUTTON
@@ -189,19 +253,20 @@ if(this.editSuccess){
   	if(this.OTPForm.value.email =="")
   	{
   		return;
-  	}
+    }
   	else
   	{
       this.registerService.verifyOTPToMail(this.OTPForm.value.email,localStorage.getItem("secret_key"))
       .subscribe((res)=>{
         console.log(res)
-        console.log(this.emailOTPError)
         if(res['msg']=='Email OTP Verified'){
           this.registerService.changeEmailPhone(localStorage.getItem("UserName"),localStorage.getItem("form_email"),localStorage.getItem("form_phone")).subscribe((res)=>{
             if(res['msg']="changed sucessfully"){
               //to set values
               this.param="profile"
               this.editSuccess=true;
+              this.enableEdit=false;
+              this.userForm.disable()
               localStorage.setItem("email",localStorage.getItem("form_email"))
             this.router.navigate(['/profile']);
           
@@ -236,6 +301,9 @@ if(this.editSuccess){
               //to set values
               this.param="profile"
               this.editSuccess=true;
+              this.enableEdit=false;
+              this.userForm.disable()
+
             localStorage.setItem("phone",localStorage.getItem("form_phone"))
             this.router.navigate(['/profile']);
           
@@ -313,6 +381,7 @@ if(this.editSuccess){
     
   	if(this.userForm.invalid == true)
   	{
+     this.buttonEnabler=false;
   		return;
   	}
   	else
@@ -381,66 +450,157 @@ if(this.editSuccess){
           }
         }
       })
-    }
-    else{
-      if( localStorage.getItem("phone").trim()!=this.userForm.value.phone){
-        this.registerService.SendOTPtoPhone(this.userForm.value.phone)
- .subscribe((res)=>{
-   if(res['message']=='OTP Sent successfully.'){
-    localStorage.setItem("OTP_SessionId",res['SessionId']);
- this.router.navigate(['/profile'],{ queryParams: { type: "phoneVerify"} })
-   }
-   else{
-    this.buttonEnabler=false;
-    this.phoneOTPFailed="aaa"
-  }
-  },
-  err => {console.log( err)},
-  );
-      }
-      else if(this.userForm.value.email.trim()!=localStorage.getItem("email")){
-        this.registerService.checkUpdateUser(this.userForm.value).subscribe((res)=>{
-          // console.log(res);
-           if(res['msg']=="Username Available"){
-            this.submitted = false;
-            this.registerService.SendOTPToMAIL(this.userForm.value.email.trim()).subscribe((res)=>{
-              if(res['msg']=="A Email change OTP is sent to your email Id"){
-                localStorage.setItem("secret_key",res['secret'])
-             this.router.navigate(['/profile'],{ queryParams: { type: "emailVerify"} })
-            }
-            else{
-              this.buttonEnabler=false;
-              //email otp failed.
-              this.emailOTPFailed="aaa"
-            }
-            })
-           }
-           else{
-            this.buttonEnabler=false;
-              if(res['msg']=="Email Already Exists"){
-               this.emailExistError="aaa";
-               return;
-             }
-             else if(res['msg']=="Invalid Email"){
-               this.emailError="aaaa"
-               return;
-             }
-             else{
-               this.emailExistError="aaa";
-               return;
-             }
-           }
-         })
       }
       else{
-        // if user clicks on update button withouth changing values
-        this.changeAlert="aaa";
-  this.buttonEnabler=false;
-
-      }
+          if( localStorage.getItem("phone").trim()!=this.userForm.value.phone){
+            this.registerService.SendOTPtoPhone(this.userForm.value.phone)
+            .subscribe((res)=>{
+            if(res['message']=='OTP Sent successfully.'){
+            localStorage.setItem("OTP_SessionId",res['SessionId']);
+            this.router.navigate(['/profile'],{ queryParams: { type: "phoneVerify"} })
+            }
+            else{
+            this.buttonEnabler=false;
+            this.phoneOTPFailed="aaa"
+            }
+            },
+            err => {console.log( err)},
+            );
+          }
+          else if(this.userForm.value.email.trim()!=localStorage.getItem("email")){
+            this.registerService.checkUpdateUser(this.userForm.value).subscribe((res)=>{
+              console.log(res);
+              if(res['msg']=="Username Available"){
+                this.submitted = false;
+                this.registerService.SendOTPToMAIL(this.userForm.value.email.trim()).subscribe((res)=>{
+                  if(res['msg']=="A Email change OTP is sent to your email Id"){
+                    localStorage.setItem("secret_key",res['secret'])
+                this.router.navigate(['/profile'],{ queryParams: { type: "emailVerify"} })
+                console.log("sdada")
+                }
+                else{
+                  this.buttonEnabler=false;
+                  //email otp failed.
+                  this.emailOTPFailed="aaa"
+                }
+                })
+              }
+              else{
+                this.buttonEnabler=false;
+                  if(res['msg']=="Email Already Exists"){
+                  this.emailExistError="aaa";
+                  return;
+                }
+                else if(res['msg']=="Invalid Email"){
+                  this.emailError="aaaa"
+                  return;
+                }
+                else{
+                  this.emailExistError="aaa";
+                  return;
+                }
+              }
+            })
+          }
+          else{
+            // if user clicks on update button withouth changing values
+            this.changeAlert="aaa";
+            this.buttonEnabler=false;
+          }
+        }
     }
+  this.submitted = false;
+}
+  onSubmit1(){
+  this.submitted1=true;
+  this.buttonEnabler=true;
+  console.log(this.addressForm.pristine)
+
+  if(this.addressForm.invalid == true)
+  {
+  this.buttonEnabler=false;
+    return;
   }
-   this.submitted = false;
+  else if(this.addressForm.pristine){
+    this.buttonEnabler=false;
+    this.changeAlert1="aaa"
+    return;
+  }
+  else{
+    this.registerService.editAddress(this.addressForm.value).subscribe((res)=>{
+     if(res=this.registerService.constants.success){
+      this.submitted1 = false;
+      this.buttonEnabler=false;
+      this.enableEdit1=false;
+      this.addressForm.markAsPristine()
+      this.addressForm.disable()
+      this.cd.detectChanges()
+      this.showSuccess("ADDRESS")
+     }
+    })
+  }
+
+  this.changeAlert1="";
+
+
+  }
+  editable(){
+    this.enableEdit=true;
+   this.userForm.enable()
+
+   this.enableEdit1=false;
+   this.changeAlert=""
+   this.changeAlert1=""
+   this.addressForm.disable()
+   this.reInitAddressForm()
+  }
+  editable1(){
+    this.enableEdit1=true;
+   this.addressForm.enable()
+
+   this.enableEdit=false;
+    this.changeAlert=""
+    this.userForm.disable()
+    this.reInitUserForm()
+  }
+  uneditable(){
+    this.enableEdit=false;
+    this.changeAlert=""
+
+    this.userForm.disable()
+    this.reInitUserForm()
+    this.submitted=false;
+  }
+reInitUserForm(){
+  this.userForm = this.formBuilder.group({
+    name: [localStorage.getItem("UserName") ],  
+    phone:[localStorage.getItem("phone"), Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+    email: [localStorage.getItem("email"), [Validators.required, Validators.email]],
+   
+  })
+}
+reInitAddressForm(){
+ let  res =this.registerService.addresssObj
+
+  this.addressForm = this.formBuilder.group({
+    name: [res.name,Validators.compose([Validators.required ])],
+    phone:[res.phone, Validators.compose([Validators.required,Validators.pattern("[0-9]{10}")])],
+    pincode: [res.pincode, Validators.compose([Validators.required, Validators.pattern("[0-9]{6}")])],
+    address: [res.address, Validators.compose([Validators.required])],
+    city: [res.city, Validators.compose([Validators.required])],
+    state: [res.state, Validators.compose([Validators.required])]
+  },
+  )
+  this.addressForm.markAsPristine()
+}
+  uneditable1(){
+    this.enableEdit1=false;
+    this.changeAlert1=""
+    this.addressForm.disable()
+    this.reInitAddressForm()
+    this.submitted1=false;
+
+
   }
   ngOnDestroy() {
     if(this.sub !=undefined){

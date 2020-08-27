@@ -1,3 +1,17 @@
+
+.submit{
+  background: #fb641b;color: #ffffff;box-shadow:0 1px 2px 0 rgba(0,0,0,.2);border: none;
+  margin-top: 4%;
+  margin-right: 3%;
+  padding: 12px 30px;
+  min-width: 150px;
+  text-transform: uppercase;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.1);
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+}
 .big-banner{
   background-image: url('../../login/images/cartempty.png');
     /* Full height */

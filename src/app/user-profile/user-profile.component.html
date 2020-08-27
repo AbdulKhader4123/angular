@@ -1,61 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" class="">
 
-<head>
-  <!-- Required meta tags always come first -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Material Design Bootstrap Template</title>
-
-<!-- Bootstrap core CSS -->
-<!-- <link  href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
-<!-- Material Design Bootstrap -->
-<!-- <link  href="/assets/css/mdb.min.css" rel="stylesheet" type="text/css"> -->
-
-
-  <!-- <style>
-    html,
-    body,
-    header,
-    .jarallax {
-      height: 700px;
-    }
-
-    @media (max-width: 740px) {
-      html,
-      body,
-      header,
-      .jarallax {
-        height: 100vh;
-      }
-    }
-
-     @media (min-width: 800px) and (max-width: 850px) {
-      html,
-      body,
-      header,
-      .jarallax {
-        height: 100vh;
-      }
-    }
-
-    @media (min-width: 560px) and (max-width: 660px) {
-      header .jarallax h5 {
-        display: none !important;
-      }
-    }
-
-    .page-footer {
-      margin-top: 0px;
-      padding-top: 0px;
-    }
-
-  </style> -->
-  
-</head>
-
-<body>
 <br>
 <br>
         <div class="container-fluid">
@@ -97,44 +40,48 @@
               <div class="col-lg-8 mb-4">
     
                 <!-- Card -->
-                <div class="card card-cascade narrower">
+                <div class="card" style="margin-bottom: 4%;">
     
                   <!-- Card image -->
-                  <div class="view view-cascade gradient-card-header mdb-color lighten-3">
-                    <h5 class="mb-0 font-weight-bold">Edit Account</h5>
+                  <div style="padding: 3%" class='d-flex' >
+                    <h5 class="mb-0" style="font-size: 18px;">Personal Information</h5><div style="margin-left: auto"><i class="fas fa-edit"  *ngIf="!enableEdit" (click)="editable()" style="color: #000000c2;
+                      font-size: xx-large;"></i>
+                      <i  *ngIf="enableEdit"class="fas fa-save" style="color: #82c91e;
+                      font-size: xx-large; margin-right: 20px" title="Save" (click)="onSubmit()" [ngClass]="{'disabled':buttonEnabler}"></i>
+                      <i class="fas fa-ban"  *ngIf="enableEdit" title="Reset" (click)="uneditable()" style="color: #b82121c2;
+                      font-size: xx-large;"></i>
+                      </div>
                   </div>
                   <!-- Card image -->
     
                   <!-- Card content -->
-                  <div class="card-body card-body-cascade text-center">
+                  <div class="card-body">
     
                     <!-- Edit Form -->
-                    <form  [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                    <form  [formGroup]="userForm"  >
                       <!-- First row -->
                       <div class="row">
        <!-- First column -->
-       <div class="col-md-6 form-group">
-          <div class="md-form  md-outline">
-                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': (invalidEmail() || emailExistError!=''|| emailError!=''|| emailOTPFailed!='')}" id="email" name="email" (keyup)="EmailHandler()" (keypress)="emailkeyPress($event)" (paste)="onemailPaste($event)" autocomplete="off">
-                <label for="email" id="emaillabel"class="control-label" [ngClass]="{'active':lblactive}">E-mail</label>
-            <p *ngIf="invalidEmail() && !userForm.controls['email'].hasError('required')" id="email_error" class="invalid-feedback">Invalid email address.</p>
-            <p *ngIf="userForm.controls['email'].hasError('required') " id="email_error" class="invalid-feedback">Email is required.</p>
-            <p *ngIf="emailExistError!='' && !userForm.controls['email'].hasError('required')" id="email_error1" class="invalid-feedback">Email already Registered.</p>
-            <p *ngIf="emailError!='' && !userForm.controls['email'].hasError('required')" id="email_error2" class="invalid-feedback">Invalid Email.</p>
-            <p *ngIf="emailOTPFailed!='' && !userForm.controls['email'].hasError('required') " id="emailError2" class="invalid-feedback">Unable to send Otp to email.</p>
-          </div>
-        </div>
+                      <div class="col-md-6 form-group">
+                            <label for="email" id="emaillabel" [ngClass]="{'active':lblactive}">E-mail</label>
+                              <input type="text"  formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': (invalidEmail() || emailExistError!=''|| emailError!=''|| emailOTPFailed!='')}" id="email" name="email" (keyup)="EmailHandler()" (keypress)="emailkeyPress($event)" (paste)="onemailPaste($event)" autocomplete="off">
+                            
+                          <p *ngIf="invalidEmail() && !userForm.controls['email'].hasError('required')" id="email_error" class="invalid-feedback">Invalid email address.</p>
+                          <p *ngIf="userForm.controls['email'].hasError('required') " id="email_error" class="invalid-feedback">Email is required.</p>
+                          <p *ngIf="emailExistError!='' && !userForm.controls['email'].hasError('required')" id="email_error1" class="invalid-feedback">Email already Registered.</p>
+                          <p *ngIf="emailError!='' && !userForm.controls['email'].hasError('required')" id="email_error2" class="invalid-feedback">Invalid Email.</p>
+                          <p *ngIf="emailOTPFailed!='' && !userForm.controls['email'].hasError('required') " id="emailError2" class="invalid-feedback">Unable to send Otp to email.</p>
+                      </div>
                         <!-- Second column --> 
                         <div class="col-md-6 form-group">
-          <div class="md-form  md-outline">
-              <input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': invalidPhone() ||phoneOTPFailed!='' }" id="phone" name="phone"  (keyup)="ChangeHandler()" (keypress)="PhonekeyPress($event)" (paste)="onPaste($event)"minlength=10 maxlength=10 autocomplete="off">
+              <label for="phone" id="phonelabel"  [ngClass]="{'active':lblactive}">Phone #</label>
+              <input type="text"  formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': invalidPhone() ||phoneOTPFailed!='' }" id="phone" name="phone"  (keyup)="ChangeHandler()" (keypress)="PhonekeyPress($event)" (paste)="onPaste($event)"minlength=10 maxlength=10 autocomplete="off">
            
-          <label for="phone" id="phonelabel" class="control-label"  [ngClass]="{'active':lblactive}">Phone #</label>
+          
           <p *ngIf="invalidPhone() && !userForm.controls['phone'].hasError('required')" id="phone_error" class="invalid-feedback">Invalid phone #</p>
           <p *ngIf="userForm.controls['phone'].hasError('required') " id="phone_error" class="invalid-feedback">Phone # is required.</p>
           <p *ngIf="phoneOTPFailed!='' && !userForm.controls['phone'].hasError('required') " id="phone_error2" class="invalid-feedback">Unable to send Otp to phone.</p>
-        </div>
-      </div>
+                       </div>
                         
                       </div>
                       <!-- First row -->
@@ -145,11 +92,11 @@
                         </button>
                       </div>
                       <!-- Fourth row -->
-                      <div class="row">
-                        <div class="col-md-12 text-center my-4">
+                      <!-- <div class="row"> -->
+                        <!-- <div class="col-md-12 text-center my-4">
                           <input type="submit" value="Update Account" [ngClass]="{'disabled':buttonEnabler}" class="btn btn-info btn-rounded">
                         </div>
-                      </div>
+                      </div> -->
                       <!-- Fourth row -->
     
                     </form>
@@ -160,7 +107,106 @@
     
                 </div>
                 <!-- Card -->
+                <div class="card">
     
+                  <!-- Card image -->
+                  <div style="padding: 3%" class='d-flex' >
+                    <h5 class="mb-0" style="font-size: 18px;">Address</h5><div style="margin-left: auto"><i class="fas fa-edit"  *ngIf="!enableEdit1" (click)="editable1()" style="color: #000000c2;
+                      font-size: xx-large;"></i>
+                      <i  *ngIf="enableEdit1"class="fas fa-save" style="color: #82c91e;
+                      font-size: xx-large; margin-right: 20px" title="Save" (click)="onSubmit1()" [ngClass]="{'disabled':buttonEnabler}"></i>
+                      <i class="fas fa-ban"  *ngIf="enableEdit1" title="Reset" (click)="uneditable1()" style="color: #b82121c2;
+                      font-size: xx-large;"></i>
+                      </div>
+                  </div>
+                  <!-- Card image -->
+    
+                  <!-- Card content -->
+                  <div class="card-body">
+    
+                    <!-- Edit Form -->
+                    <form  [formGroup]="addressForm"  >
+                      <!-- First row -->
+                      <div class="row">
+       <!-- First column -->
+                      <div class="col-md-4 col-sm-6 form-group " >
+                        <div class="md-form  md-outline">
+                            <label for="name" id="namelabel"class="control-label" [ngClass]="{'active':lblactive}">Name</label>
+                              <input type="text"   (keyup)="ChangeHandler1()"   formControlName="name" class="form-control"  autocomplete="off" [ngClass]="{ 'is-invalid': invalidUserName1() }">
+                            
+                              <p *ngIf="addressForm.controls['name'].hasError('required') " id="name_error2" class="invalid-feedback">Name is required.</p>
+                        </div>
+                      </div>
+                        <!-- Second column --> 
+                      <div class="col-md-4 col-sm-3 form-group">
+                          <div class="md-form  md-outline">
+                              <label for="phone" id="phonelabel" class="control-label"  [ngClass]="{'active':lblactive}">Phone #</label>
+                              <input type="text"  formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': invalidPhone1() }" id="phone" name="phone"(keyup)="ChangeHandler1()"  (keypress)="PhonekeyPress($event)" (paste)="onPaste($event)"minlength=10 maxlength=10 autocomplete="off">
+                          
+                          
+                          <p *ngIf="invalidPhone1() && !addressForm.controls['phone'].hasError('required')" id="phone_error1" class="invalid-feedback">Invalid phone #</p>
+                          <p *ngIf="addressForm.controls['phone'].hasError('required') " id="phone_error2" class="invalid-feedback">Phone # is required.</p>
+                          </div>
+                       </div>
+
+                       <div class="col-md-4 col-sm-3 form-group">
+                            <label for="pincode" id="pincodelabel"   [ngClass]="{'active':lblactive}">Pincode</label>
+                            <input type="text"  formControlName="pincode" class="form-control" [ngClass]="{ 'is-invalid': invalidPincode() }" id="pincode" name="pincode" (keyup)="ChangeHandler1()"  (keypress)="PhonekeyPress($event)" (paste)="onPaste($event)"minlength=6 maxlength=6 autocomplete="off"  >
+                        
+                        
+                        <p *ngIf="invalidPincode() && !addressForm.controls['pincode'].hasError('required')" id="pincode_error1" class="invalid-feedback">Invalid pincode</p>
+                        <p *ngIf="addressForm.controls['pincode'].hasError('required') " id="pincode_error2" class="invalid-feedback">Pincode is required.</p>
+                     </div>
+                     <div class="col-md-6 col-sm-6 form-group">
+                      <div class="md-form  md-outline">
+                          <label for="address" id="addresslabel" class="control-label"  [ngClass]="{'active':lblactive}">Address</label>
+                          <textarea rows="3" formControlName="address" class="form-control" (keyup)="ChangeHandler1()"  id="address" name="address"  autocomplete="off" [ngClass]="{ 'is-invalid': invalidAddress()}" ></textarea > 
+                      
+                    
+                      <p *ngIf="addressForm.controls['address'].hasError('required') " id="address_error1" class="invalid-feedback">Address is required.</p>
+                      </div>
+                   </div>
+                   <div class="col-md-3 col-sm-3 form-group">
+                    <div class="md-form  md-outline">
+                        <label for="city" id="citylabel" class="control-label"  [ngClass]="{'active':lblactive}">City</label>
+                        <input type="text" (keyup)="ChangeHandler1()"  formControlName="city" class="form-control"  id="city" name="city"  autocomplete="off" [ngClass]="{ 'is-invalid': invalidCity()  }" >
+                    
+                  
+                    <p *ngIf="addressForm.controls['city'].hasError('required') " id="city_error1" class="invalid-feedback">City is required.</p>
+                    </div>
+                 </div>
+                 <div class="col-md-3 col-sm-3 form-group">
+                  <div class="md-form  md-outline">
+                      <label for="state" id="statelabel" class="control-label"  [ngClass]="{'active':lblactive}">State</label>
+                      <input type="text" (keyup)="ChangeHandler1()"  formControlName="state" class="form-control"  id="state" name="state"  autocomplete="off" [ngClass]="{ 'is-invalid': invalidState()}">
+                  
+                
+                  <p *ngIf="addressForm.controls['state'].hasError('required') " id="state_error1" class="invalid-feedback">State is required.</p>
+                  </div>
+               </div>
+                      </div>
+                      <!-- First row -->
+                      <div *ngIf="changeAlert1!=''" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>No Fields changed!</strong> You must change some fields to update.
+                        <button type="button" class="close" (click)="changeAlertmethod1()"data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <!-- Fourth row -->
+                      <!-- <div class="row"> -->
+                        <!-- <div class="col-md-12 text-center my-4">
+                          <input type="submit" value="Update Account" [ngClass]="{'disabled':buttonEnabler}" class="btn btn-info btn-rounded">
+                        </div>
+                      </div> -->
+                      <!-- Fourth row -->
+    
+                    </form>
+                    <!-- Edit Form -->
+    
+                  </div>
+                  <!-- Card content -->
+    
+                </div>
               </div>
               <!-- Second column -->
     
@@ -335,21 +381,3 @@
           <!-- Section: Edit Account -->
         </div>
     
-      <!-- Main layout -->
-
-
-  <!--  SCRIPTS  -->
-  <!-- JQuery -->
-
-  <script>
-    new WOW().init();
-
-    // MDB Lightbox Init
-    $(function () {
-      $("#mdb-lightbox-ui").load("/mdb-addons/mdb-lightbox-ui.html");
-    });
-
-  </script>
-</body>
-
-</html>

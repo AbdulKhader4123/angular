@@ -1,6 +1,6 @@
-<div class="row" *ngIf='CartProductArray?.length>0' style="margin-top:0px!important"> 
-<div class="col-md-4" style="padding-top: 1%;margin-left:-5px;padding-left:8px;display: inline-block;">
-    <div *ngFor="let product of CartProductArray" >
+<div class="row" *ngIf='CartProductArray?.length>0' > 
+<div class="col-md-6" style="padding-top: 1%;margin-left:-5px;padding-left:8px;display: inline-block;">
+    <ng-container *ngFor="let product of CartProductArray" >
         <div class="card flex-row flex-wrap column" style="width:350px;margin-bottom: -40px;margin-left:15px;">
             <div class="card-header column3"style="padding: 4px 4px 4px 7px;">
                 <img class="column4" style="height:12rem;width:135px"[src]="product.imagePath[0]"
@@ -33,15 +33,15 @@
             </div>
         </div>
         <br>
-    </div>
+    </ng-container>
     <br>
     <br>
     </div>
 
 
-<div class="col-md-5 " style="padding-top: 1%;margin-left:-5px;padding-left:8px;display: inline-block;">
+<div class="col-md-6" style="padding-top: 1%;margin-left:-5px;padding-left:8px;display: inline-block;">
         <div class="card flex-row flex-wrap column1" >
-            <div class="card-text"style="height:150px;padding: 4px 4px 4px 7px;width:100%">
+            <div class="card-text"style="height:180px;padding: 4px 4px 4px 7px;width:100%">
                 <p class="card-text"style="font-size:18px;font-weight:bold;padding-left:8px;padding-top: 2%;margin-bottom: 0%;">Order Summary</p>
                 <hr style="margin-top: 0.2rem;">
                 <p class="card-text"style="display:inline-block;font-size:15px;padding-left:4%;padding-top: 0%;margin-bottom: 0%;font-weight:bold;">Order total</p>
@@ -49,6 +49,9 @@
                 <br>
                 <p class="card-text"style="display:inline-block;font-size:15px;padding-left:4%;padding-top: 0%;margin-bottom: 0%;font-weight:bold;">Savings</p>
                 <p id="cartSavings" class="card-text"style="display:inline-block;padding-top: 0%;margin-bottom: 0%;float: right;padding-right:3%"><i class="fa fa-inr"></i></p>
+                <div style="display: flex;justify-content:flex-end">
+                    <button class="btn btn-primary submit" (click)="placeOrder()" >PLACE ORDER</button>
+                </div>
             </div>
            
             <!-- <div class="card-block px-1"style="padding-top:6px">
@@ -81,6 +84,7 @@
     <br>
     <br>
 </div>
+<app-login *ngIf="makeLogIn" parent="cart" (dismissError)="dismissAlert()"></app-login>
 </div>
 <div class="row"  *ngIf='CartProductArray?.length==0'>
     <div class="col-md-4">

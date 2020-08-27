@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, Output,EventEmitter } from '@angular/core';
-import { Ingredients } from 'src/app/shared/Ingredients.model';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+
 import { ShoppingService } from '../../shared/shopping-list.service';
 import {Product} from "../../recipes/products.model"
 import { NgbModal,ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/shared/authentication.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-shopping-item',
   templateUrl: './shopping-item.component.html',
@@ -17,9 +18,14 @@ export class ShoppingItemComponent implements OnInit {
   CartProductArray:Product[]=[]
   closeResult: string;
   modalImage :string;
-  constructor(private shoppingService:ShoppingService,private modalService:NgbModal,private authservice:AuthenticationService) { }
+  makeLogIn;
+  constructor(private shoppingService:ShoppingService,private modalService:NgbModal,private authservice:AuthenticationService,private router:Router) { }
 
   ngOnInit() {
+    console.log("122222222222222222222222222222")
+    if(!this.authservice.isLoggedIn()){
+    this.makeLogIn=true
+    }
     $(document).ready(function (e){
      
       var PriceArray= document.getElementsByClassName("price");
@@ -33,11 +39,11 @@ for(var i=0;i<finalPriceArray.length;i++){
   sumvar+=Number(finalPriceArray[i].textContent.trim());
   Pricevar+=Number(PriceArray[i].textContent.trim());
 }
- document.getElementById('cartTotal').innerHTML="<i class='fa fa-inr'></i>"+sumvar;
- document.getElementById('cartSavings').innerHTML="<i class='fa fa-inr'></i>"+(Pricevar-sumvar);
+//  document.getElementById('cartTotal').innerHTML="<i class='fa fa-inr'></i>"+sumvar;
+//  document.getElementById('cartSavings').innerHTML="<i class='fa fa-inr'></i>"+(Pricevar-sumvar);
 
-// $('#cartTotal').html("<i class='fa fa-inr'></i>"+sumvar)
-// $('#cartSavings').html("<i class='fa fa-inr'></i>"+(Pricevar-sumvar))
+$('#cartTotal').html("<i class='fa fa-inr'></i>"+sumvar)
+$('#cartSavings').html("<i class='fa fa-inr'></i>"+(Pricevar-sumvar))
 
       $('.minus-btn').on('click', function(e) {
         e.preventDefault();
@@ -129,14 +135,23 @@ $('#cartSavings').html("<i class='fa fa-inr'></i>"+(Pricevar-sumvar))
     
    
   }
-  // AddIngredient(){
-  //   const ingName=this.nameInputRef.nativeElement.value;
-  //   const ingAmount=this.amountInputRef.nativeElement.value;
-  //   const ingredient=new Ingredients(ingName,ingAmount);
-  //   // this.IngredientsAdded.emit(ingredient);
-  //   this.shoppingService.AddIngredient(ingredient);
-  // }
+  placeOrder(){
+    if(this.authservice.isLoggedIn()){
+     
 
+    let txtValueArray= document.getElementsByClassName("txtValue");
+    console.log(txtValueArray[0].id)
+    console.log($(document.getElementById(txtValueArray[0].id)).val())
+    }
+    else{
+      this.authservice.doLoginForOrderobMethod();
+       //this.router.navigate(['/login'],{ queryParams: { PlaceOrder: "loginRequired"}})
+    }
+        
+  }
+  dismissAlert() {
+    console.log("werwrw")
+  }
   deleteProduct(product,content){
     //this.CartProductArray= JSON.parse(localStorage.getItem("CartProducts"));
   this.modalImage=product.imagePath[0];

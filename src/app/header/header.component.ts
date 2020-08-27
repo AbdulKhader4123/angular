@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthenticationService } from '../shared/authentication.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,6 @@ obs:Subscription
 constructor(private authService:AuthenticationService,private route:Router){}
   
 ngOnInit(): void {
-  
 document.addEventListener('click',function (e){
   if(e.isTrusted){
     let elementId: string = (event.target as Element).id;

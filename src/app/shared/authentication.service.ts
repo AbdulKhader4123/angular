@@ -18,7 +18,7 @@ export class AuthenticationService   implements OnInit{
     //  feature$ =this.feature.asObservable();
       featureSelected =new EventEmitter<string>();
 
-      private ModuleTitle = new Subject<string>();
+      private ModuleTitle = new BehaviorSubject<string>("");
       currentModuleTitle = this.ModuleTitle.asObservable();
 
       private CartProducts = new Subject<string>();
@@ -33,12 +33,18 @@ export class AuthenticationService   implements OnInit{
       private displayFooter = new Subject<string>();
       displayFooterObs = this.displayFooter.asObservable();
 
+      private doLoginForOrder = new Subject<string>();
+      doLoginForOrderObs = this.doLoginForOrder.asObservable();
+
     constructor(private http: HttpClient,private route:Router) {
       
     }
  
     ngOnInit() {
     }
+    doLoginForOrderobMethod(){
+      this.doLoginForOrder.next("");
+          }
     CartProductsobMethod(){
       this.CartProducts.next("");
           }
