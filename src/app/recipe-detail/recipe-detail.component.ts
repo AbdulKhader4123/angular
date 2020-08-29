@@ -4,6 +4,7 @@ import { RecipeService } from '../shared/recipe.service';
 import {ActivatedRoute} from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { AuthenticationService } from '../shared/authentication.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -18,16 +19,14 @@ prodDetails:string[]=[];
 prodId :number;
 isLoaded =false;
 obs:Subscription;
-constructor(private recipeService: RecipeService,private route: ActivatedRoute,private toastr:ToastrService) { }
+constructor(private recipeService: RecipeService,private route: ActivatedRoute,private toastr:ToastrService,private authservice:AuthenticationService) { }
 
 ngOnInit() {
 this.isLoaded =false;
    this.obs= this.route.queryParams.subscribe(params => {
       // debugger;
      this.prodId =Number(this.route.snapshot.paramMap.get('id'));
-    //  console.log(this.prodId);
      this.prodarr=this.recipeService.product;
-    //  console.log(this.prodarr)
      if(this.prodarr.length>0){
       for (var i=0; i < this.prodarr.length; i++) {
         if (this.prodarr[i].productId === this.prodId ) {
@@ -59,8 +58,21 @@ this.isLoaded =true;
   
   }
 AddToShoppingList(){
-this.recipeService.AddToCart(this.product);
-this.toastr.success('Product added to cart',"",{timeOut: 3000});
+  if(this.authservice.isLoggedIn()){
+    this.recipeService.AddToCart(this.product).subscribe((res)=>{
+      if(res['msg']==this.recipeService.constants.cart_success){
+        this.toastr.success(this.recipeService.constants.cart_add_success,"",{timeOut: 3000});
+      }
+      else{
+        this.toastr.error(this.recipeService.constants.cart_add_failed,"",{timeOut: 3000});
+      }
+    });
+  }
+  else{
+    this.recipeService.AddToCart(this.product)
+    this.toastr.success(this.recipeService.constants.cart_add_success,"",{timeOut: 3000});
+  }
+
 }
 ngOnDestroy(){
 this.obs.unsubscribe();

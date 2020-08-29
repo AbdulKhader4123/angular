@@ -20,16 +20,16 @@
                             <p class="card-text"style="display:inline-block;color:grey;font-size:14px;padding-top: 0%;margin-bottom: 0%">{{(product.discount/100) | percent}} off</p>
                            </div>
                            <div class="quantity" style="padding-left: 12px">
-                            <button class="minus-btn" type="button" name="button" >
+                            <button class="minus-btn" type="button" (click)="updateQty(product.productId,1)" name="button" >
                                 <img src="assets/images/minus.svg" alt="" />
                               </button>
-                            <input id="txt_{{product.productId}}" class="txtValue" type="text" name="name"  value="1" readonly>
-                            <button class="plus-btn" type="button" name="button" >
+                            <input id="txt_{{product.productId}}" class="txtValue" type="text" name="name"  value={{product.quantity}} readonly>
+                            <button class="plus-btn" type="button" (click)="updateQty(product.productId,2)" name="button" >
                                 <img src="assets/images/plus.svg" alt="" />
                               </button>
                            
                           </div>
-                          <p class="card-text   finalPrice"style="padding-top: 9%;padding-right: 2%;float: right;"><i class="fa fa-inr"></i>{{product.price-(product.price*(product.discount/100)) | number:'1.0-0'}}</p>
+                          <p class="card-text   finalPrice"style="padding-top: 9%;padding-right: 2%;float: right;"><i class="fa fa-inr"></i>{{product.price*product.quantity-((product.price*product.quantity)*(product.discount/100)) | number:'1.0-0'}}</p>
             </div>
         </div>
         <br>

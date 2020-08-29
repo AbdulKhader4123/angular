@@ -1,16 +1,16 @@
 import { Ingredients } from '../shared/Ingredients.model';
 
 export class Product{
-    public name :string;
-    public description:string;
-    public imagePath:string[];
-    public productId :number;
-    public price:number;
-    public discount:number;
-    public productDetails:object;
-    public quantity:number;
-    public category:string;
-    public id:string;
+    public name ?:string;
+    public description?:string;
+    public imagePath?:string[];
+    public productId ?:number;
+    public price?:number;
+    public discount?:number;
+    public productDetails?:object;
+    public quantity?:number;
+    public category?:string;
+    public id?:string;
 
     // public ingredients:Ingredients[];
 
@@ -25,7 +25,7 @@ export class Product{
         this.price=Response.price;
         this.discount=Response.discount;
         this.productDetails=Response.ProductDetails
-        this.quantity=Response.quantity
+        this.quantity=Response.quantity?Response.quantity:0;
         this.category=Response.category
         this.id=Response._id
         // this.ingredients=ingredients;

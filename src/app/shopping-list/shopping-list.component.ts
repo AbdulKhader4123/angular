@@ -13,30 +13,30 @@ export class ShoppingListComponent implements OnInit {
 constructor(private _authService:AuthenticationService) {}
 obs:Subscription
 ingredients:Ingredients[];
-UserLoggedIn=false;
+showLogIn=false;
 ngOnInit() {
 this.obs=this._authService.currentCartProducts.subscribe(()=>{
   if (this._authService.isLoggedIn()){
-    this.UserLoggedIn =true;
+    this.showLogIn =true;
   }
   else{
-    this.UserLoggedIn =false;
+    this.showLogIn =false;
   }
 })
 if (this._authService.isLoggedIn()||(localStorage.getItem("CartProducts")!=null && localStorage.getItem("CartProducts")!="[]")) {
-  this.UserLoggedIn=true;
+  this.showLogIn=true;
 
 }
 else{
-  this.UserLoggedIn=false;
+  this.showLogIn=false;
 }
 }
 
 showErrorMsg() {
-this.UserLoggedIn = true;
+this.showLogIn = true;
 }
 hideErrorMsg() {
-this.UserLoggedIn = true;
+this.showLogIn = true;
 }
 ngOnDestroy(){
   this.obs.unsubscribe();

@@ -7,6 +7,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomValidators } from '../custom-validators';
 import * as $ from 'jquery';
 import { Subscription } from 'rxjs';
+import { RecipeService } from '../shared/recipe.service';
+import { Product } from '../recipes/products.model';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit  {
 
-  constructor(private fb:FormBuilder,private loginService:LoginService,private authService:AuthenticationService,private router:Router,private modalService:NgbModal,private route:ActivatedRoute) { 
+  constructor(private fb:FormBuilder,private loginService:LoginService,private authService:AuthenticationService,private router:Router,private modalService:NgbModal,private route:ActivatedRoute,private recipeService:RecipeService) { 
 
   }
   @ViewChild('username',{static: false}) usernameInputRef :ElementRef;
@@ -128,44 +130,52 @@ this.usernameInputRef.nativeElement.value=value.toLowerCase();
   }
   onSubmit()
   {
-  	this.submitted = true;
-  	if(this.loginForm.invalid == true)
-  	{
-  		return;
-  	}
-  	else
-  	{
-      this.param="";
-      this.loggedIn = true;
-      this.loginService.LoginUser(this.loginForm.value).subscribe((res)=>{
-this.authService.doLoginUser(res['userName'],res['token'])
-localStorage.setItem("UserName", res['userName']);
-localStorage.setItem("phone", res['phone']);
-localStorage.setItem("email",res['email']);
-localStorage.setItem("role",res['role']);
+  this.submitted = true;
+  if(this.loginForm.invalid == true)
+  {
+    return;
+  }
+  else
+  {
+  this.param="";
+  this.loggedIn = true;
+  this.loginService.LoginUser(this.loginForm.value).subscribe((res)=>{
+  this.authService.doLoginUser(res['userName'],res['token'])
+  localStorage.setItem("UserName", res['userName']);
+  localStorage.setItem("phone", res['phone']);
+  localStorage.setItem("email",res['email']);
+  localStorage.setItem("role",res['role']);
 
-this.authService.observableMethod();
+  this.authService.observableMethod();
 
-     this.modalService.dismissAll()
-     this.dismissAlert();
+  this.modalService.dismissAll()
+  this.dismissAlert();
 
-     if(this.loginPage){
-      this.router.navigate(['/'])
-     }
+
+  let cartProducts :Product[]= JSON.parse(localStorage.getItem('CartProducts'))
+  if(cartProducts.length>0){
+    this.recipeService.UpdateManyCart(cartProducts,this.recipeService.constants.cartupdateInd).subscribe((res)=>{
+      if(res['msg']==this.recipeService.constants.cart_success){
+        localStorage.removeItem('CartProducts');
       }
-      ,
-   err => {
+    })
+  }
 
-     if( err.error.msg=="Incorrect Password"){
-this.param="incorrectPassword";
-   }
-   else if( err.error.msg=="User not exist in the Database"){
+    if(this.loginPage){
+    this.router.navigate(['/'])
+    }
+    },
+    err => {
 
-    this.param="invalidUsername";
-       }
-  },
-      );
-  	}
+    if( err.error.msg=="Incorrect Password"){
+      this.param="incorrectPassword";
+    }
+    else if( err.error.msg=="User not exist in the Database"){
+      this.param="invalidUsername";
+    }
+    },
+    );
+    }
   }
   ngOnDestroy(){
     if(this.obs){

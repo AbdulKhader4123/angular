@@ -45,8 +45,7 @@ export class UserProfileComponent implements OnInit ,AfterViewInit {
 
   ngOnInit() {
   let email =localStorage.getItem("email")
-
-    this.registerService.getAddress(email).subscribe((res:any)=>{
+    this.registerService.getAddress().subscribe((res:any)=>{
       if(res['msg']=this.registerService.constants.address_exists){
         this.registerService.addresssObj=res['address1'];
         this.addressForm = this.formBuilder.group({

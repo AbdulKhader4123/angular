@@ -36,6 +36,9 @@ this.subscription=  this.authservice.currenttab.pipe(
   if(response==""){
     response="kurti"
   }
+  // this.recipeService.Kurtiproduct.length=0
+  // this.recipeService.sareeProduct.length=0
+
   this.recipeService.selectedCat=response.toString().toLowerCase();
   if(response.toString().toLowerCase()=="kurti"){
     if(this.recipeService.Kurtiproduct.length==0){
