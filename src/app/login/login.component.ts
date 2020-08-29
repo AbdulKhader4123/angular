@@ -153,7 +153,7 @@ this.usernameInputRef.nativeElement.value=value.toLowerCase();
 
 
   let cartProducts :Product[]= JSON.parse(localStorage.getItem('CartProducts'))
-  if(cartProducts.length>0){
+  if(cartProducts && cartProducts.length>0){
     this.recipeService.UpdateManyCart(cartProducts,this.recipeService.constants.cartupdateInd).subscribe((res)=>{
       if(res['msg']==this.recipeService.constants.cart_success){
         localStorage.removeItem('CartProducts');
