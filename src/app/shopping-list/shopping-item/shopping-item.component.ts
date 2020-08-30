@@ -50,14 +50,15 @@ if(this.authservice.isLoggedIn()){
     }
   });
 
-//reusing address for orders until the address is edited.
-// if(this.registerService.orderAddresssObj==null){
-//   this.registerService.getAddress().subscribe((res)=>{
-//     if(res['msg']=this.registerService.constants.address_exists){
-//       this.registerService.orderAddresssObj=res['address1'];
-//     }
-//   })
-// }
+//in order to display in ordercomponent if user navigates from here
+//for immediate display
+if(this.registerService.addresssObj==null){
+  this.registerService.getAddress().subscribe((res:any)=>{
+    if(res['msg']=this.registerService.constants.address_exists){
+      this.registerService.addresssObj=res['address1'];
+    }
+  });
+}
 }
 this.calculatePrice();
 }

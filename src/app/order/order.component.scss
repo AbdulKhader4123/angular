@@ -1,0 +1,122 @@
+.card1{
+padding: 16px 24px;
+min-height: 90px;
+display: flex;
+margin-bottom: 2%;
+}
+.block-title{
+color: #878787;
+font-size: 15px;
+margin-bottom: 6px;
+text-transform: uppercase;
+
+}
+.block-address{
+font-size: 14px;
+max-width: 630px;
+}
+.block-name{
+color: #212121;
+
+}
+.padder{
+padding-left: 8px;
+padding-right: 8px;
+margin-left: -4px;
+}
+.disabled{
+pointer-events: none;
+color: grey;
+    opacity: 0.5;
+}
+.col-sm-3{
+width:50%
+}
+.submit{
+background: #fb641b;
+color: #ffffff;
+box-shadow:0 1px 2px 0 rgba(0,0,0,.2);
+border: none;
+margin-top: 4%;
+margin-right: 3%;
+padding: 10px 12px;
+min-width: 150px;
+text-transform: uppercase;
+border-radius: 2px;
+box-shadow: 0 2px 2px 0 rgba(0,0,0,.1);
+font-size: 14px;
+position: relative;
+letter-spacing: 0.2px;
+}
+.cancelbtn{
+font-size: 14px;
+text-transform: uppercase;
+font-weight: 500;
+color: #2874f0;
+background-color: transparent;
+border: none;
+margin-left: 10px;
+padding-right: 0;
+outline: none;
+background: #fff;
+letter-spacing: 0.6px;
+}
+.block1{
+padding: 10px 0px;
+justify-content: space-between;
+}
+.custFont{
+font-weight: 500;
+font-family: Roboto,Arial,sans-serif;
+letter-spacing: 0;
+}
+.custFont1{
+font-family: Roboto,Arial,sans-serif;
+letter-spacing: 0;
+font-size: 14px;
+}
+.total{
+border-top: 1px dashed #e0e0e0;
+font-weight: 500;
+font-size: 16px;
+border-bottom: 1px dashed #e0e0e0;
+}
+.col-md-1, .col-md-2, .col-md-3,.col-md-4, .col-md-6{
+margin-top: 1%
+}
+.outerDiv{
+padding: 14px;
+position: relative;
+max-width: 950px;
+border-top: 1px solid #f0f0f0;
+}
+.outerDiv:last-child {
+box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+}
+.outerDiv:first-child {
+border-top: 0;
+}
+.innerDiv{
+box-sizing: border-box;
+}
+a, img {
+text-decoration: none;
+color: inherit;
+border: none;
+outline: none;
+}
+.midDiv{
+min-height: 112px;
+flex: 1 1;
+overflow: hidden;
+max-width: 460px;
+padding: 0 0% 2% 3%;
+}
+.description{
+    display: block;
+    // overflow: hidden;
+    text-overflow: ellipsis;
+    // white-space: nowrap;
+    // min-height: 30px;
+    font-size: 13px;
+}

@@ -87,7 +87,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     PinchZoomModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule,// import NgxUiLoaderRouterModule. By default, it will show foreground loader.
-    NgxUiLoaderHttpModule.forRoot({ exclude: ['/api/user/getAddress','/api/products/cart'] }),
+    NgxUiLoaderHttpModule.forRoot({ exclude: ['/api/user/getAddress','/api/user/EditAddress','/api/products/cart'] }),
     GridModule,
     // NgxPaginationModule,
     InfiniteScrollModule

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { CartRoutingModule } from './cart-routing.module';
 
 
@@ -20,7 +20,8 @@ import { OrderComponent } from '../order/order.component';
     CartRoutingModule,
     //loginmodule has to be last otherwise,it will redirect its route
     LoginModule,
-
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class CartModule { }

@@ -513,7 +513,6 @@ if(this.editSuccess){
   onSubmit1(){
   this.submitted1=true;
   this.buttonEnabler=true;
-  console.log(this.addressForm.pristine)
 
   if(this.addressForm.invalid == true)
   {
@@ -592,19 +591,17 @@ reInitAddressForm(){
   )
   this.addressForm.markAsPristine()
 }
-  uneditable1(){
-    this.enableEdit1=false;
-    this.changeAlert1=""
-    this.addressForm.disable()
-    this.reInitAddressForm()
-    this.submitted1=false;
-
-
+uneditable1(){
+  this.enableEdit1=false;
+  this.changeAlert1=""
+  this.addressForm.disable()
+  this.reInitAddressForm()
+  this.submitted1=false;
+}
+ngOnDestroy() {
+  if(this.sub !=undefined){
+  
+  this.sub.unsubscribe();
   }
-  ngOnDestroy() {
-    if(this.sub !=undefined){
-    
-    this.sub.unsubscribe();
-    }
-  }
+}
 }

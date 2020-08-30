@@ -14,7 +14,6 @@ address_not_exists:"Address not found",
 address_exists:"Address found",
 }
 addresssObj;
-orderAddresssObj;
 user:User;
 
 constructor(private http:HttpClient){
@@ -62,7 +61,7 @@ return this.http.post("/api/user/EditUser",{username:name,email:email,phone:phon
 }
 editAddress(addressObj:Address){
 //reusing address for orders until the address is edited.
-this.orderAddresssObj=null;
+this.addresssObj=null;
 addressObj.email=localStorage.getItem("email")
 return this.http.post("/api/user/EditAddress",addressObj)
 }
