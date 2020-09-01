@@ -1,5 +1,3 @@
-import { Ingredients } from '../shared/Ingredients.model';
-
 export class Product{
     public name ?:string;
     public description?:string;
@@ -12,12 +10,7 @@ export class Product{
     public category?:string;
     public id?:string;
 
-    // public ingredients:Ingredients[];
-
-    // constructor(name :string,description:string,imagePath:string,ingredients:Ingredients[]){
     constructor(Response:any){
-
-
         this.description=Response.description;
         this.name=Response.title;
         this.imagePath=Response.image;
@@ -28,7 +21,6 @@ export class Product{
         this.quantity=Response.quantity?Response.quantity:0;
         this.category=Response.category
         this.id=Response._id
-        // this.ingredients=ingredients;
     }
 
 }

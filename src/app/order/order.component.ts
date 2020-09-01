@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../shared/Register.service';
 import { RecipeService } from '../shared/recipe.service';
 import { Product } from '../recipes/products.model';
+import { OrderService } from '../shared/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -19,11 +21,11 @@ submitted1=false;
 userName;
 Address;
 displayCancelbtn=false;
-CartProductArray;
+CartProductArray:Product[];
 cartTotal;
 cartSavings;
 email;
-constructor(private formBuilder:FormBuilder,private registerService:RegisterService,private recipeService:RecipeService) { }
+constructor(private formBuilder:FormBuilder,private registerService:RegisterService,private recipeService:RecipeService,private orderService:OrderService,private router:Router) { }
 
 ngOnInit() {
 this.email=localStorage.getItem("email");
@@ -133,7 +135,6 @@ this.changeAlert1="";
 }
 reInitAddressForm(){
   let  res =this.registerService.addresssObj
-  
   this.userName=res.name;
   this.Address=res.address+","+res.city+","+res.state+"-"+res.pincode;
 
@@ -181,6 +182,21 @@ else{
 }
 this.changeAlert1="";
   }
+placeOrder(){
+  let [items, savings,amount]=this.calculateTotal();
+  let amountObj={
+items,savings,amount
+  }
+this.orderService.placeOrder(this.CartProductArray,this.addressForm.value,amountObj).subscribe((res)=>{
+  console.log(res)
+if(res['msg']==this.orderService.constants.order_success){
+this.router.navigate(['/cart/home_orders'])
+this.recipeService.UpdateManyCart(this.CartProductArray,"D").subscribe((res)=>{
+  console.log(res);
+})
+}
+})
+}
 calculatePrice(){
   let total:number=0;
   let discountedPrice:number=0;
@@ -194,5 +210,18 @@ calculatePrice(){
     this.cartTotal=discountedPrice.toFixed(0)
     this.cartSavings=savings.toFixed(0)
   },0)
+}
+calculateTotal(){
+  let total:number=0;
+  let discountedPrice:number=0;
+  let savings:number=0;
+  let items:number=0;
+  this.CartProductArray.forEach((prod:Product)=>{
+    items+=prod.quantity;
+    total+=(prod.price*prod.quantity)
+    discountedPrice+=(prod.price*prod.quantity)-((prod.price*prod.quantity)*(prod.discount/100))
+  })
+  savings= total-discountedPrice;
+return [items , savings.toFixed(0),discountedPrice.toFixed(0)];
 }
 }

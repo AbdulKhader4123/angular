@@ -41,7 +41,6 @@ if(this.authservice.isLoggedIn()){
     if(res[0]!=undefined   && res!="No Products found"){
       for ( var i in res) {
       let prod= new Product(res[i]['products_docs'][0]);
-
         prod.quantity=res[i].quantity
         this.CartProductArray.push(prod);
       }

@@ -99,7 +99,7 @@
             <div class="card-body" style="padding: 0px">
                 <div *ngFor="let product of CartProductArray" class="outerDiv">
                         <div class="innerDiv d-flex">
-                            <a>
+                            <a routerLink="/product/{{product.productId}}" >
                             <div class=col-md-2 style="padding-left:0px;padding-right:0px;width:50%" >
                                     <img style="height:7rem;min-width: 5rem;" [src]="product.imagePath[0]"
                                     alt="{{product.name}}"
@@ -108,7 +108,7 @@
                             </a>
                             <div class="midDiv" >
                                 <div class="description">
-                                    <a>{{product.description}}</a>
+                                    <a routerLink="/product/{{product.productId}}">{{product.description}}</a>
                                 </div>
                                 <div style="display: block;color: #878787;font-size: 12px;margin-top: 2%">
                                         {{product.name}}
@@ -117,7 +117,7 @@
                                 <span style="font-size: 15px;font-weight: 500;color: #212121;margin-right: 10px;"><i class='fa fa-inr'></i>{{product.price-(product.price*(product.discount/100)) | number:'1.0-0'}}</span>
                                 <span style="font-size: 11px;font-weight: 500;color: #878787;
                                 text-decoration: line-through;margin-right: 10px;"><i class='fa fa-inr'></i>{{product.price}}</span>
-                                <span style="font-size: 11px;font-weight: 500;color: #388e3c;">{{(product.discount/100) | percent}}%</span>
+                                <span style="font-size: 11px;font-weight: 500;color: #388e3c;">{{(product.discount/100) | percent}}</span>
                                 </div>
                                 <div style="margin-top: 2%;justify-content: space-between" class="d-flex">
                                     <span style="font-size: 13px;font-weight: 500;color: #212121;margin-right: 10px;">Qty : {{product.quantity}}</span>
@@ -147,7 +147,7 @@
         </div>
         <div class=" block1"  >
             <div><span class=""  style="color: #388e3c; font-size: 15px;">You will save <i class='fa fa-inr'></i>{{cartSavings}} on this order</span> <div class=""  style=" font-size: 13px;">Order confirmation email will be sent to {{email}}</div></div>
-            <div class="d-flex" style="justify-content:flex-end"> <button class="btn btn-primary submit custFont" style="margin-right: -13px;"  (click)="onSubmit()" > Continue</button>
+            <div *ngIf="!enableEdit"class="d-flex" style="justify-content:flex-end"> <button class="btn btn-primary submit custFont" style="margin-right: -13px;"  (click)="placeOrder()" > Continue</button>
             </div>
                 
             </div>

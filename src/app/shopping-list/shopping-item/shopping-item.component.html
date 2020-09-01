@@ -3,8 +3,9 @@
     <ng-container *ngFor="let product of CartProductArray" >
         <div class="card flex-row flex-wrap column" style="width:350px;margin-bottom: -40px;margin-left:15px;">
             <div class="card-header column3"style="padding: 4px 4px 4px 7px;">
-                <img class="column4" style="height:12rem;width:135px"[src]="product.imagePath[0]"
-                alt="{{product.name}}">
+                <a routerLink="/product/{{product.productId}}"> <img class="column4" style="height:12rem;width:135px"[src]="product.imagePath[0]"
+                    alt="{{product.name}}"></a>
+               
             </div>
             
             <div class="card-block px-1 column2"style="padding-top:6px">

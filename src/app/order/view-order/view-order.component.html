@@ -1,0 +1,54 @@
+<br>
+<div class="container-fluid padder" >
+<div class="row d-flex" style="flex-direction: column"> 
+    <div class="inBlock">
+        <a >Home</a> <i style="margin-left: 1%"class="fa fa-angle-right"></i>
+        <a  style="margin-left: 1%">My Account</a> <i style="margin-left: 1%"class="fa fa-angle-right"></i>
+        <a  style="margin-left: 1%">My Orders</a> 
+    </div>
+    <div  *ngFor="let order of orders" class="card" [ngStyle]="{'max-height':order.ProductDetails[0].quantity >1 ? '140px' : '125px' }">
+        <div class="innerDiv d-flex">
+            <a routerLink="/product/{{order.OrderId}}" >
+            <div class=col-md-2 style="padding-left:0px;padding-right:0px;width:50%" >
+                    <img style="height:6rem;min-width: 4rem;" [src]="order.ProductDetails[0].imagePath[0]"
+                    alt="{{order.ProductDetails[0].name}}"
+                    >
+            </div>
+            <div *ngIf="order.ProductDetails.length>1" class="img-txt">
+               {{order.items}} more items
+            </div>
+            </a>
+            <div class="midDiv" >
+                <div class="description">
+                    <a routerLink="/product/{{order.OrderId}}">Order Id : {{order.OrderId}}</a>
+                </div>
+                <div style="display: block;color: #878787;font-size: 12px;margin-top: 1%">
+                        {{order.ProductDetails[0].name}}
+                </div>
+                <div style="margin-top: 1%;" class="d-flex">
+                    <span style="font-size: 13px;font-weight: 500;color: #212121;margin-right: 15px;">Items : {{order.items}}</span>
+                    <span  class="enable"style="font-size: 13px;font-weight: 500;color: #212121;">Amount: <i class='fa fa-inr'></i>{{order.amount}}</span>
+                </div>
+                <div style="margin-top: 2%;" class="d-flex enable">
+                        <div class="status">{{order.OrderStatus}} on {{order.date | customDate}}</div>
+                </div>
+                <div style="margin-top: 1%;" class="d-flex enable">
+                    <div *ngIf="order.deliveryDate" class="substatus">Your item has been delivered</div>
+                    <div *ngIf="!order.deliveryDate" class="substatus"> Your Order has been placed.</div>
+                </div>
+            </div>
+            <div class="midDiv1" >
+                    <div style="font-weight: 500;
+                    font-size: 14px;">
+                        <a >Amount: <i class='fa fa-inr'></i>{{order.amount}}</a>
+                    </div>
+                </div>
+                <div class="midDiv1" style="margin-left: auto;" >
+                    <div> <div class="status">{{order.OrderStatus}}  on {{order.date | customDate }}</div>
+                    <div  *ngIf="order.deliveryDate" class="substatus">Your item has been delivered</div>
+                    <div *ngIf="!order.deliveryDate" class="substatus"> Your Order has been placed.</div>
+                </div>
+                </div>
+</div>
+</div>
+</div>
