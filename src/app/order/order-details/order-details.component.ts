@@ -25,7 +25,6 @@ export class OrderDetailsComponent implements OnInit {
     this.orderService.getOrder(this.OrderId).subscribe((res:any)=>{
       if(res!=this.orderService.constants.order_not_found){
         this.order=res[0];
-        console.log(this.order)
         this.orderService.selectedOrder=this.order;
         this.init()
       }

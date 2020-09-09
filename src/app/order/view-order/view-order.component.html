@@ -30,12 +30,12 @@
                     <span  class="enable"style="font-size: 13px;font-weight: 500;color: #212121;">Amount: <i class='fa fa-inr'></i>{{order.amount}}</span>
                 </div>
                 <div style="margin-top: 2%;" class="d-flex enable">
-                        <div *ngIf="!order.deliveryDate" class="status">{{order.OrderStatus}}  on {{order.date | customDate }}</div>
-                    <div  *ngIf="order.deliveryDate" class="status">{{order.deliveryStatus}}  on {{order.deliveryDate | customDate }}</div>
+                        <div *ngIf="!order.deliverDate" class="status">{{order.OrderStatus}}  on {{order.date | customDate }}</div>
+                    <div  *ngIf="order.deliverDate" class="status">{{order.deliveryStatus}}  on {{order.deliverDate | customDate }}</div>
                 </div>
                 <div style="margin-top: 1%;" class="d-flex enable">
-                    <div *ngIf="order.deliveryDate" class="substatus">Your item has been delivered</div>
-                    <div *ngIf="!order.deliveryDate" class="substatus"> Your Order has been placed.</div>
+                    <div *ngIf="order.deliverDate" class="substatus">Your item has been delivered</div>
+                    <div *ngIf="!order.deliverDate" class="substatus"> Your Order has been placed.</div>
                 </div>
             </div>
             <div class="midDiv1" >
@@ -46,10 +46,10 @@
                 </div>
                 <div class="midDiv1" style="margin-left: auto;" >
                     <div>
-                    <div *ngIf="!order.deliveryDate" class="status">{{order.OrderStatus}}  on {{order.date | customDate }}</div>
-                    <div  *ngIf="order.deliveryDate" class="status">{{order.deliveryStatus}}  on {{order.deliveryDate | customDate }}</div>
-                    <div  *ngIf="order.deliveryDate" class="substatus">Your item has been delivered</div>
-                    <div *ngIf="!order.deliveryDate" class="substatus"> Your Order has been placed.</div>
+                    <div *ngIf="!order.deliverDate" class="status">{{order.OrderStatus}}  on {{order.date | customDate }}</div>
+                    <div  *ngIf="order.deliverDate" class="status">{{order.deliveryStatus}}  on {{order.deliverDate | customDate }}</div>
+                    <div  *ngIf="order.deliverDate" class="substatus">Your item has been delivered</div>
+                    <div *ngIf="!order.deliverDate" class="substatus"> Your Order has been placed.</div>
                 </div>
                 </div>
 </div>
