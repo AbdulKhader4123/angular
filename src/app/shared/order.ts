@@ -15,8 +15,13 @@ export class Order{
     public items ?:number;
     public savings ?:number;
     public date ?:string;
-    public deliveryDate ?:string;
+    public deliverDate ?:string;
     public deliveryStatus?:string;
+    public shippingDate ?:string;
+    public shippingStatus?:string;
+    public returnRaised ?:string;
+    public returnReason?:string;
+    public returnDate?:string;
 
     constructor(Response:any){
         this.OrderId=Response.OrderId;
@@ -33,7 +38,12 @@ export class Order{
         this.savings=Response.savings;
         this.items=Response.items;
         this.date=Response.date;
-        this.deliveryDate=Response.deliveryDate;
+        this.deliverDate=Response.deliverDate;
         this.deliveryStatus=Response.deliveryStatus;
+        this.shippingDate =Response.shippingDate;
+        this.shippingStatus=Response.shippingStatus;
+        this.returnRaised =Response.returnRaised;
+        this.returnReason=Response.returnReason;
+        this.returnDate=Response.returnDate;
     }
 }

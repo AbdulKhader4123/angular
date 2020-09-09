@@ -2,6 +2,7 @@
 padding-left: 12%;
 padding-right: 12%;
 margin-left: -4px;
+margin-top: 1%;
 }
 .inBlock{
 font-size: 13px;
@@ -11,15 +12,21 @@ padding-left: 3%;
 }
 .card{
     max-height: 140px;
+    transition: box-shadow .2s linear;
+    outline: none;
 }
 .enable{
     display: none!important;
+}
+.card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 @media screen  and (max-width: 500px) {
     .padder{
         padding-left: 5%;
         padding-right: 5%;
         margin-left: -4px;
+        margin-top: 2%;
         }
     .enable{
         display: block!important;

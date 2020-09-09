@@ -16,8 +16,6 @@ import { DatePipe } from '../date.pipe';
     ShoppingListComponent,
     ShoppingItemComponent,
     OrderComponent,
-    ViewOrderComponent,
-    DatePipe,
 
   ],
   imports: [

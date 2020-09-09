@@ -12,7 +12,7 @@ const appRoutes: Routes = [
    //shared module
    {path: 'login', loadChildren:'./login/login.module#LoginModule'},
    {path: 'reset', loadChildren:'./password-reset/password-reset.module#PasswordResetModule'},
-   { path: 'profile', loadChildren: './user-profile/user-profile.module#UserProfileModule'},
+   { path: 'account', loadChildren: './user-profile/user-profile.module#UserProfileModule'},
 
     { path: 'product/:id', component: RecipeDetailComponent},
     { path: 'productEdit', component: EditproductComponent,canActivate: [AuthGuard] },

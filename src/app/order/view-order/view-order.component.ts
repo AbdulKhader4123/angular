@@ -13,13 +13,19 @@ export class ViewOrderComponent implements OnInit {
   constructor(private orderService:OrderService) { }
 
   ngOnInit() {
-    this.orderService.getOrders().subscribe((res:any)=>{
-      this.orders;
+    if(this.orderService.Orders.length==0){
+      this.orderService.getOrders().subscribe((res:any)=>{
         if(res!=this.orderService.constants.orders_not_found){
           this.orders=res;
-          console.log(this.orders)
+          this.orders.reverse()
+          this.orderService.Orders=this.orders;
         }
     })
+    }
+    else{
+      this.orders=this.orderService.Orders;
+    }
+   
   }
 
 }

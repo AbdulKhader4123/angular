@@ -190,7 +190,7 @@ items,savings,amount
 this.orderService.placeOrder(this.CartProductArray,this.addressForm.value,amountObj).subscribe((res)=>{
   console.log(res)
 if(res['msg']==this.orderService.constants.order_success){
-this.router.navigate(['/cart/home_orders'])
+this.router.navigate(['/account/home_orders'])
 this.recipeService.UpdateManyCart(this.CartProductArray,"D").subscribe((res)=>{
   console.log(res);
 })

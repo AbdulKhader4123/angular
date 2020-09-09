@@ -1,0 +1,131 @@
+<br>
+<div class="container-fluid padder" >
+<div class="row d-flex" style="flex-direction: column"> 
+    <div class="inBlock">
+        <a routerLink="/">Home</a> <i style="margin-left: 1%"class="fa fa-angle-right"></i>
+        <a routerLink="/account" style="margin-left: 1%">My Account</a> <i style="margin-left: 1%"class="fa fa-angle-right"></i>
+        <a routerLink="/account/home_orders"  style="margin-left: 1%">My Orders</a>  <i style="margin-left: 1%"class="fa fa-angle-right"></i>
+        <a style="margin-left: 1%">{{OrderId}}</a> 
+
+    </div>
+  
+</div>
+<div *ngIf="order" class="card" style="padding: 14px 20px;"  >
+        <div class="d-block">
+            <div class="block-title custFont d-flex">
+               <span> Delivery Address</span>
+            </div>
+            <div class="block-address">
+                
+                 <span class='block-name custFont pr-1'>{{userName | titlecase }}</span>
+                <div>{{Address}}</div>
+                <div>
+                 <span class='block-name custFont pr-1'>Phone number</span>
+                <div class="custFont1">{{phone}}</div>
+                </div>
+            </div>
+        </div>
+</div>
+<div *ngIf="order" class="card pad1" style="margin-bottom: 6%" >
+    <div class="card-body padd" >
+            <div  style="display: flex;justify-content: center">
+                <div class="col-md-6" style="position:relative;">
+                    <div class="class1">
+                        <div class="class2">
+                            <div class="class3" style="color:#26a541;transition: color .25s ease-in;">
+                                <span>Ordered</span>
+                            </div>
+                            <div class="class4" style="background:#26a541;transition: background .25s ease-in;">
+                            </div>
+                            <div class="class5">
+                                <div *ngIf="order.shippingDate" style="background:#26a541;width:auto;height:3px;animation:transfer; animation-duration: 1.5s;transform-origin:  left;">
+
+                                </div>
+                                <div *ngIf="!order.shippingDate" style="background:#26a541;width:auto;height:3px;animation:transfer1;transform: scaleX(0.85); animation-duration: 1.5s;transform-origin:  left;">
+                                </div>
+                            </div>
+                            <div class="class6">
+                                    {{order.date|customDate}}
+                            </div>
+                        </div>
+                            <div class="class2">
+                            <div class="class3" >
+                                <span  *ngIf="order.shippingDate" style="animation: color_change ;animation-delay: 1.3s;
+                                animation-fill-mode: forwards;
+                               ">Shipped</span>
+                                <span   *ngIf="!order.shippingDate">Shipped</span>
+                            </div>
+                            <div  *ngIf="order.shippingDate" class="class4" style="animation: color_change1 ;animation-delay: 1.3s;
+                            animation-fill-mode: forwards;
+                           ">
+                            </div>
+                            <div  *ngIf="!order.shippingDate" class="class4">
+                            </div>
+                            <div class="class5">
+                                <div *ngIf="order.deliverDate" style="transform:scaleX(0); background:#26a541;width:auto;height:3px;animation:transfer; animation-delay: 1.3s;animation-duration: 1.5s;animation-fill-mode: forwards;transform-origin:  left;">
+
+                                </div>
+                                <div *ngIf="order.shippingDate && !order.deliverDate" style="transform:scaleX(0);background:#26a541;width:auto;height:3px;animation:transfer1; animation-delay: 1.3s;animation-duration: 1.5s;animation-fill-mode: forwards;transform-origin:  left;">
+                                </div>
+                            </div>
+                            <div class="class6">
+                                {{order.shippingDate|customDate}}
+                            </div>
+                        </div>
+                        <div class="class2">
+                                <div class="class3">
+                                    <span  *ngIf="order.deliverDate" style="animation: color_change ;animation-delay: 2.4s;
+                                    animation-fill-mode: forwards;
+                                    ">Delivered</span>
+                                    <span   *ngIf="!order.deliverDate">Delivery</span>
+                                </div>
+                                <div  *ngIf="order.deliverDate" class="class4" style="animation: color_change1 ;animation-delay: 2.4s;
+                                animation-fill-mode: forwards;
+                               ">
+                                </div>
+                                <div  *ngIf="!order.deliverDate" class="class4">
+                                    </div>
+                                <div class="class7">
+                                    
+                                </div>
+                                <div  class="class6" [ngStyle]="{'font-weight': order.deliverDate? 'bold' : 0,'color':order.deliverDate? 'black' : '#878787'}" >
+                                {{order.deliverDate|customDate}}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div> 
+        <div *ngFor="let item of order.ProductDetails" class="outerDiv">
+                <div class="innerDiv d-flex">
+                    <a routerLink="/product/{{item.productId}}" >
+                    <div class=col-md-2 style="padding-left:0px;padding-right:0px;width:50%" >
+                            <img style="height:7rem;min-width: 5rem;" [src]="item.imagePath[0]"
+                            alt="{{item.name}}"
+                            >
+                    </div>
+                    </a>
+                    <div class="midDiv" >
+                        <div class="description">
+                            <a routerLink="/product/{{item.productId}}">{{item.description  | titlecase}}</a>
+                        </div>
+                        <div style="display: block;color: #878787;font-size: 12px;margin-top: 2%">
+                                {{item.name}}
+                        </div>
+                        <div style="margin-top: 2%">
+                        <span style="font-size: 15px;font-weight: 500;color: #212121;margin-right: 10px;"><i class='fa fa-inr'></i>{{item.price-(item.price*(item.discount/100)) | number:'1.0-0'}}</span>
+                        <span style="font-size: 11px;font-weight: 500;color: #878787;
+                        text-decoration: line-through;margin-right: 10px;"><i class='fa fa-inr'></i>{{item.price}}</span>
+                        <span style="font-size: 11px;font-weight: 500;color: #388e3c;">{{(item.discount/100) | percent}}</span>
+                        </div>
+                        <div style="margin-top: 2%;" class="d-flex content">
+                            <span style="font-size: 13px;font-weight: 500;color: #212121;margin-right: 10px;">Qty : {{item.quantity}}</span>
+                            <span style="font-size: 15px;font-weight: 500;color: #212121;"><i class='fa fa-inr'></i>{{item.price*item.quantity-((item.price*item.quantity)*(item.discount/100)) | number:'1.0-0'}}</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </div> 
+</div>
+    </div>
+

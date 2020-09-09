@@ -9,7 +9,7 @@
                <span> Delivery Address</span><span class='ml-auto'><i class="fas fa-edit"  (click)="editable()"></i></span>
             </div>
             <div class="block-address ">
-                <span class='block-name custFont pr-1'>{{userName}}</span>
+                <span class='block-name custFont pr-1'>{{userName  | titlecase}}</span>
                 <span>{{Address}}</span>
             </div>
         </div>
@@ -108,7 +108,7 @@
                             </a>
                             <div class="midDiv" >
                                 <div class="description">
-                                    <a routerLink="/product/{{product.productId}}">{{product.description}}</a>
+                                    <a routerLink="/product/{{product.productId}}">{{product.description  | titlecase}}</a>
                                 </div>
                                 <div style="display: block;color: #878787;font-size: 12px;margin-top: 2%">
                                         {{product.name}}
